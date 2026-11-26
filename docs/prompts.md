@@ -56,7 +56,11 @@ Depois desse vinham a identidade visual, a lista dos 11 projetos com os links, a
 
 > Os textos estão muito com cara de inteligência artificial. Quero que a minha personalidade venha antes do que eu fiz: a pessoa primeiro me conhece, depois vê minhas habilidades e só no final o portfólio. E quero um design bem fora da caixinha, sem cards genéricos, mas que continue agradável de olhar. O fundo não precisa ser preto.
 
-## 13. README e commits
+## 13. Nova identidade visual
+
+> Não gostei da direção artística e alguns textos parecem escritos por IA. Usa essas duas imagens como referência: fundo claro, rosa e preto, colagem, letras recortadas, estrelas, setas à mão, faixas animadas, papel rasgado. Mas adapta pra Ciência de Dados, com gráficos de dispersão, matriz de correlação, tabelinhas e pipelines fazendo parte da composição. E não apaga nada: projetos, filtros, acessibilidade e animações ficam.
+
+## 14. README e commits
 
 > Faz commits que pareçam um humano falando, tipo "subindo tal coisa", "organizando tal coisa". E no README coloca a estrutura de pastas, como funciona, o objetivo e como você foi usado, com exemplo de prompt.
 
