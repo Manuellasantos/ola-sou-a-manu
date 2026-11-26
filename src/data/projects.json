@@ -1,0 +1,399 @@
+[
+  {
+    "slug": "voebem",
+    "nome": "Voebem — Pontualidade de Voos ANAC",
+    "resumo": "Pipeline ETL com arquitetura medalhão e dashboard AI/BI no Databricks, analisando mais de 1 milhão de etapas de voo com dados públicos da ANAC (VRA).",
+    "destaque": 1,
+    "categorias": ["Engenharia de Dados", "Análise de Dados", "Business Intelligence", "Infraestrutura e Cloud Computing"],
+    "tecnologias": ["Python", "SQL", "Apache Spark", "Databricks", "Unity Catalog", "AI/BI Dashboard", "Git"],
+    "tipo": ["pessoal"],
+    "equipe": false,
+    "status": null,
+    "conquistas": [],
+    "links": {
+      "github": "https://github.com/Manuellasantos/voebem-analytics",
+      "deploy": null,
+      "figma": null
+    },
+    "imagens": [
+      { "src": "img/projetos/voebem-1.webp", "alt": "Dashboard Voebem com KPIs de pontualidade e ranking de aeroportos com maior percentual de atraso", "real": true },
+      { "src": "img/projetos/voebem-2.webp", "alt": "Gráfico de atraso médio por hora prevista de partida, mostrando o efeito cascata ao longo do dia", "real": true },
+      { "src": "img/projetos/voebem-3.webp", "alt": "Gráfico de minutos recuperados em voo por companhia e tabela de pontualidade x cancelamento", "real": true }
+    ],
+    "detalhes": {
+      "contexto": "Análise da pontualidade de voos regulares no Brasil a partir dos microdados VRA publicados pela ANAC, em que cada linha é uma etapa de voo com partida e chegada previstas e realizadas.",
+      "problema": "Os microdados chegam brutos: valores 'null' como texto, linhas repetidas, atrasos implausíveis e códigos que só fazem sentido com os cadastros de referência.",
+      "objetivo": "Construir um pipeline confiável e um dashboard que respondam perguntas de negócio sobre atrasos, cancelamentos e recuperação de tempo em voo.",
+      "fontes": ["ANAC — VRA (microdados de voos regulares)", "ANAC — cadastro de aeródromos", "ANAC — cadastro de empresas aéreas", "ANAC — códigos de operação (DI e tipo de linha)"],
+      "metodologia": "Arquitetura medalhão no Unity Catalog (catálogo voebem): ingestão bruta na Bronze, espelho tipado na Silver e modelagem dimensional na Gold (dimensão de aeroportos, fato de voos e OBT de consumo). Uma etapa de qualidade marca, audita e coloca em quarentena linhas problemáticas.",
+      "tratamento": ["String 'null' convertida para NULL e timestamps tipados", "Atrasos calculados em minutos (partida, chegada e minutos recuperados)", "Atrasos abaixo de -120 min ou acima de 1440 min viram NULL, sem descartar a linha", "Deduplicação: em empate, mantém a primeira linha ingerida", "Escopo: tipos N/C = doméstico, I/G = internacional"],
+      "arquitetura": "medalhao",
+      "funcionalidades": ["KPIs de voos no período, % de partida pontual, % de cancelados e atraso médio", "Ranking de aeroportos com maior % de atraso (≥ 5.000 voos)", "Atraso médio por hora prevista de partida (efeito cascata)", "Piores rotas domésticas (≥ 2.000 voos) e rotas sem recuperação de atraso", "Minutos recuperados em voo e pontualidade x cancelamento por companhia (≥ 10.000 voos)"],
+      "calculos": ["Voo pontual = atraso de partida ≤ 15 minutos", "Cortes de volume nos rankings para evitar distorção de amostras pequenas", "Minutos recuperados = atraso de partida − atraso de chegada"],
+      "contribuicao": "Projeto individual: pipeline, regras de negócio e dashboard. Usei Databricks Assistant e Genie com prompts estruturados para gerar e revisar SQL/PySpark e montar o dashboard.",
+      "resultados": "Dashboard versionado como arquivo .lvdash.json, com as perguntas de negócio documentadas no repositório. Os números do dashboard estão nas capturas reais acima.",
+      "limitacoes": ["O dashboard só é renderizado dentro do Databricks; não há deploy público", "Os resultados dependem do período de dados ingerido no workspace"],
+      "aprendizados": ["Modelagem em camadas e governança com Unity Catalog", "Regras de qualidade que preservam linhas sem distorcer métricas", "Uso de IA com prompts estruturados como apoio, não como substituto da validação"]
+    }
+  },
+  {
+    "slug": "spotify-etl",
+    "nome": "Spotify ETL Dashboard",
+    "resumo": "Dashboard em Python que prepara dados de músicas populares do Spotify com um processo ETL e apresenta tudo em gráficos e tabelas interativas.",
+    "destaque": 2,
+    "categorias": ["Análise de Dados", "Engenharia de Dados", "Business Intelligence"],
+    "tecnologias": ["Python", "Pandas", "NumPy", "Plotly", "Streamlit"],
+    "tipo": ["pessoal"],
+    "equipe": false,
+    "status": null,
+    "origem": "Curso TOTVS — Fundamentos de Engenharia de Dados e Machine Learning",
+    "conquistas": [],
+    "links": {
+      "github": "https://github.com/Manuellasantos/spotify-etl-dashboard",
+      "deploy": "https://spotify-etl-dashboard-ia7bjm5qdexmrvp9zbpkso.streamlit.app/",
+      "figma": null
+    },
+    "imagens": [],
+    "detalhes": {
+      "contexto": "Projeto desenvolvido durante o curso TOTVS — Fundamentos de Engenharia de Dados e Machine Learning.",
+      "problema": "O CSV original tem colunas com nomes pouco práticos, faixas duplicadas, registros incompletos e duração em milissegundos.",
+      "objetivo": "Limpar, transformar e explorar os dados de músicas populares em um dashboard interativo.",
+      "fontes": ["Arquivo high_popularity_spotify_data.csv (base pública de músicas populares do Spotify)"],
+      "metodologia": "Processo ETL em Pandas seguido de exploração visual em seis abas do Streamlit, com filtros de popularidade mínima, ano de lançamento e gênero na barra lateral.",
+      "tratamento": ["Extração: leitura do CSV com Pandas", "Transformação: renomeação de colunas, remoção de duplicatas, um registro por faixa, remoção de registros sem informações necessárias, extração do ano e conversão de ms para minutos", "Carregamento: salvamento em spotify_tratado.csv"],
+      "arquitetura": "etl",
+      "funcionalidades": ["Panorama: músicas, artistas, popularidade e duração média", "Gêneros: popularidade e características sonoras", "Artistas: quantidade de músicas x popularidade média", "Evolução: lançamentos por ano e mudanças nas características", "Perfil sonoro: correlação e comparação de variáveis", "Dados: busca por música ou artista e exportação em CSV"],
+      "calculos": ["Médias de popularidade e duração", "Matriz de correlação entre características musicais"],
+      "contribuicao": "Projeto individual.",
+      "resultados": null,
+      "limitacoes": ["A base contém apenas músicas de alta popularidade, então não representa o catálogo inteiro"],
+      "aprendizados": ["Estruturar um ETL simples e reprodutível", "Construir um dashboard com filtros e exportação"]
+    }
+  },
+  {
+    "slug": "lavanderia",
+    "nome": "Lavanderia — Análise e Previsão de Demanda",
+    "resumo": "Aplicação web acadêmica que analisa dados históricos de demanda de uma iniciativa comunitária de lavanderia e gera previsões com métodos estatísticos.",
+    "destaque": 3,
+    "categorias": ["Ciência de Dados", "Análise de Dados", "Machine Learning", "Desenvolvimento Full Stack", "Banco de Dados"],
+    "tecnologias": ["Python", "Flask", "Pandas", "NumPy", "scikit-learn", "Supabase", "PostgreSQL", "JavaScript", "Chart.js", "Tailwind CSS", "Pytest"],
+    "tipo": ["academico"],
+    "equipe": true,
+    "status": "Em desenvolvimento",
+    "conquistas": [],
+    "links": {
+      "github": "https://github.com/Cosmic-Bubble/projetolavanderia",
+      "deploy": null,
+      "figma": "https://www.figma.com/design/0cPfF5D0pHMTzKGJX43wMW/Previs%C3%A3o-de-Demanda?node-id=0-1&t=EXtclxMflOIHIBuU-1"
+    },
+    "imagens": [],
+    "detalhes": {
+      "contexto": "Projeto acadêmico da disciplina de Empreendedorismo, aplicando matemática, estatística e programação a uma iniciativa comunitária de lavanderia.",
+      "problema": "Sem previsão de demanda, fica difícil planejar capacidade, insumos e atendimentos.",
+      "objetivo": "Analisar dados históricos, identificar sazonalidade e tendências e gerar previsões que apoiem decisões estratégicas.",
+      "fontes": ["Planilhas de atendimento importadas (.csv/.xlsx) e armazenadas no Supabase"],
+      "metodologia": "O Python/Pandas faz os cálculos pesados (médias, somas, agrupamentos) e devolve JSON; o JavaScript só desenha os gráficos. As previsões usam regressão linear (scikit-learn) e média móvel simples, escolhidas por indicador.",
+      "tratamento": ["Importação e validação de planilhas", "Agregação mensal dos indicadores"],
+      "arquitetura": "fullstack",
+      "funcionalidades": ["Importação de dados", "Dashboard de indicadores", "Previsões por indicador", "Comparação entre previsto e realizado", "Alertas e controle de capacidade", "Módulos social e comercial"],
+      "calculos": ["Regressão linear sobre a série histórica mensal", "Média móvel simples (janela de 3 períodos)", "Comparação previsto x realizado"],
+      "contribuicao": "Projeto em equipe. A divisão individual das tarefas não está detalhada na documentação do repositório.",
+      "resultados": null,
+      "limitacoes": ["Projeto em andamento (MVP previsto para 16/11/2026)", "Sem deploy público até o momento"],
+      "aprendizados": ["Separar processamento (backend) de renderização (frontend)", "Escolher métodos simples e explicáveis para séries curtas"]
+    }
+  },
+  {
+    "slug": "black-in-tech",
+    "nome": "Black in Tech — App BiT",
+    "resumo": "Plataforma de matching inclusivo criada no Hackathon Wongola 2026 para conectar empresas a profissionais de grupos sub-representados, com indicadores de diversidade e ESG.",
+    "destaque": 4,
+    "categorias": ["Inteligência Artificial", "Análise de Dados", "Desenvolvimento Full Stack", "Desenvolvimento Frontend", "Geoprocessamento", "Impacto Social"],
+    "tecnologias": ["React", "Ionic", "TypeScript", "Python", "FastAPI", "Vercel", "Render", "Figma"],
+    "tipo": ["hackathon"],
+    "equipe": true,
+    "status": "Protótipo de hackathon",
+    "conquistas": [],
+    "links": {
+      "github": "https://github.com/Manuellasantos/Black-In-Tech",
+      "deploy": "https://app-bit-hack.vercel.app/login",
+      "figma": "https://www.figma.com/design/p6GBPhw7npHPgL677gBYPR/App-Bit?node-id=0-1&t=Dlq1ElBtnjReEvM5-1"
+    },
+    "imagens": [
+      { "src": "img/projetos/bit-1.webp", "alt": "Dashboard do App BiT com indicadores e gráficos de diversidade", "real": true },
+      { "src": "img/projetos/bit-2.webp", "alt": "Tela de resultados de matching com ranking de compatibilidade de candidatos", "real": true },
+      { "src": "img/projetos/bit-3.webp", "alt": "Tela de Insights ESG com métricas de inclusão e mapa de concentração de talentos", "real": true }
+    ],
+    "detalhes": {
+      "contexto": "Desenvolvido durante o Hackathon Wongola 2026.",
+      "problema": "Empresas podem ter dificuldade para encontrar profissionais de grupos sub-representados, reduzir possíveis vieses no processo seletivo e acompanhar indicadores de diversidade e metas ESG.",
+      "objetivo": "Usar dados, IA e informações geográficas para apoiar o processo de seleção.",
+      "fontes": [],
+      "metodologia": "Frontend em Ionic React consumindo uma API REST em FastAPI que concentra o motor de matching e insights.",
+      "tratamento": [],
+      "arquitetura": "fullstack",
+      "funcionalidades": ["Cadastro e publicação de vagas", "Definição de requisitos e habilidades", "Recomendação de candidatos e ranking de compatibilidade", "Indicadores de diversidade", "Mapa de concentração de talentos por região", "Acompanhamento de informações ESG"],
+      "calculos": [],
+      "contribuicao": "Data Analyst e Front-End Developer, segundo a tabela de equipe do repositório (com Daissa e Jadson Sousa Mattos).",
+      "resultados": null,
+      "limitacoes": ["Protótipo de hackathon: não há evidência de que a solução elimine vieses ou garanta resultados de inclusão"],
+      "aprendizados": ["Traduzir um problema social em indicadores", "Trabalhar sob prazo curto em equipe multidisciplinar"]
+    }
+  },
+  {
+    "slug": "vagalume",
+    "nome": "Vagalume",
+    "resumo": "MVP acadêmico de rotas a pé que ajuda mulheres a comparar trajetos com dados de iluminação pública, pontos de apoio e avaliações colaborativas.",
+    "destaque": 5,
+    "categorias": ["Desenvolvimento Frontend", "Inteligência Artificial", "Geoprocessamento", "Impacto Social"],
+    "tecnologias": ["JavaScript", "React", "Vite", "Leaflet", "OpenStreetMap", "OSRM", "Google Gemini API", "VLibras", "Vercel"],
+    "tipo": ["academico"],
+    "equipe": true,
+    "status": "MVP",
+    "conquistas": [],
+    "links": {
+      "github": "https://github.com/alesslatorre/somos-vagalume",
+      "deploy": "https://somosvagalume.vercel.app/",
+      "figma": null
+    },
+    "imagens": [
+      { "src": "img/projetos/vagalume-1.webp", "alt": "Tela do Vagalume com mapa e três alternativas de trajeto", "real": true, "mobile": true },
+      { "src": "img/projetos/vagalume-2.webp", "alt": "Tela inicial do aplicativo Vagalume", "real": true, "mobile": true },
+      { "src": "img/projetos/vagalume-3.webp", "alt": "Conversa com a Lume, assistente virtual do Vagalume", "real": true, "mobile": true }
+    ],
+    "detalhes": {
+      "contexto": "MVP acadêmico desenvolvido na Fatec, com região piloto em Campos Elíseos, Santa Cecília e Bom Retiro, em São Paulo.",
+      "problema": "Informações que ajudam a escolher um percurso a pé — iluminação, locais de apoio e experiências de outras pessoas — costumam estar dispersas.",
+      "objetivo": "Reunir dados geográficos, iluminação pública e avaliações colaborativas para apoiar a escolha de trajetos.",
+      "fontes": ["Dados públicos de iluminação do GeoSampa", "OpenStreetMap", "Avaliações colaborativas das usuárias"],
+      "metodologia": "Rotas calculadas com OSRM sobre OpenStreetMap e exibidas no Leaflet, enriquecidas com iluminação e pontos de apoio próximos.",
+      "tratamento": [],
+      "arquitetura": "frontend",
+      "funcionalidades": ["Até três alternativas de rota com tempo, distância e iluminação", "Avaliações colaborativas", "Compartilhamento de percursos", "Botão SOS com mensagem no WhatsApp", "Clube das Lumes (gamificação)", "Lume, assistente com Google Gemini", "Acessibilidade: VLibras, modos para daltonismo, alto contraste e ajuste de texto"],
+      "calculos": [],
+      "contribuicao": "Projeto em equipe com Alessandra La Torre, Matheus Bonfim, Fernanda Marques e Mayra. A divisão individual não está detalhada no repositório.",
+      "resultados": null,
+      "limitacoes": ["Ferramenta de apoio à decisão: não garante a segurança de nenhum percurso", "Cobertura limitada à região piloto"],
+      "aprendizados": ["Integrar dados geográficos públicos a uma interface acessível"]
+    }
+  },
+  {
+    "slug": "focinho-amigo",
+    "nome": "Focinho Amigo",
+    "resumo": "Plataforma web da equipe Hackeridos para a OSCIP de Proteção Animal Focinho Amigo, com adoção, voluntariado, campanhas e painel administrativo.",
+    "destaque": 6,
+    "categorias": ["Desenvolvimento Full Stack", "Desenvolvimento Frontend", "Desenvolvimento Backend", "Banco de Dados", "UI/UX Design", "Impacto Social"],
+    "tecnologias": ["React", "TypeScript", "Node.js", "MySQL", "Figma", "Vercel"],
+    "tipo": ["hackathon"],
+    "equipe": true,
+    "status": null,
+    "conquistas": ["3º lugar — Fatec Innovation Challenge 2026"],
+    "links": {
+      "github": "https://github.com/nanda-marques/fic2026-fatec-sebrae-hackeridos",
+      "deploy": "https://fic2026-fatec-sebrae-hackeridos.vercel.app/",
+      "figma": "https://www.figma.com/design/aGcBilq5WAKQM6nO0ikLXo/Focinho-Amigo---Website?node-id=0-1&t=OMEz0nfvKt0uXElw-1"
+    },
+    "imagens": [
+      { "src": "img/projetos/focinho-1.webp", "alt": "Página inicial do site Focinho Amigo", "real": true },
+      { "src": "img/projetos/focinho-2.webp", "alt": "Painel administrativo do Focinho Amigo para gerenciar animais e publicações", "real": true },
+      { "src": "img/projetos/focinho-3.webp", "alt": "Equipe Hackeridos com o troféu de 3º lugar no Fatec Innovation Challenge 2026", "real": true }
+    ],
+    "detalhes": {
+      "contexto": "Desafio do Fatec Innovation Challenge 2026 proposto pela OSCIP de Proteção Animal Focinho Amigo.",
+      "problema": "A organização concilia divulgação de animais, atendimento, voluntários e campanhas com demandas concentradas no WhatsApp e muitas tarefas manuais.",
+      "objetivo": "Centralizar a presença digital e oferecer ferramentas de gestão para a equipe dedicar mais tempo à proteção animal.",
+      "fontes": [],
+      "metodologia": "Plataforma com frontend, API e banco de dados, planejada a partir das necessidades da organização.",
+      "tratamento": [],
+      "arquitetura": "fullstack",
+      "funcionalidades": ["Conteúdo institucional", "Vitrine de animais para adoção", "Apadrinhamento e voluntariado", "Campanhas, eventos e newsletter", "Painel administrativo com autenticação"],
+      "calculos": [],
+      "contribuicao": "Projeto da equipe Hackeridos (Fernanda, Matheus, Mayra e Manuella). A divisão individual não está detalhada no repositório.",
+      "resultados": "3º lugar no Fatec Innovation Challenge 2026. A redução de demandas no WhatsApp citada no repositório é uma meta projetada, não um resultado medido.",
+      "limitacoes": [],
+      "aprendizados": ["Desenvolver para um cliente real com necessidades concretas"]
+    }
+  },
+  {
+    "slug": "analise-aws",
+    "nome": "Análise AWS",
+    "resumo": "Script Python que lê casos publicados de redução de custos com S3, EC2 e RDS, resume os dados no terminal e gera dois gráficos.",
+    "destaque": null,
+    "categorias": ["Infraestrutura e Cloud Computing", "Análise de Dados"],
+    "tecnologias": ["Python", "Pandas", "Matplotlib", "AWS"],
+    "tipo": ["pessoal"],
+    "equipe": false,
+    "status": null,
+    "origem": "Curso TOTVS — Fundamentos de Engenharia de Dados e Machine Learning",
+    "conquistas": [],
+    "links": {
+      "github": "https://github.com/Manuellasantos/Analise-AWS",
+      "deploy": null,
+      "figma": null
+    },
+    "imagens": [
+      { "src": "img/projetos/aws-1.webp", "alt": "Gráfico de barras com a redução de custo de cada um dos nove casos AWS", "real": true },
+      { "src": "img/projetos/aws-2.webp", "alt": "Gráfico com a menor e a maior redução de custo por serviço: S3, EC2 e RDS", "real": true }
+    ],
+    "detalhes": {
+      "contexto": "Projeto da trilha TOTVS — Fundamentos de Engenharia de Dados e Machine Learning.",
+      "problema": "Entender, com casos publicados, onde S3, EC2 e RDS geraram economia.",
+      "objetivo": "Organizar casos reais em um CSV e comunicar a faixa de redução por serviço.",
+      "fontes": ["9 estudos de caso e posts publicados pela AWS (3 por serviço), com links no CSV"],
+      "metodologia": "Leitura do CSV com Pandas, validação de colunas, resumo no terminal e dois gráficos em Matplotlib.",
+      "tratamento": ["Exclusão de casos sem relação com os três serviços ou sem número verificável"],
+      "arquitetura": null,
+      "funcionalidades": ["Resumo dos casos no terminal", "Gráfico de redução por caso", "Gráfico de faixa (mínimo e máximo) por serviço"],
+      "calculos": ["Menor e maior redução percentual por serviço"],
+      "contribuicao": "Projeto individual.",
+      "resultados": null,
+      "limitacoes": ["É uma análise de dados sobre serviços AWS, não uma implantação de infraestrutura", "Percentuais com bases de comparação diferentes não são diretamente comparáveis", "Casos publicados pela própria AWS: possível viés de seleção"],
+      "aprendizados": ["Documentar fontes e limitações tanto quanto os resultados"]
+    }
+  },
+  {
+    "slug": "dashboard-excel",
+    "nome": "Dashboard de Vendas em Excel",
+    "resumo": "Dashboard em Excel com dados fictícios de vendas, da organização dos dados às tabelas dinâmicas, gráficos e indicadores.",
+    "destaque": null,
+    "categorias": ["Análise de Dados", "Business Intelligence"],
+    "tecnologias": ["Excel"],
+    "tipo": ["pessoal"],
+    "equipe": false,
+    "status": null,
+    "dadosFicticios": true,
+    "conquistas": [],
+    "links": {
+      "github": "https://github.com/Manuellasantos/dashboard-vendas-excel",
+      "deploy": null,
+      "figma": null
+    },
+    "imagens": [
+      { "src": "img/projetos/excel-1.webp", "alt": "Dashboard de vendas em Excel em tons de rosa, com indicadores e gráficos (dados fictícios)", "real": true }
+    ],
+    "detalhes": {
+      "contexto": "Projeto de prática de Excel com dados de vendas fictícios.",
+      "problema": null,
+      "objetivo": "Treinar todo o fluxo: organizar dados, aplicar fórmulas, criar tabelas dinâmicas e montar um dashboard.",
+      "fontes": ["Dados fictícios criados exclusivamente para praticar"],
+      "metodologia": null,
+      "tratamento": ["Organização das tabelas", "Tratamento de datas com TEXTO, ANO e DATA"],
+      "arquitetura": null,
+      "funcionalidades": ["Indicadores de vendas", "Tabelas dinâmicas", "Gráficos"],
+      "calculos": ["PROCV para busca", "Operações aritméticas para valores e diferenças"],
+      "contribuicao": "Projeto individual.",
+      "resultados": null,
+      "limitacoes": ["Dados fictícios: os números não representam vendas reais"],
+      "aprendizados": ["Apresentar dados de forma simples e fácil de acompanhar"]
+    }
+  },
+  {
+    "slug": "memoria-viva",
+    "nome": "Memória Viva",
+    "resumo": "Site oficial do aplicativo de TCC Memória Viva, que apoia pessoas com Alzheimer em estágio inicial e intermediário com fotos, áudios e mensagens do cuidador.",
+    "destaque": null,
+    "categorias": ["Desenvolvimento Frontend", "UI/UX Design", "Impacto Social"],
+    "tecnologias": ["HTML", "CSS", "JavaScript", "GitHub Pages", "Figma"],
+    "tipo": ["academico"],
+    "equipe": true,
+    "status": null,
+    "origem": "TCC",
+    "conquistas": [],
+    "links": {
+      "github": "https://github.com/Manuellasantos/website-memoria-viva",
+      "deploy": "https://manuellasantos.github.io/website-memoria-viva/",
+      "figma": "https://www.figma.com/design/AsUHuA4ACKFHGjcwjWy45Y/mem%C3%B3riaviva?node-id=0-1&t=ght77U0Dqdnnndqu-1"
+    },
+    "imagens": [
+      { "src": "img/projetos/memoria-1.webp", "alt": "Página inicial do site Memória Viva", "real": true }
+    ],
+    "detalhes": {
+      "contexto": "Site desenvolvido como parte do TCC para apresentar o aplicativo Memória Viva. O site e o aplicativo são entregas diferentes: este card trata do site.",
+      "problema": null,
+      "objetivo": "Apresentar o app, mostrar as funcionalidades e disponibilizar o download.",
+      "fontes": [],
+      "metodologia": null,
+      "tratamento": [],
+      "arquitetura": "frontend",
+      "funcionalidades": ["Página única com Início, Sobre, Funcionalidades, Equipe e Download", "Modos de cor: padrão, protanopia, deuteranopia, tritanopia e acromatopsia", "FAQ, termos de uso e política de privacidade", "Layout responsivo"],
+      "calculos": [],
+      "contribuicao": "Líder de projeto, front-end e back-end: layout, estrutura das páginas, organização do conteúdo e contribuições no back-end (segundo o README).",
+      "resultados": null,
+      "limitacoes": ["Não há comprovação de eficácia clínica do aplicativo"],
+      "aprendizados": ["Acessibilidade de cor desde o início do projeto"]
+    }
+  },
+  {
+    "slug": "nossas-cores",
+    "nome": "Nossas Cores",
+    "resumo": "Aplicação web de catálogo e venda de tintas por acabamento, com cadastro, login, carrinho e MySQL.",
+    "destaque": null,
+    "categorias": ["Desenvolvimento Full Stack", "Desenvolvimento Frontend", "Desenvolvimento Backend", "Banco de Dados"],
+    "tecnologias": ["Node.js", "Express", "MySQL", "EJS", "HTML", "CSS", "JavaScript"],
+    "tipo": ["academico"],
+    "equipe": true,
+    "status": null,
+    "origem": "Gestão de Conteúdo Web — Etec Albert Einstein",
+    "conquistas": [],
+    "links": {
+      "github": "https://github.com/nanda-marques/nossasCores",
+      "deploy": "https://nossascores.netlify.app/",
+      "figma": null
+    },
+    "imagens": [
+      { "src": "img/projetos/nossascores-1.webp", "alt": "Página inicial da loja de tintas Nossas Cores", "real": true },
+      { "src": "img/projetos/nossascores-2.webp", "alt": "Catálogo de tintas por categoria de acabamento", "real": true }
+    ],
+    "detalhes": {
+      "contexto": "Projeto de prática da disciplina Gestão de Conteúdo Web, na Etec Albert Einstein.",
+      "problema": null,
+      "objetivo": "Apresentar e comercializar tintas com navegação por categorias de acabamento.",
+      "fontes": [],
+      "metodologia": "Servidor Node.js/Express com páginas EJS e persistência em MySQL.",
+      "tratamento": [],
+      "arquitetura": "fullstack",
+      "funcionalidades": ["Catálogo por acabamento (fosca, semibrilho, brilho, acetinada, emborrachada)", "Cadastro e login", "Carrinho de compras", "Integração com MySQL"],
+      "calculos": [],
+      "contribuicao": "Projeto em equipe com Matheus Bonfim Batista e Fernanda Marques. A divisão individual não está detalhada no repositório.",
+      "resultados": null,
+      "limitacoes": [],
+      "aprendizados": ["Rotas, templates e banco relacional em uma aplicação completa"]
+    }
+  },
+  {
+    "slug": "agendamento-sus",
+    "nome": "Agendamento SUS",
+    "resumo": "Protótipo acadêmico de plataforma inclusiva para escolher um atendimento, marcar horário e acompanhar agendamentos.",
+    "destaque": null,
+    "categorias": ["Desenvolvimento Frontend", "Impacto Social"],
+    "tecnologias": ["HTML", "CSS", "JavaScript", "GitHub Pages"],
+    "tipo": ["academico"],
+    "equipe": true,
+    "status": "Protótipo acadêmico",
+    "origem": "Atividade final de UDIAD",
+    "conquistas": [],
+    "links": {
+      "github": "https://github.com/Manuellasantos/Agendamento-sus",
+      "deploy": "https://manuellasantos.github.io/Agendamento-sus/",
+      "figma": null
+    },
+    "imagens": [
+      { "src": "img/projetos/sus-1.webp", "alt": "Prévia da plataforma de agendamento de consultas e serviços", "real": true }
+    ],
+    "detalhes": {
+      "contexto": "Atividade final de UDIAD: criar um protótipo funcional de um serviço ou solução digital inclusiva.",
+      "problema": null,
+      "objetivo": "Permitir que a pessoa escolha o atendimento, marque o horário e acompanhe seus agendamentos.",
+      "fontes": [],
+      "metodologia": null,
+      "tratamento": [],
+      "arquitetura": "frontend",
+      "funcionalidades": ["Escolha do tipo de atendimento", "Marcação de horário", "Acompanhamento de agendamentos"],
+      "calculos": [],
+      "contribuicao": "Projeto em equipe com Matheus Bonfim Batista e Fernanda Marques.",
+      "resultados": null,
+      "limitacoes": ["Protótipo acadêmico sem integração com os sistemas oficiais do SUS"],
+      "aprendizados": ["Pensar inclusão digital no fluxo de um serviço público"]
+    }
+  }
+]
