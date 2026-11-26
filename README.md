@@ -147,7 +147,7 @@ pytest tests/python
 | Suricato | Sobre mim | Espia por trás do card de formação e acompanha o cursor com os olhos |
 | Aranha e teia | Habilidades | A rede é "tecida" quando aparece e a aranha desce até a tecnologia escolhida |
 | Borboleta → k-means | O que estou estudando | Pontos desenham a curva da borboleta e depois viram dados simulados agrupados passo a passo |
-| Passagem secreta | Projetos | Digite "corvinal": os cards trocam de lugar (técnica FLIP) |
+| Brasão da Corvinal | Página toda | Digite "corvinal" (ou toque em "mostrar o brasão" no mural): um brasão original em azul e bronze carimba a tela, o corvo bate as asas e os projetos trocam de lugar (técnica FLIP) |
 | Balão vermelho | Vamos conversar? | Easter egg |
 | Letras recortadas | Início | Cada letra do nome "cai" girada e assenta no lugar |
 | Faixas | Início | Duas faixas inclinadas com texto correndo em sentidos opostos |

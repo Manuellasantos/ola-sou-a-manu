@@ -28,6 +28,11 @@ export default function AlemDaTecnologia() {
               </span>
               <span className="mural__campo mono">{campo}</span>
               <span className="mural__valor">{valor}</span>
+              {campo === 'Casa em Hogwarts' && (
+                <button type="button" className="btn btn-sm mural__botao" onClick={() => window.dispatchEvent(new Event('corvinal'))}>
+                  mostrar o brasão
+                </button>
+              )}
             </li>
           ))}
         </ul>

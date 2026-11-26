@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useDados } from '../../hooks/useDados'
 import { useNaTela } from '../../hooks/useNaTela'
 import Capitulo from '../Capitulo'
-import { Acumulado, Heatmap, Linguagens, Semana, fmtData, fmtMes } from '../Graficos'
+import { Acumulado, Heatmap, Linguagens, Semana, fmtMes } from '../Graficos'
 import { Rasgo } from '../Colagem'
 
 export default function Analises() {
@@ -129,17 +129,6 @@ export default function Analises() {
                 </div>
               )}
 
-              <div className="lab__fonte">
-                <p>
-                  <strong>Fonte:</strong> API pública do GitHub, conta @{dados.usuario}. Atualizado em{' '}
-                  {fmtData(dados.coletado_em.slice(0, 10))}.
-                </p>
-                <p>
-                  <strong>Limitações:</strong> quantidade de código não mede o quanto eu sei de uma linguagem. Só entra o que é público, então o dashboard
-                  em Excel quase não aparece. No repositório da Análise AWS a pasta do ambiente virtual foi enviada junto com o código, então ignorei os
-                  bytes de lá para não inflar o Python.
-                </p>
-              </div>
             </div>
           </div>
         )}

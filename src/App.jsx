@@ -2,6 +2,7 @@ import { Suspense, lazy, useEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 import Cabecalho from './components/Cabecalho'
 import Rodape from './components/Rodape'
+import Brasao from './animations/Brasao'
 import Inicio from './pages/Inicio'
 
 // A página de detalhes só é baixada quando alguém abre um projeto
@@ -34,6 +35,7 @@ export default function App() {
         </Suspense>
       </main>
       <Rodape />
+      <Brasao />
     </>
   )
 }

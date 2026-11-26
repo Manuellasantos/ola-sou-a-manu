@@ -53,13 +53,6 @@
 .seta-mao {
   color: var(--text);
 }
-.coordenadas {
-  display: inline-block;
-  padding: 4px 10px;
-  border: 1.5px dashed var(--text);
-  background: var(--surface);
-  color: var(--text);
-}
 
 /* faixas inclinadas com texto correndo */
 .faixas {
@@ -322,21 +315,10 @@
   text-align: center;
   margin-top: 6px;
 }
-.abertura__adesivo--dispersao {
-  left: 0;
-  top: 40px;
-  --giro: -7deg;
-}
 .abertura__adesivo--barras {
   right: -10px;
   bottom: -30px;
   --giro: 5deg;
-}
-.abertura__coordenadas {
-  position: absolute;
-  left: 30px;
-  bottom: 30px;
-  transform: rotate(-3deg);
 }
 .abertura__estrela--1 {
   width: 120px;
@@ -390,9 +372,6 @@
     width: 118px;
   }
 
-  .abertura__coordenadas {
-    display: none;
-  }
 }
 
 /* ================= sobre mim ================= */
@@ -414,7 +393,7 @@
 }
 .sobre__colagem {
   position: relative;
-  padding: 70px 0 170px;
+  padding: 70px 0 40px;
 }
 .formacao {
   padding: 24px;
@@ -444,19 +423,9 @@
   right: -20px;
   top: 30px;
 }
-.sobre__adesivo {
-  left: -20px;
-  bottom: 0;
-  width: 140px;
-  --giro: -6deg;
-}
 @media (max-width: 900px) {
   .sobre {
     grid-template-columns: 1fr;
-  }
-  .sobre__adesivo {
-    left: auto;
-    right: 0;
   }
 }
 
@@ -1250,12 +1219,6 @@
 }
 .lab__rodape {
   grid-column: 1 / -1;
-}
-.lab__fonte {
-  margin-top: 20px;
-  max-width: 78ch;
-  font-size: 0.92rem;
-  color: var(--text-2);
 }
 .heatmap__rolagem {
   overflow-x: auto;

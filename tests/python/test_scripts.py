@@ -54,10 +54,17 @@ def test_rosa_tem_pontos_finitos():
     assert np.isfinite(np.column_stack([px, py, pz])).all()
 
 
-def test_arte_correlacao_e_simetrica():
+def test_arte_resumo_github(tmp_path, monkeypatch):
     import gerar_arte
 
-    matriz = np.array(gerar_arte.correlacao_rosa()["valores"])
-    assert matriz.shape == (4, 4)
-    assert np.allclose(matriz, matriz.T)
-    assert np.allclose(np.diag(matriz), 1)
+    (tmp_path / "github.json").write_text(
+        '{"linguagens": [{"linguagem": "Python", "repos": 5}, {"linguagem": "CSS", "repos": 8}],'
+        ' "repos_por_mes": [{"acumulado": 1}, {"acumulado": 3}],'
+        ' "contribuicoes": {"por_dia_semana": [{"dia": "Seg", "total": 2}]}}',
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(gerar_arte, "PASTA_PUBLICA", tmp_path)
+    resumo = gerar_arte.resumo_github()
+    assert resumo["linguagens"][0] == ["CSS", 8]
+    assert resumo["acumulado"] == [1, 3]
+    assert resumo["semana"] == [["Seg", 2]]

@@ -4,7 +4,6 @@ import Gato from '../../animations/Gato'
 import Moonwalk from '../../animations/Moonwalk'
 import { useNaTela } from '../../hooks/useNaTela'
 import { usePreferencias } from '../../hooks/usePreferencias'
-import { tocar } from '../../services/audio'
 import { projetosOrdenados } from '../../services/data'
 import {
   FILTROS_VAZIOS,
@@ -80,25 +79,15 @@ export default function Projetos() {
 
   useFlip(gradeRef, resultado.map((p) => p.slug).join(), animar)
 
-  // Passagem secreta: digitar "corvinal" reorganiza os projetos, como as escadas que mudam de lugar
+  // Passagem secreta: o brasão (src/animations/Brasao.jsx) avisa e os projetos trocam de ordem,
+  // como as escadas que mudam de lugar
   useEffect(() => {
-    let digitado = ''
     const abrir = () => {
       setPassagem((n) => n + 1)
-      setAviso('As escadas mudaram de lugar: os projetos trocaram de ordem.')
-      tocar('transicao')
+      setAviso('Os projetos trocaram de ordem.')
     }
-    const aoTeclar = (e) => {
-      if (e.target.matches?.('input, textarea, select')) return
-      digitado = (digitado + e.key.toLowerCase()).slice(-8)
-      if (digitado === 'corvinal') abrir()
-    }
-    window.addEventListener('keydown', aoTeclar)
     window.addEventListener('passagem-secreta', abrir)
-    return () => {
-      window.removeEventListener('keydown', aoTeclar)
-      window.removeEventListener('passagem-secreta', abrir)
-    }
+    return () => window.removeEventListener('passagem-secreta', abrir)
   }, [])
 
   const mudar = (parcial) => setFiltros((f) => ({ ...f, ...parcial }))

@@ -2,7 +2,7 @@ import Suricato from '../../animations/Suricato'
 import { useNaTela } from '../../hooks/useNaTela'
 import { perfil } from '../../services/data'
 import Capitulo from '../Capitulo'
-import { AdesivoCorrelacao, Estrela, Rasgo } from '../Colagem'
+import { Estrela, Rasgo } from '../Colagem'
 
 export default function QuemSou() {
   const [ref, visivel] = useNaTela()
@@ -39,7 +39,6 @@ export default function QuemSou() {
               </ol>
             </div>
             <Estrela className="sobre__estrela" semente={21} pontas={8} cor="var(--rosa)" />
-            <AdesivoCorrelacao className="sobre__adesivo" />
           </aside>
         </div>
       </div>

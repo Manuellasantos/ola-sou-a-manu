@@ -1,7 +1,7 @@
 import RosaGenerativa from '../../animations/RosaGenerativa'
 import { asset, irParaSecao, linkSecao } from '../../config/site'
 import { perfil } from '../../services/data'
-import { AdesivoBarras, AdesivoDispersao, Coordenadas, Estrela, Faixa, SetaMao } from '../Colagem'
+import { AdesivoBarras, Estrela, Faixa, SetaMao } from '../Colagem'
 import Icone from '../Icone'
 
 // cada letra do nome é um "recorte" diferente, como letras de revista
@@ -45,11 +45,9 @@ export default function Abertura() {
               ) : (
                 <RosaGenerativa />
               )}
-              <figcaption className="mao">{perfil.foto ? 'eu!' : 'minha flor preferida'}</figcaption>
+              <figcaption className="mao">{perfil.foto ? 'eu!' : 'rosa, minha flor favorita'}</figcaption>
             </figure>
-            <AdesivoDispersao className="abertura__adesivo abertura__adesivo--dispersao" />
             <AdesivoBarras className="abertura__adesivo abertura__adesivo--barras" />
-            <Coordenadas className="abertura__coordenadas" />
           </div>
 
           <div className="abertura__texto">

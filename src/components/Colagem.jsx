@@ -86,61 +86,6 @@ function Adesivo({ titulo, nota, className = '', children }) {
   )
 }
 
-export function AdesivoDispersao({ className }) {
-  const { dados } = useDados('arte')
-  if (!dados) return null
-  const formas = ['circulo', 'quadrado', 'triangulo']
-  return (
-    <Adesivo titulo="k-means, k = 3" nota="dados simulados" className={className}>
-      <svg viewBox="0 0 120 120" role="img" aria-label="Gráfico de dispersão com três grupos de pontos simulados">
-        <line x1="8" y1="112" x2="116" y2="112" stroke="currentColor" strokeWidth="1.5" />
-        <line x1="8" y1="4" x2="8" y2="112" stroke="currentColor" strokeWidth="1.5" />
-        {dados.dispersao.pontos.map(([x, y, g], i) => {
-          const cx = 12 + x * 100
-          const cy = 108 - y * 100
-          const cor = ['var(--rosa)', 'var(--preto)', 'var(--rosa-medio)'][g]
-          if (formas[g] === 'quadrado') return <rect key={i} x={cx - 2.5} y={cy - 2.5} width="5" height="5" fill={cor} />
-          if (formas[g] === 'triangulo') return <path key={i} d={`M${cx} ${cy - 3.2} L${cx + 3} ${cy + 2.4} L${cx - 3} ${cy + 2.4}Z`} fill={cor} />
-          return <circle key={i} cx={cx} cy={cy} r="2.8" fill={cor} />
-        })}
-      </svg>
-    </Adesivo>
-  )
-}
-
-export function AdesivoCorrelacao({ className }) {
-  const { dados } = useDados('arte')
-  if (!dados) return null
-  const { variaveis, valores } = dados.correlacao
-  const t = 22
-  return (
-    <Adesivo titulo="correlação" nota="coordenadas da rosa" className={className}>
-      <svg viewBox={`0 0 ${t * 4 + 22} ${t * 4 + 22}`} role="img" aria-label={`Matriz de correlação entre ${variaveis.join(', ')}`}>
-        {valores.map((linha, i) =>
-          linha.map((v, j) => (
-            <g key={`${i}${j}`}>
-              <rect x={22 + j * t} y={22 + i * t} width={t - 2} height={t - 2} fill="var(--rosa)" opacity={0.12 + Math.abs(v) * 0.88} />
-              <text x={22 + j * t + (t - 2) / 2} y={22 + i * t + t / 2 + 2} textAnchor="middle" className="adesivo__num">
-                {v.toFixed(1)}
-              </text>
-            </g>
-          )),
-        )}
-        {variaveis.map((v, i) => (
-          <g key={v}>
-            <text x={22 + i * t + t / 2 - 1} y="15" textAnchor="middle" className="adesivo__rot">
-              {v}
-            </text>
-            <text x="16" y={22 + i * t + t / 2 + 2} textAnchor="end" className="adesivo__rot">
-              {v}
-            </text>
-          </g>
-        ))}
-      </svg>
-    </Adesivo>
-  )
-}
-
 export function AdesivoTabela({ className }) {
   const { dados } = useDados('arte')
   if (!dados) return null
@@ -202,14 +147,6 @@ export function AdesivoLinha({ className }) {
         <circle cx="134" cy={70 - 60} r="4" fill="var(--preto)" />
       </svg>
     </Adesivo>
-  )
-}
-
-export function Coordenadas({ className = '' }) {
-  return (
-    <p className={`coordenadas mono ${className}`} aria-label="São Paulo: latitude 23,55 graus sul, longitude 46,63 graus oeste">
-      23.5505° S, 46.6333° W
-    </p>
   )
 }
 
