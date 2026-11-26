@@ -2,6 +2,8 @@
 
 Este é meu portfólio pessoal, onde reúno meus projetos, estudos e um pouco dos meus interesses fora da tecnologia.
 
+**Acesse o site:** [manuellasantos.github.io/ola-sou-a-manu](https://manuellasantos.github.io/ola-sou-a-manu/)
+
 Sou a **Manuella Santos Cruz**, estudante de Ciência de Dados para Negócios na Fatec Sebrae e técnica em Informática para Internet pela Etec Albert Einstein. Meu foco é **Ciência de Dados, Análise de Dados, Engenharia de Dados e Inteligência Artificial**.
 
 ![Prévia do portfólio](public/og.png)
