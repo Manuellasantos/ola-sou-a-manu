@@ -6,7 +6,7 @@ Este é meu portfólio pessoal, onde reúno meus projetos, estudos e um pouco do
 
 Sou a **Manuella Santos Cruz**, estudante de Ciência de Dados para Negócios na Fatec Sebrae e técnica em Informática para Internet pela Etec Albert Einstein. Meu foco é **Ciência de Dados, Análise de Dados, Engenharia de Dados e Inteligência Artificial**.
 
-![Prévia do portfólio](public/og.png)
+![Prévia do portfólio](public/manu.png)
 
 ## Objetivo
 
