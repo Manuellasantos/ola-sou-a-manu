@@ -52,7 +52,11 @@ Depois desse vinham a identidade visual, a lista dos 11 projetos com os links, a
 
 > Coloca um balão vermelho escondido, de It: A Coisa, que quando clica aparece "Todos nós flutuamos por aqui". E alguma coisa da Corvinal, bem discreta, tipo os cards mudando de lugar igual as escadas de Hogwarts.
 
-## 12. README e commits
+## 12. Storytelling e design
+
+> Os textos estão muito com cara de inteligência artificial. Quero que a minha personalidade venha antes do que eu fiz: a pessoa primeiro me conhece, depois vê minhas habilidades e só no final o portfólio. E quero um design bem fora da caixinha, sem cards genéricos, mas que continue agradável de olhar. O fundo não precisa ser preto.
+
+## 13. README e commits
 
 > Faz commits que pareçam um humano falando, tipo "subindo tal coisa", "organizando tal coisa". E no README coloca a estrutura de pastas, como funciona, o objetivo e como você foi usado, com exemplo de prompt.
 

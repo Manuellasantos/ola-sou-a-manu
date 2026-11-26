@@ -10,11 +10,28 @@ Sou a **Manuella Santos Cruz**, estudante de Ciência de Dados para Negócios na
 
 Eu não queria só um currículo online. Queria que o próprio site mostrasse como eu trabalho com dados:
 
-- os projetos estão em um catálogo com filtros, e cada um tem uma página de detalhes;
-- tem um **mini projeto de análise de dados dentro do portfólio**: scripts em Python coletam a API do GitHub, tratam os dados com Pandas e geram os gráficos da seção "Meu GitHub";
+- o site começa por quem eu sou e só depois mostra o que eu fiz;
+- os projetos estão em um índice com filtros, e cada um tem uma página de detalhes;
+- tem um **mini projeto de análise de dados dentro do portfólio**: scripts em Python coletam a API do GitHub, tratam os dados com Pandas e geram os gráficos do capítulo "Laboratório";
 - as animações também usam dados de verdade: a rosa do início, a rede de habilidades e a borboleta que vira k-means são calculadas em Python (NumPy) e só desenhadas no navegador.
 
 Cuidados que tomei: nada de barra de "Python 90%", nenhum resultado inventado, dados simulados sempre identificados e contribuição individual só quando está documentada no repositório do projeto.
+
+## A história do site
+
+O site é um caderno de campo, dividido em capítulos. A ordem é proposital: primeiro a pessoa me conhece, depois vê o que eu sei fazer e só então chega nos projetos.
+
+| Capítulo | O que tem |
+|---|---|
+| Abertura | "Olá, sou a Manu." e uma rosa de partículas calculada em Python |
+| I. Quem sou | Minha apresentação e uma "ficha de campo" com as minhas manias (o suricato fica de olho) |
+| II. O caminho até aqui | Etec, Fatec, cursos, competições, SOEL, monitoria e iniciação científica, ano a ano |
+| III. Uma teia de ferramentas | Rede que liga cada ferramenta aos projetos em que eu usei ela |
+| IV. O que eu construí | Os 11 projetos como índice de caderno, com o moonwalk puxando os destaques |
+| V. O laboratório | Análise dos meus dados do GitHub, a borboleta que vira k-means e a arquitetura do Voebem |
+| Epílogo | Contato e um balão vermelho escondido |
+
+O visual imita papel pontilhado: tinta escura, rosa como caneta marca-texto, anotações escritas à mão (fonte Caveat), prints colados com fita e números de capítulo vazados. Evitei cards genéricos de propósito.
 
 ## Como funciona
 
@@ -24,7 +41,7 @@ Python (scripts/)                         JavaScript (src/)
 API do GitHub ──► coletar_github.py
                      │ data/raw/github_bruto.json
                      ▼
-               processar_github.py ──► public/data/github.json ──► seção "Meu GitHub"
+               processar_github.py ──► public/data/github.json ──► capítulo "Laboratório"
 gerar_rosa.py ──────────────────────► public/data/rosa.json   ──► rosa do início (canvas)
 gerar_rede_habilidades.py ──────────► public/data/rede.json   ──► rede de habilidades (SVG)
 gerar_clusters.py ──────────────────► public/data/clusters.json ► borboleta → k-means (SVG)
@@ -63,8 +80,8 @@ ola-sou-a-manu/
 │   └── utils.py
 ├── src/
 │   ├── animations/           # rosa, moonwalk, gato, suricato, borboleta, balão
-│   ├── components/           # cabeçalho, cards, pipeline, menu de acessibilidade
-│   │   └── secoes/           # uma seção da home por arquivo
+│   ├── components/           # cabeçalho, capítulo, linha de projeto, gráficos, pipeline, acessibilidade
+│   │   └── secoes/           # um capítulo por arquivo (Abertura, QuemSou, Caminho, Habilidades, Projetos, Laboratorio, Epilogo)
 │   ├── config/               # seções, caminhos e trilhas de áudio
 │   ├── data/                 # projects.json e profile.json
 │   ├── hooks/                # preferências, visibilidade, carregamento de dados
@@ -120,14 +137,14 @@ pytest tests/python
 
 | Animação | Onde | Como funciona |
 |---|---|---|
-| Rosa de partículas | Início | 3.000 pontos de uma superfície paramétrica calculada em NumPy; o canvas gira, projeta em perspectiva e o cursor empurra as pétalas |
+| Rosa de partículas | Abertura | 3.000 pontos de uma superfície paramétrica calculada em NumPy; o canvas gira, projeta em perspectiva e o cursor empurra as pétalas |
 | Moonwalk | Projetos | Dançarino original em SVG. As pernas usam cinemática inversa (lei dos cossenos): um pé fica na ponta parado e o outro desliza chapado para trás. Ele puxa o painel "Em cartaz" |
-| Gato | Grade de projetos | Segue o cursor pela borda dos cards, senta e cochila quando fica parado |
-| Suricato | Sobre | Espia por trás do card de formação e acompanha o cursor com os olhos |
+| Gato | Projetos | Anda pela borda do índice seguindo o cursor, senta e cochila quando fica parado |
+| Suricato | Quem sou | Espia por trás da ficha de campo e acompanha o cursor com os olhos |
 | Aranha e teia | Habilidades | A rede é "tecida" quando aparece e a aranha desce até a tecnologia escolhida |
-| Borboleta → k-means | Pesquisa | Pontos desenham a curva da borboleta e depois viram dados simulados agrupados passo a passo |
+| Borboleta → k-means | Laboratório | Pontos desenham a curva da borboleta e depois viram dados simulados agrupados passo a passo |
 | Passagem secreta | Projetos | Digite "corvinal": os cards trocam de lugar (técnica FLIP) |
-| Balão vermelho | Contato | Easter egg |
+| Balão vermelho | Epílogo | Easter egg |
 
 Nenhuma animação bloqueia o conteúdo: tudo está no HTML desde o início e as animações só começam quando a seção aparece na tela.
 
@@ -152,7 +169,7 @@ Eu adoraria um trechinho de Billie Jean no moonwalk, mas não incluí nenhuma m�
 ## Adicionando um projeto
 
 1. Inclua um objeto em `src/data/projects.json` seguindo o formato dos outros.
-2. Coloque as capturas em `public/img/projetos/` (sem captura, o card mostra uma capa conceitual identificada).
+2. Coloque as capturas em `public/img/projetos/` (sem captura, o índice avisa que ainda não há print público).
 3. Rode `python scripts/gerar_rede_habilidades.py` para a rede de habilidades incluir as tecnologias novas.
 
 ## Deploy
