@@ -7,6 +7,7 @@
 import sys
 
 import coletar_github
+import gerar_arte
 import gerar_clusters
 import gerar_graficos
 import gerar_og
@@ -24,7 +25,7 @@ def main() -> int:
     ]
     if "--offline" not in sys.argv:
         etapas.append(("Coleta do GitHub", coletar_github.main))
-    etapas += [("Processamento do GitHub", processar_github.main), ("Gráficos e relatório", gerar_graficos.main)]
+    etapas += [("Processamento do GitHub", processar_github.main), ("Gráficos e relatório", gerar_graficos.main), ("Adesivos de dados", gerar_arte.main)]
 
     for nome, funcao in etapas:
         print(f"→ {nome}")

@@ -52,3 +52,12 @@ def test_rosa_tem_pontos_finitos():
     x, t = np.meshgrid(np.linspace(0.2, 1, 3), np.linspace(0, 10, 50))
     px, py, pz = gerar_rosa.superficie_rosa(x.ravel(), t.ravel())
     assert np.isfinite(np.column_stack([px, py, pz])).all()
+
+
+def test_arte_correlacao_e_simetrica():
+    import gerar_arte
+
+    matriz = np.array(gerar_arte.correlacao_rosa()["valores"])
+    assert matriz.shape == (4, 4)
+    assert np.allclose(matriz, matriz.T)
+    assert np.allclose(np.diag(matriz), 1)
