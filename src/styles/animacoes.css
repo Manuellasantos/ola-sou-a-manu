@@ -77,8 +77,8 @@
 /* Suricato */
 .suricato {
   position: absolute;
-  top: -78px;
-  right: 28px;
+  top: -84px;
+  right: 40px;
   width: 64px;
   height: 90px;
   padding: 0;
@@ -212,4 +212,8 @@
 }
 .cinetico__palavra:not(:last-child) {
   margin-right: 0.22em;
+}
+.cinetico__palavra:last-child {
+  color: var(--accent);
+  font-style: italic;
 }

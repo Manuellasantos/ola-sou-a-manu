@@ -3,13 +3,11 @@ export const asset = (caminho) => `${import.meta.env.BASE_URL}${caminho.replace(
 
 export const SECOES = [
   { id: 'inicio', rotulo: 'Início' },
-  { id: 'sobre', rotulo: 'Sobre' },
+  { id: 'quem-sou', rotulo: 'Quem sou' },
+  { id: 'caminho', rotulo: 'Caminho' },
   { id: 'habilidades', rotulo: 'Habilidades' },
   { id: 'projetos', rotulo: 'Projetos' },
-  { id: 'trajetoria', rotulo: 'Trajetória' },
-  { id: 'dados', rotulo: 'Meu GitHub' },
-  { id: 'pesquisa', rotulo: 'Pesquisa' },
-  { id: 'alem', rotulo: 'Além dos dados' },
+  { id: 'laboratorio', rotulo: 'Laboratório' },
   { id: 'contato', rotulo: 'Contato' },
 ]
 

@@ -1,123 +1,135 @@
-/* Tokens de design. As paletas de acessibilidade só trocam estas variáveis. */
+/*
+  Tema "caderno de campo": papel claro, tinta escura e rosa como caneta marca-texto.
+  As paletas de acessibilidade só trocam estas variáveis.
+*/
 :root {
-  --bg: #131217;
-  --bg-2: #1b1920;
-  --surface: #24212b;
-  --surface-2: #2e2a37;
-  --line: rgba(243, 239, 242, 0.1);
-  --line-strong: rgba(243, 239, 242, 0.22);
-  --text: #f3eff2;
-  --text-2: #c9c1cc;
-  --text-3: #9a91a0;
+  --bg: #f6f1ed;          /* papel */
+  --bg-2: #efe7e2;        /* papel mais escuro (faixas, blocos) */
+  --surface: #fffaf7;     /* folha solta, colada por cima */
+  --surface-2: #e7dde0;
+  --line: rgba(34, 29, 41, 0.14);
+  --line-strong: rgba(34, 29, 41, 0.38);
+  --grid: rgba(120, 90, 110, 0.16); /* pontinhos do papel */
+  --text: #221d29;        /* tinta */
+  --text-2: #4a4252;
+  --text-3: #6f6577;
 
-  --accent: #e8a1bc;      /* rosa suave: assinatura */
-  --accent-strong: #cc5c91; /* rosa intenso */
-  --accent-2: #ac96db;    /* lavanda */
-  --on-accent: #131217;
+  --accent: #b23a72;        /* rosa caneta: textos e detalhes (contraste AA no papel) */
+  --accent-strong: #cc5c91;
+  --accent-2: #6e55b5;      /* lavanda escura */
+  --on-accent: #fffaf7;
+  --hl: #f5bfd5;            /* marca-texto rosa */
+  --hl-2: #d9ccf3;          /* marca-texto lavanda */
+  --hl-3: #bfe6da;          /* marca-texto menta */
+  --hl-4: #fbd9b9;          /* marca-texto pêssego */
+  --fita: rgba(232, 161, 188, 0.55); /* fita adesiva */
 
-  /* séries de dados (gráficos, rede, filtros). Cada série também tem forma/padrão. */
-  --s1: #e8a1bc;
-  --s2: #ac96db;
-  --s3: #f3eff2;
-  --s4: #cc5c91;
-  --s5: #7c6f8f;
+  /* séries de dados: cada uma também tem forma ou padrão */
+  --s1: #cc5c91;
+  --s2: #7d63c6;
+  --s3: #2f2836;
+  --s4: #3f9a82;
+  --s5: #a3979f;
 
-  /* rampa do heatmap: só a luminosidade muda, então funciona sem cor */
-  --heat-0: #24212b;
-  --heat-1: #4a3343;
-  --heat-2: #7d4865;
-  --heat-3: #b45d8a;
-  --heat-4: #e8a1bc;
+  --heat-0: #e9e0e3;
+  --heat-1: #f1c3d6;
+  --heat-2: #e08ab0;
+  --heat-3: #c2508a;
+  --heat-4: #7e2356;
 
-  /* paleta colorida: cada seção tem a sua cor, sempre sobre a base escura */
-  --c-rosa: #e8a1bc;
-  --c-lavanda: #ac96db;
-  --c-menta: #8fd6c3;
-  --c-pessego: #f4b393;
-  --c-ceu: #8ec5f0;
-  --c-manteiga: #f0d68a;
-  --sec: var(--c-rosa);
+  --c-rosa: #cc5c91;
+  --c-lavanda: #7d63c6;
+  --c-menta: #3f9a82;
+  --c-pessego: #d9793f;
+  --c-ceu: #3b84c4;
+  --c-manteiga: #c9a227;
+  --sec: var(--accent);
 
-  --glass: rgba(36, 33, 43, 0.55);
-  --glass-border: rgba(243, 239, 242, 0.12);
-  --focus: #f6c1d6;
+  --glass: var(--surface);
+  --glass-border: var(--line);
+  --focus: #6e55b5;
 
   --font-display: 'Fraunces', Georgia, serif;
   --font-ui: 'Space Grotesk', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-mao: 'Caveat', 'Comic Sans MS', cursive; /* anotações à mão */
 
-  --radius: 22px;
-  --radius-sm: 12px;
-  --gutter: clamp(16px, 4vw, 48px);
+  --radius: 4px;
+  --radius-sm: 4px;
+  --gutter: clamp(16px, 4vw, 56px);
   --max: 1240px;
   --font-scale: 1;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Protanopia e deuteranopia: eixo azul ↔ laranja, que continua distinguível */
+/* Protanopia e deuteranopia: eixo azul ↔ laranja */
 :root[data-palette='protanopia'],
 :root[data-palette='deuteranopia'] {
-  --c-rosa: #f0b25a;
-  --c-lavanda: #6aa9f0;
-  --c-menta: #a9d0ff;
-  --c-pessego: #ffd38a;
-  --c-ceu: #4f8fd6;
-  --c-manteiga: #f3eff2;
-  --accent: #f0b25a;
+  --accent: #a3570a;
   --accent-strong: #d98a1f;
-  --accent-2: #6aa9f0;
-  --s1: #f0b25a;
-  --s2: #6aa9f0;
-  --s3: #f3eff2;
-  --s4: #2f6fc4;
-  --s5: #8d8d8d;
-  --heat-1: #22385a;
-  --heat-2: #2f5f99;
-  --heat-3: #4f8fd6;
-  --heat-4: #a9d0ff;
-  --focus: #ffd38a;
+  --accent-2: #2456a6;
+  --hl: #f9d9a8;
+  --hl-2: #c6dbf7;
+  --hl-3: #c6dbf7;
+  --hl-4: #f9d9a8;
+  --fita: rgba(240, 178, 90, 0.5);
+  --s1: #d98a1f;
+  --s2: #2f6fc4;
+  --s4: #6aa9f0;
+  --heat-1: #c6dbf7;
+  --heat-2: #7fb0ea;
+  --heat-3: #3b78c8;
+  --heat-4: #163e7a;
+  --c-rosa: #d98a1f;
+  --c-lavanda: #2f6fc4;
+  --c-menta: #6aa9f0;
+  --c-pessego: #a3570a;
+  --c-ceu: #163e7a;
+  --c-manteiga: #8a6d00;
+  --focus: #2456a6;
 }
 
 /* Tritanopia: eixo vermelho ↔ ciano */
 :root[data-palette='tritanopia'] {
-  --c-rosa: #f07a8a;
-  --c-lavanda: #3cc8c0;
-  --c-menta: #9ff0ea;
-  --c-pessego: #ff9eaa;
-  --c-ceu: #2aa39b;
-  --c-manteiga: #f3eff2;
-  --accent: #f07a8a;
+  --accent: #b0283f;
   --accent-strong: #d64560;
-  --accent-2: #3cc8c0;
-  --s1: #f07a8a;
-  --s2: #3cc8c0;
-  --s3: #f3eff2;
-  --s4: #a8323f;
-  --s5: #8d8d8d;
-  --heat-1: #4a2228;
-  --heat-2: #803540;
-  --heat-3: #c24b5d;
-  --heat-4: #ff9eaa;
-  --focus: #9ff0ea;
+  --accent-2: #137a74;
+  --hl: #f7c2ca;
+  --hl-2: #b9ece8;
+  --hl-3: #b9ece8;
+  --hl-4: #f7c2ca;
+  --fita: rgba(240, 122, 138, 0.45);
+  --s1: #d64560;
+  --s2: #1a9e96;
+  --s4: #5fd0c8;
+  --heat-1: #f7c2ca;
+  --heat-2: #e77d8e;
+  --heat-3: #c23a52;
+  --heat-4: #6e1424;
+  --c-rosa: #d64560;
+  --c-lavanda: #137a74;
+  --c-menta: #1a9e96;
+  --c-pessego: #b0283f;
+  --c-ceu: #0e5e59;
+  --c-manteiga: #6e1424;
+  --focus: #137a74;
 }
 
 :root[data-contrast='alto'] {
-  --c-rosa: #ffb3d1;
-  --c-lavanda: #d9c9ff;
-  --c-menta: #b3ffe9;
-  --c-pessego: #ffd1b8;
-  --c-ceu: #b8e0ff;
-  --c-manteiga: #fff0b3;
-  --bg: #000;
-  --bg-2: #000;
-  --surface: #0d0d0d;
-  --surface-2: #1a1a1a;
-  --line: rgba(255, 255, 255, 0.5);
-  --line-strong: #fff;
-  --text: #fff;
-  --text-2: #fff;
-  --text-3: #e6e6e6;
-  --glass: #0d0d0d;
-  --glass-border: #fff;
-  --focus: #ffff00;
+  --bg: #ffffff;
+  --bg-2: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #e6e6e6;
+  --line: #000;
+  --line-strong: #000;
+  --grid: transparent;
+  --text: #000;
+  --text-2: #000;
+  --text-3: #1a1a1a;
+  --accent: #8a0045;
+  --hl: #ffe100;
+  --hl-2: #ffe100;
+  --hl-3: #ffe100;
+  --hl-4: #ffe100;
+  --focus: #0000c8;
 }

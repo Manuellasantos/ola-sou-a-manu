@@ -10,9 +10,9 @@
     "curriculo": "curriculo/ManuellaSantos.pdf"
   },
   "bio": [
-    "Tenho 19 anos, estudo Ciência de Dados para Negócios na Fatec Sebrae e sou técnica em Informática para Internet pela Etec Albert Einstein, onde concluí a formação em 2025.",
-    "Gosto de entender como as coisas funcionam e de transformar ideias em soluções. Hoje meus principais interesses são Ciência de Dados, Inteligência Artificial, Engenharia de Dados e desenvolvimento de aplicações.",
-    "Participo de projetos, hackathons, competições acadêmicas e iniciativas de pesquisa, e atuo como monitora de hackathons na Fatec Sebrae, conectando estudantes a oportunidades de inovação."
+    "Tenho 19 anos, estudo Ciência de Dados para Negócios na Fatec Sebrae e me formei técnica em Informática para Internet na Etec Albert Einstein em 2025.",
+    "Sou do tipo que precisa entender como as coisas funcionam por dentro. Com o tempo, isso virou interesse por Ciência de Dados, Inteligência Artificial, Engenharia de Dados e desenvolvimento de aplicações.",
+    "Também gosto de estar no meio das coisas: hackathons, competições, pesquisa. Hoje sou monitora de hackathons na Fatec Sebrae e ajudo outros estudantes a entrar nesse mundo."
   ],
   "habilidades": {
     "Linguagens": [
@@ -52,280 +52,163 @@
   },
   "trajetoria": [
     {
-      "ano": "2023 – 2025",
-      "ordem": 2023,
+      "fase": "2023 – 2025",
       "tipo": "formacao",
-      "titulo": "Técnico em Informática para Internet",
-      "local": "Etec Albert Einstein",
-      "texto": "Desenvolvimento web, mobile e UX/UI; projetos de frontend, backend e trabalho em equipe. Projetos da época: Nossas Cores e o site do TCC Memória Viva.",
+      "titulo": "Etec Albert Einstein",
+      "texto": "Técnico em Informática para Internet. Foi onde aprendi a programar de verdade: web, mobile, UX e muito trabalho em grupo.",
       "projetos": [
         "nossas-cores",
         "memoria-viva"
       ]
     },
     {
-      "ano": "Dez. 2024",
-      "ordem": 2024.9,
+      "fase": "2024",
+      "quando": "dez.",
       "tipo": "certificacao",
-      "titulo": "Meninas Programadoras USP — Python Básico",
-      "local": "ICMC/USP",
-      "texto": "Curso de Python básico do projeto Meninas Programadoras."
+      "titulo": "Meninas Programadoras USP",
+      "texto": "Meu primeiro curso de Python, no ICMC/USP."
     },
     {
-      "ano": "Nov. 2025 – mar. 2026",
-      "ordem": 2025.85,
+      "fase": "Competições pelo caminho",
+      "tipo": "conquista",
+      "titulo": "Medalha de prata no CUCo",
+      "texto": "Competição USP de Conhecimentos."
+    },
+    {
+      "fase": "Competições pelo caminho",
+      "tipo": "conquista",
+      "titulo": "Top 100 do Sudeste na Olimpíada Brasileira de Biologia Sintética",
+      "texto": "Biologia é uma paixão paralela que nunca larguei."
+    },
+    {
+      "fase": "2025",
+      "quando": "nov.",
       "tipo": "voluntariado",
-      "titulo": "Redatora",
-      "local": "SOEL — Sociedade Olímpica de Estudos e Lideranças",
-      "texto": "Produção de textos e materiais informativos; pesquisa e organização de informações sobre cursos, bolsas, editais e eventos científicos."
+      "titulo": "Redatora na SOEL",
+      "texto": "Escrevia sobre cursos, bolsas, editais e eventos científicos para a Sociedade Olímpica de Estudos e Lideranças."
     },
     {
-      "ano": "2026 – 2028 (previsão)",
-      "ordem": 2026,
+      "fase": "2026",
+      "quando": "início",
       "tipo": "formacao",
-      "titulo": "Tecnologia em Ciência de Dados para Negócios",
-      "local": "Fatec Sebrae",
-      "texto": "Formação em análise estatística, visualização, modelagem e decisões orientadas a dados."
+      "titulo": "Fatec Sebrae",
+      "texto": "Comecei Ciência de Dados para Negócios. Previsão de formatura: 2028."
     },
     {
-      "ano": "Mar. 2026 – atual",
-      "ordem": 2026.2,
+      "fase": "2026",
+      "quando": "mar.",
       "tipo": "voluntariado",
-      "titulo": "Líder de Equipe — LinkedIn Newsletter",
-      "local": "SOEL",
-      "texto": "Liderança da newsletter: organização das atividades, acompanhamento da produção de conteúdos e divulgação de oportunidades acadêmicas e profissionais."
+      "titulo": "Líder da newsletter da SOEL",
+      "texto": "Passei a cuidar da newsletter no LinkedIn: organizo a equipe, acompanho os textos e divulgo oportunidades."
     },
     {
-      "ano": "Mai. 2026",
-      "ordem": 2026.4,
+      "fase": "2026",
+      "quando": "mai.",
       "tipo": "certificacao",
-      "titulo": "Fundamentos de Engenharia de Dados e Machine Learning",
-      "local": "TOTVS e DIO",
-      "texto": "Projetos desenvolvidos na trilha: Spotify ETL Dashboard e Análise AWS.",
+      "titulo": "Trilha de Engenharia de Dados e Machine Learning",
+      "texto": "Pela TOTVS e DIO. Daqui saíram o Spotify ETL e a Análise AWS.",
       "projetos": [
         "spotify-etl",
         "analise-aws"
       ]
     },
     {
-      "ano": "2026",
-      "ordem": 2026.5,
+      "fase": "2026",
+      "quando": "jun.",
       "tipo": "hackathon",
-      "titulo": "Hackathon Wongola 2026",
-      "local": "Equipe Black in Tech",
-      "texto": "Plataforma de matching inclusivo App BiT. Atuei como Data Analyst e Front-End Developer.",
+      "titulo": "Hackathon Wongola",
+      "texto": "Fiquei com a análise de dados e parte do front do App BiT.",
       "projetos": [
         "black-in-tech"
       ]
     },
     {
-      "ano": "Em andamento",
-      "ordem": 2026.6,
+      "fase": "2026",
       "tipo": "pesquisa",
-      "titulo": "Iniciação científica: Uso da Inteligência Artificial no Ambiente de Trabalho",
-      "local": "Pesquisa em andamento",
-      "texto": "Pesquisa sobre aplicações da inteligência artificial no ambiente de trabalho."
+      "titulo": "Iniciação científica",
+      "texto": "Comecei uma pesquisa sobre o uso de inteligência artificial no ambiente de trabalho. Ainda em andamento."
     },
     {
-      "ano": "2026",
-      "ordem": 2026.7,
+      "fase": "2026",
       "tipo": "conquista",
-      "titulo": "Participação no InterFatecs 2026",
-      "local": "Competição entre as Fatecs",
-      "texto": "Participação na competição."
+      "titulo": "InterFatecs",
+      "texto": "Participei da competição entre as Fatecs."
     },
     {
-      "ano": "Out. 2026 – atual",
-      "ordem": 2026.75,
+      "fase": "2026",
+      "quando": "out.",
       "tipo": "experiencia",
-      "titulo": "Monitora de Hackathons",
-      "local": "Fatec Sebrae",
-      "texto": "Conecto estudantes a hackathons: identifico e divulgo oportunidades e oriento equipes da formação à apresentação. Desenvolvi uma ferramenta em Python para coletar e organizar eventos e gerar relatórios."
+      "titulo": "Monitora de hackathons na Fatec Sebrae",
+      "texto": "Ajudo equipes do começo até a apresentação. Também fiz uma ferramenta em Python que junta os eventos e gera relatórios."
     },
     {
-      "ano": "2026",
-      "ordem": 2026.8,
+      "fase": "2026",
+      "quando": "nov.",
       "tipo": "conquista",
-      "titulo": "3º lugar — Fatec Innovation Challenge 2026",
-      "local": "Equipe Hackeridos · Fatec Sebrae",
-      "texto": "Plataforma Focinho Amigo para uma OSCIP de proteção animal.",
+      "titulo": "3º lugar no Fatec Innovation Challenge",
+      "texto": "Com o Focinho Amigo, junto com a equipe Hackeridos.",
       "projetos": [
         "focinho-amigo"
       ]
-    },
-    {
-      "ano": "2026",
-      "ordem": 2026.85,
-      "tipo": "projeto",
-      "titulo": "Lavanderia — Previsão de Demanda",
-      "local": "Fatec Sebrae · Empreendedorismo",
-      "texto": "Projeto acadêmico em equipe, em desenvolvimento.",
-      "projetos": [
-        "lavanderia"
-      ]
-    },
-    {
-      "ano": "2026",
-      "ordem": 2026.9,
-      "tipo": "projeto",
-      "titulo": "Vagalume",
-      "local": "Fatec",
-      "texto": "MVP acadêmico de rotas a pé com dados de iluminação pública.",
-      "projetos": [
-        "vagalume"
-      ]
-    },
-    {
-      "ano": "2026",
-      "ordem": 2026.92,
-      "tipo": "projeto",
-      "titulo": "Voebem — Pontualidade de Voos ANAC",
-      "local": "Databricks",
-      "texto": "Pipeline medalhão com mais de 1 milhão de etapas de voo.",
-      "projetos": [
-        "voebem"
-      ]
-    },
-    {
-      "ano": "Sem data informada",
-      "ordem": 2025.5,
-      "tipo": "conquista",
-      "titulo": "Medalha de prata — CUCo",
-      "local": "Competição USP de Conhecimentos",
-      "texto": "Medalha de prata na competição."
-    },
-    {
-      "ano": "Sem data informada",
-      "ordem": 2025.6,
-      "tipo": "conquista",
-      "titulo": "Top 100 da Região Sudeste",
-      "local": "Olimpíada Brasileira de Biologia Sintética",
-      "texto": "Entre as 100 melhores colocações da Região Sudeste. Biologia é uma curiosidade antiga minha."
     }
   ],
-  "pesquisa": {
-    "realizado": [
-      {
-        "titulo": "Iniciação científica (em andamento)",
-        "texto": "Pesquisa sobre o uso da inteligência artificial no ambiente de trabalho.",
-        "projeto": null
-      },
-      {
-        "titulo": "Engenharia de dados em camadas",
-        "texto": "Pipeline medalhão (Bronze, Silver, Gold) no Databricks com regras de qualidade e quarentena.",
-        "projeto": "voebem"
-      },
-      {
-        "titulo": "Séries temporais simples",
-        "texto": "Regressão linear e média móvel para prever demanda mensal.",
-        "projeto": "lavanderia"
-      },
-      {
-        "titulo": "ETL e visualização",
-        "texto": "Limpeza com Pandas e dashboards interativos com Plotly e Streamlit.",
-        "projeto": "spotify-etl"
-      }
+  "ficha": [
+    [
+      "Nome",
+      "Manuella Santos Cruz, mas pode chamar de Manu"
     ],
-    "interesses": [
-      {
-        "titulo": "Inteligência Artificial",
-        "texto": "Como modelos aprendem e como usar IA de forma responsável e explicável."
-      },
-      {
-        "titulo": "Machine Learning aplicado",
-        "texto": "Ir além da regressão linear: clustering, classificação e avaliação de modelos."
-      },
-      {
-        "titulo": "Biologia e natureza",
-        "texto": "Curiosidade enorme por seres vivos e padrões da natureza. Fiquei no Top 100 do Sudeste na Olimpíada Brasileira de Biologia Sintética, mesmo seguindo outro caminho profissional."
-      },
-      {
-        "titulo": "Pesquisa científica",
-        "texto": "Fazer boas perguntas, documentar limitações e não confundir correlação com causa."
-      }
+    [
+      "Idade",
+      "19 anos"
+    ],
+    [
+      "Habitat",
+      "São Paulo"
+    ],
+    [
+      "Estuda",
+      "Ciência de Dados para Negócios, na Fatec Sebrae"
+    ],
+    [
+      "Personalidade",
+      "INTJ. Gosto de planejar antes de sair fazendo"
+    ],
+    [
+      "Casa em Hogwarts",
+      "Corvinal"
+    ],
+    [
+      "Animal, segundo um teste",
+      "suricato (kkk)"
+    ],
+    [
+      "Cor e flor favoritas",
+      "rosa e rosas"
+    ],
+    [
+      "Artista",
+      "Michael Jackson"
+    ],
+    [
+      "Lendo",
+      "suspense, mistério e terror. O último foi It: A Coisa"
+    ],
+    [
+      "Mora com",
+      "meus gatos e as vozes da minha cabeça"
+    ],
+    [
+      "Fraqueza",
+      "sorvete. Açaí, principalmente"
+    ],
+    [
+      "Fora da tela",
+      "leio, treino e aprendo coisa que não tem nada a ver com a minha área"
     ]
-  },
-  "alemDosDados": [
-    {
-      "id": "mj",
-      "titulo": "Michael Jackson",
-      "texto": "Meu artista preferido. Ele aparece por aqui fazendo o moonwalk para revelar os projetos."
-    },
-    {
-      "id": "gatos",
-      "titulo": "Gatos",
-      "texto": "Eu, meus gatos e as vozes da minha cabeça. Tem um gato passeando pelos cards."
-    },
-    {
-      "id": "livros",
-      "titulo": "Suspense, mistério e terror",
-      "texto": "Terminei It: A Coisa, do Stephen King, recentemente. Procure o balão vermelho."
-    },
-    {
-      "id": "corvinal",
-      "titulo": "Corvinal",
-      "texto": "Minha casa em Hogwarts. Curiosidade, inteligência e conhecimento."
-    },
-    {
-      "id": "intj",
-      "titulo": "INTJ",
-      "texto": "Gosto de planejar, investigar e enxergar conexões entre áreas diferentes."
-    },
-    {
-      "id": "suricato",
-      "titulo": "Suricato",
-      "texto": "O animal que deu no teste. Kkk. Ele fica de olho em você na seção Sobre."
-    },
-    {
-      "id": "rosas",
-      "titulo": "Rosa e rosas",
-      "texto": "Minha cor preferida e minha flor preferida. A rosa do início é feita de curvas matemáticas."
-    },
-    {
-      "id": "acai",
-      "titulo": "Sorvete e açaí",
-      "texto": "Açaí merece uma menção especial."
-    },
-    {
-      "id": "esporte",
-      "titulo": "Atividade física",
-      "texto": "Gosto de me movimentar e de aprender coisas além da minha área."
-    }
   ],
-  "tracos": [
-    {
-      "rotulo": "Curiosa",
-      "detalhe": "questiono, investigo e conecto áreas diferentes"
-    },
-    {
-      "rotulo": "INTJ",
-      "detalhe": "planejamento, lógica e visão de sistema"
-    },
-    {
-      "rotulo": "Corvinal",
-      "detalhe": "curiosidade, inteligência e conhecimento"
-    },
-    {
-      "rotulo": "Monitora",
-      "detalhe": "hackathons na Fatec Sebrae"
-    }
-  ],
-  "interesses": [
-    {
-      "titulo": "Ciência de Dados",
-      "texto": "Fazer boas perguntas aos dados e responder com análise, estatística e visualização."
-    },
-    {
-      "titulo": "Engenharia de Dados",
-      "texto": "Pipelines confiáveis, camadas bem definidas e regras de qualidade."
-    },
-    {
-      "titulo": "Inteligência Artificial",
-      "texto": "Entender como os modelos aprendem e usar IA com responsabilidade."
-    },
-    {
-      "titulo": "Desenvolvimento de aplicações",
-      "texto": "Transformar análises em ferramentas que as pessoas usam."
-    }
+  "estudar": [
+    "Machine Learning além da regressão linear: clustering, classificação e avaliação de modelos",
+    "IA usada com responsabilidade (é o tema da minha iniciação científica)",
+    "Biologia e padrões da natureza, porque não consigo largar"
   ]
 }

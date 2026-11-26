@@ -1,21 +1,20 @@
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import AlemDosDados from '../components/secoes/AlemDosDados'
-import Contato from '../components/secoes/Contato'
-import DadosGithub from '../components/secoes/DadosGithub'
+import Abertura from '../components/secoes/Abertura'
+import Caminho from '../components/secoes/Caminho'
+import Epilogo from '../components/secoes/Epilogo'
 import Habilidades from '../components/secoes/Habilidades'
-import Hero from '../components/secoes/Hero'
-import Pesquisa from '../components/secoes/Pesquisa'
+import Laboratorio from '../components/secoes/Laboratorio'
 import Projetos from '../components/secoes/Projetos'
-import Sobre from '../components/secoes/Sobre'
-import Trajetoria from '../components/secoes/Trajetoria'
+import QuemSou from '../components/secoes/QuemSou'
 import { irParaSecao } from '../config/site'
 
+// A ordem conta a história: primeiro quem eu sou, depois de onde vim,
+// o que sei fazer, o que construí e, por fim, os meus próprios dados.
 export default function Inicio() {
   const [params] = useSearchParams()
   const secao = params.get('secao')
 
-  // links como /#/?secao=projetos (vindos de outra página) rolam até a seção
   useEffect(() => {
     if (!secao) return
     const id = setTimeout(() => irParaSecao(secao), 80)
@@ -28,15 +27,13 @@ export default function Inicio() {
 
   return (
     <>
-      <Hero />
-      <Sobre />
+      <Abertura />
+      <QuemSou />
+      <Caminho />
       <Habilidades />
       <Projetos />
-      <Trajetoria />
-      <DadosGithub />
-      <Pesquisa />
-      <AlemDosDados />
-      <Contato />
+      <Laboratorio />
+      <Epilogo />
     </>
   )
 }

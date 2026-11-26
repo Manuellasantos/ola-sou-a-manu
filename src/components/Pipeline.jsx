@@ -51,7 +51,7 @@ export default function Pipeline({ tipo = 'medalhao', titulo }) {
           </button>
         ))}
       </div>
-      <div id={`painel-${tipo}`} role="tabpanel" aria-labelledby={`tab-${ativa}`} className="pipeline__painel glass">
+      <div id={`painel-${tipo}`} role="tabpanel" aria-labelledby={`tab-${ativa}`} className="pipeline__painel folha">
         <p>{atual.texto}</p>
       </div>
     </div>

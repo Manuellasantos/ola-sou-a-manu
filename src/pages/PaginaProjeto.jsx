@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import CapaProjeto from '../components/CapaProjeto'
-import { rotuloTipo } from '../components/CardProjeto'
+import { rotuloTipo } from '../components/LinhaProjeto'
 import Icone from '../components/Icone'
 import Pipeline from '../components/Pipeline'
 import { asset } from '../config/site'
@@ -42,7 +42,7 @@ export default function PaginaProjeto() {
   return (
     <article className="detalhe wrap section" aria-labelledby="detalhe-titulo">
       <Link className="btn btn-sm detalhe__voltar" to="/?secao=projetos">
-        <Icone nome="voltar" /> Todos os projetos
+        <Icone nome="voltar" /> voltar para os projetos
       </Link>
 
       <header className="detalhe__topo">
@@ -67,7 +67,7 @@ export default function PaginaProjeto() {
               <Icone nome="externo" /> Demonstração online
             </a>
           ) : (
-            <span className="muted detalhe__sem-deploy">Sem demonstração online: a documentação está no repositório.</span>
+            <span className="muted detalhe__sem-deploy">sem demo online, mas o repositório explica tudo.</span>
           )}
           {p.links.figma && (
             <a className="btn" href={p.links.figma} target="_blank" rel="noreferrer">
@@ -80,13 +80,13 @@ export default function PaginaProjeto() {
       <div className="detalhe__galeria">
         {p.imagens.length ? (
           p.imagens.map((img) => (
-            <figure key={img.src} className={`glass ${img.mobile ? 'detalhe__img--mobile' : ''}`}>
+            <figure key={img.src} className={`folha ${img.mobile ? 'detalhe__img--mobile' : ''}`}>
               <img src={asset(img.src)} alt={img.alt} loading="lazy" decoding="async" />
-              <figcaption className="mono muted">{img.alt} · captura real do repositório</figcaption>
+              <figcaption className="mono muted">{img.alt}</figcaption>
             </figure>
           ))
         ) : (
-          <figure className="glass">
+          <figure className="folha">
             <CapaProjeto projeto={p} grande />
           </figure>
         )}
@@ -127,7 +127,7 @@ export default function PaginaProjeto() {
           </Bloco>
         </div>
 
-        <aside className="detalhe__lateral glass">
+        <aside className="detalhe__lateral folha fita">
           <h2>Minha contribuição</h2>
           <p>{d.contribuicao}</p>
           {d.fontes?.length > 0 && (
@@ -154,8 +154,8 @@ export default function PaginaProjeto() {
       </div>
 
       <nav className="detalhe__proximo" aria-label="Próximo projeto">
-        <Link to={`/projeto/${proximo.slug}`} className="glass">
-          <span className="mono muted">próximo projeto</span>
+        <Link to={`/projeto/${proximo.slug}`}>
+          <span className="mao">próximo</span>
           <strong>{proximo.nome}</strong>
           <Icone nome="seta" />
         </Link>

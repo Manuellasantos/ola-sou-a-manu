@@ -15,7 +15,8 @@ import {
   statusDisponiveis,
   tecnologiasDisponiveis,
 } from '../../services/filters'
-import CardProjeto from '../CardProjeto'
+import Capitulo from '../Capitulo'
+import LinhaProjeto from '../LinhaProjeto'
 import Icone from '../Icone'
 
 const CATEGORIAS = categoriasDisponiveis(projetosOrdenados)
@@ -78,12 +79,12 @@ export default function Projetos() {
 
   useFlip(gradeRef, resultado.map((p) => p.slug).join(), animar)
 
-  // Passagem secreta: digitar "corvinal" ou usar o botão da seção "Além dos dados"
+  // Passagem secreta: digitar "corvinal" reorganiza os projetos, como as escadas que mudam de lugar
   useEffect(() => {
     let digitado = ''
     const abrir = () => {
       setPassagem((n) => n + 1)
-      setAviso('As escadas mudaram de lugar. Os projetos se reorganizaram.')
+      setAviso('As escadas mudaram de lugar: os projetos trocaram de ordem.')
       tocar('transicao')
     }
     const aoTeclar = (e) => {
@@ -103,18 +104,22 @@ export default function Projetos() {
   const alternarTipo = (tipo) =>
     mudar({ tipos: filtros.tipos.includes(tipo) ? filtros.tipos.filter((t) => t !== tipo) : [...filtros.tipos, tipo] })
 
+  const temFiltroExtra = filtros.tecnologia || filtros.tipos.length || filtros.comDemo || filtros.status
+
   return (
-    <section id="projetos" className="section projetos secao--rosa" aria-labelledby="proj-titulo">
+    <section id="projetos" className="section projetos" aria-labelledby="proj-titulo">
       <div className={`wrap reveal ${visivel ? 'is-visible' : ''}`} ref={ref}>
-        <p className="eyebrow">Projetos</p>
-        <h2 id="proj-titulo" className="section-title">
-          Onze projetos, <em>um</em> fio condutor: dados.
-        </h2>
+        <Capitulo numero="IV" nota="o que eu construí" id="proj-titulo">
+          Onze projetos e um fio em comum: <span className="marca">dados</span>
+        </Capitulo>
+        <p className="capitulo__intro">
+          Alguns fiz sozinha, a maioria em equipe. Quando o projeto é de grupo, conto o que foi meu só se isso estiver escrito no repositório.
+        </p>
 
         <div ref={palcoRef}>
           <Moonwalk disparar={palcoVisivel}>
-            <div className="cartaz glass">
-              <p className="cartaz__titulo mono">★ em cartaz · destaques em dados e IA</p>
+            <div className="cartaz folha">
+              <p className="mao cartaz__titulo">em cartaz: os que eu mais gosto de mostrar</p>
               <ol className="cartaz__lista">
                 {DESTAQUES.map((p) => (
                   <li key={p.slug}>
@@ -126,37 +131,12 @@ export default function Projetos() {
           </Moonwalk>
         </div>
 
-        <form className="filtros glass" role="search" aria-label="Filtrar projetos" onSubmit={(e) => e.preventDefault()}>
-          <div className="filtros__linha">
-            <label className="filtros__busca">
-              <Icone nome="busca" />
-              <span className="sr-only">Buscar por nome, descrição, categoria ou tecnologia</span>
-              <input
-                type="search"
-                placeholder="Buscar: python, ETL, mapa, hackathon…"
-                value={filtros.busca}
-                onChange={(e) => mudar({ busca: e.target.value })}
-              />
-            </label>
-            <label className="filtros__select">
-              <span className="sr-only">Tecnologia</span>
-              <select value={filtros.tecnologia} onChange={(e) => mudar({ tecnologia: e.target.value })}>
-                <option value="">Todas as tecnologias</option>
-                {TECNOLOGIAS.map((t) => (
-                  <option key={t}>{t}</option>
-                ))}
-              </select>
-            </label>
-            <label className="filtros__select">
-              <span className="sr-only">Status</span>
-              <select value={filtros.status} onChange={(e) => mudar({ status: e.target.value })}>
-                <option value="">Qualquer status</option>
-                {STATUS.map((s) => (
-                  <option key={s}>{s}</option>
-                ))}
-              </select>
-            </label>
-          </div>
+        <form className="filtros" role="search" aria-label="Filtrar projetos" onSubmit={(e) => e.preventDefault()}>
+          <label className="filtros__busca">
+            <Icone nome="busca" />
+            <span className="sr-only">Buscar por nome, descrição, categoria ou tecnologia</span>
+            <input type="search" placeholder="procurar: python, ETL, mapa…" value={filtros.busca} onChange={(e) => mudar({ busca: e.target.value })} />
+          </label>
 
           <div className="filtros__chips" role="group" aria-label="Área">
             {['Todos', ...CATEGORIAS].map((c) => (
@@ -166,22 +146,46 @@ export default function Projetos() {
             ))}
           </div>
 
-          <div className="filtros__linha filtros__linha--fim">
-            <div className="filtros__chips" role="group" aria-label="Tipo de projeto">
-              {Object.entries(TIPOS).map(([valor, rotulo]) => (
-                <button key={valor} type="button" className="chip" aria-pressed={filtros.tipos.includes(valor)} onClick={() => alternarTipo(valor)}>
-                  {rotulo}
+          <details className="filtros__mais" open={Boolean(temFiltroExtra)}>
+            <summary>mais filtros</summary>
+            <div className="filtros__linha">
+              <label className="filtros__select">
+                <span className="sr-only">Tecnologia</span>
+                <select value={filtros.tecnologia} onChange={(e) => mudar({ tecnologia: e.target.value })}>
+                  <option value="">qualquer tecnologia</option>
+                  {TECNOLOGIAS.map((t) => (
+                    <option key={t}>{t}</option>
+                  ))}
+                </select>
+              </label>
+              <label className="filtros__select">
+                <span className="sr-only">Status</span>
+                <select value={filtros.status} onChange={(e) => mudar({ status: e.target.value })}>
+                  <option value="">qualquer status</option>
+                  {STATUS.map((s) => (
+                    <option key={s}>{s}</option>
+                  ))}
+                </select>
+              </label>
+              <div className="filtros__chips" role="group" aria-label="Tipo de projeto">
+                {Object.entries(TIPOS).map(([valor, rotulo]) => (
+                  <button key={valor} type="button" className="chip" aria-pressed={filtros.tipos.includes(valor)} onClick={() => alternarTipo(valor)}>
+                    {rotulo}
+                  </button>
+                ))}
+                <button type="button" className="chip" aria-pressed={filtros.comDemo} onClick={() => mudar({ comDemo: !filtros.comDemo })}>
+                  com demo online
                 </button>
-              ))}
-              <button type="button" className="chip" aria-pressed={filtros.comDemo} onClick={() => mudar({ comDemo: !filtros.comDemo })}>
-                Com demonstração online
-              </button>
+              </div>
             </div>
-            <p className="filtros__contagem" aria-live="polite">
-              <strong>{resultado.length}</strong> de {projetosOrdenados.length} projetos
+          </details>
+
+          <div className="filtros__rodape">
+            <p className="filtros__contagem mono" aria-live="polite">
+              {resultado.length} de {projetosOrdenados.length}
             </p>
             <button type="button" className="btn btn-sm" onClick={() => setFiltros(FILTROS_VAZIOS)} disabled={!filtrosAtivos(filtros)}>
-              Limpar filtros
+              limpar filtros
             </button>
           </div>
         </form>
@@ -190,22 +194,23 @@ export default function Projetos() {
           {aviso}
         </p>
 
-        <div className="bento-area">
+        <div className="indice-area">
           <Gato alvoRef={gradeRef} />
-          <div className="bento" ref={gradeRef}>
-            {resultado.map((p) => (
-              <CardProjeto key={p.slug} projeto={p} />
+          <ol className="indice" ref={gradeRef}>
+            {resultado.map((p, i) => (
+              <LinhaProjeto key={p.slug} projeto={p} numero={i + 1} />
             ))}
-          </div>
+          </ol>
           {resultado.length === 0 && (
-            <div className="vazio glass">
-              <p>Nenhum projeto com essa combinação de filtros.</p>
+            <div className="vazio">
+              <p className="mao">nenhum projeto com essa combinação.</p>
               <button type="button" className="btn btn-sm" onClick={() => setFiltros(FILTROS_VAZIOS)}>
-                Limpar filtros
+                limpar filtros
               </button>
             </div>
           )}
         </div>
+        <p className="mao projetos__dica">psiu: digita “corvinal” em qualquer lugar da página.</p>
       </div>
     </section>
   )

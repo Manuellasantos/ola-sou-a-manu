@@ -1,13 +1,12 @@
+// Gráficos da análise do meu GitHub. Todos leem o JSON gerado por scripts/processar_github.py.
 import { useMemo, useState } from 'react'
-import { useDados } from '../../hooks/useDados'
-import { useNaTela } from '../../hooks/useNaTela'
 
 const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
 const fmtMes = (m) => `${MESES[Number(m.slice(5, 7)) - 1]}/${m.slice(2, 4)}`
 const fmtData = (d) => new Date(`${d}T12:00:00`).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' })
 
 /** Calendário de contribuições (heatmap). Níveis calculados em Python. */
-function Heatmap({ contrib }) {
+export function Heatmap({ contrib }) {
   const [foco, setFoco] = useState(null)
   const celula = 12
   const semanas = []
@@ -68,7 +67,7 @@ function Heatmap({ contrib }) {
 }
 
 /** Barras de linguagens montadas por pontinhos: "dados brutos se organizando em gráfico". */
-function Linguagens({ linguagens, visivel }) {
+export function Linguagens({ linguagens, visivel }) {
   const pontos = useMemo(() => {
     const lista = []
     linguagens.forEach((l, linha) => {
@@ -121,7 +120,7 @@ function Linguagens({ linguagens, visivel }) {
   )
 }
 
-function Acumulado({ meses }) {
+export function Acumulado({ meses }) {
   const max = Math.max(...meses.map((m) => m.acumulado))
   const L = 520
   const A = 160
@@ -150,7 +149,7 @@ function Acumulado({ meses }) {
   )
 }
 
-function Semana({ dias }) {
+export function Semana({ dias }) {
   const max = Math.max(...dias.map((d) => d.total)) || 1
   return (
     <ul className="semana" aria-label="Contribuições por dia da semana">
@@ -165,133 +164,5 @@ function Semana({ dias }) {
   )
 }
 
-export default function DadosGithub() {
-  const [ref, visivel] = useNaTela()
-  const { dados, erro, carregando } = useDados('github', visivel)
-  const [tabela, setTabela] = useState(false)
-  const c = dados?.contribuicoes
 
-  return (
-    <section id="dados" className="section secao--menta" aria-labelledby="dados-titulo">
-      <div className={`wrap reveal ${visivel ? 'is-visible' : ''}`} ref={ref}>
-        <p className="eyebrow">Análise de dados · meu GitHub</p>
-        <h2 id="dados-titulo" className="section-title">
-          Analisei <em>meus próprios</em> dados.
-        </h2>
-        <p className="lead">
-          Um pequeno projeto dentro do portfólio: scripts em Python coletam a API pública do GitHub, tratam tudo com Pandas e geram os JSONs que estes
-          gráficos leem. Um GitHub Action repete o processo toda semana.
-        </p>
-
-        {carregando && <p className="muted">Consultando os dados…</p>}
-        {erro && <p className="notice">Os dados do GitHub não carregaram agora. Tente recarregar a página.</p>}
-
-        {dados && (
-          <>
-            <dl className="numeros">
-              <div className="glass">
-                <dt>repositórios públicos</dt>
-                <dd>{dados.resumo.repos_publicos}</dd>
-              </div>
-              <div className="glass">
-                <dt>projetos em equipe em outras contas</dt>
-                <dd>{dados.resumo.repos_equipe_externos}</dd>
-              </div>
-              {c && (
-                <>
-                  <div className="glass">
-                    <dt>contribuições no último ano</dt>
-                    <dd>{c.total}</dd>
-                  </div>
-                  <div className="glass">
-                    <dt>dias com atividade</dt>
-                    <dd>{c.dias_ativos}</dd>
-                  </div>
-                </>
-              )}
-            </dl>
-
-            <div className="painel-dados">
-              {c && (
-                <figure className="glass painel-dados__largo">
-                  <figcaption>Calendário de contribuições</figcaption>
-                  <Heatmap contrib={c} />
-                </figure>
-              )}
-              <figure className="glass">
-                <figcaption>Linguagens nos repositórios (% dos bytes)</figcaption>
-                <Linguagens linguagens={dados.linguagens} visivel={visivel} />
-              </figure>
-              <figure className="glass">
-                <figcaption>Repositórios acumulados</figcaption>
-                <Acumulado meses={dados.repos_por_mes} />
-                {c && (
-                  <>
-                    <figcaption className="painel-dados__sub">Contribuições por dia da semana</figcaption>
-                    <Semana dias={c.por_dia_semana} />
-                  </>
-                )}
-              </figure>
-            </div>
-
-            <button type="button" className="btn btn-sm" aria-expanded={tabela} onClick={() => setTabela((v) => !v)}>
-              {tabela ? 'Esconder' : 'Ver'} os dados em tabela
-            </button>
-            {tabela && (
-              <div className="tabelas">
-                <table>
-                  <caption>Linguagens</caption>
-                  <thead>
-                    <tr>
-                      <th scope="col">Linguagem</th>
-                      <th scope="col">% dos bytes</th>
-                      <th scope="col">Repositórios</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {dados.linguagens.map((l) => (
-                      <tr key={l.linguagem}>
-                        <td>{l.linguagem}</td>
-                        <td>{l.percentual.toFixed(1)}</td>
-                        <td>{l.repos}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                {c && (
-                  <table>
-                    <caption>Contribuições por mês</caption>
-                    <thead>
-                      <tr>
-                        <th scope="col">Mês</th>
-                        <th scope="col">Contribuições</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {c.por_mes.map((m) => (
-                        <tr key={m.mes}>
-                          <td>{fmtMes(m.mes)}</td>
-                          <td>{m.total}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                )}
-              </div>
-            )}
-
-            <div className="notice fonte-dados">
-              <p>
-                <strong>Fonte:</strong> {dados.fonte}, usuário {dados.usuario}. Coletado em {fmtData(dados.coletado_em.slice(0, 10))}
-                {c && `; contribuições de ${fmtData(c.inicio)} a ${fmtData(c.fim)}`}.
-              </p>
-              <p>
-                <strong>Limitações:</strong> {dados.limitacoes.join(' ')}
-              </p>
-            </div>
-          </>
-        )}
-      </div>
-    </section>
-  )
-}
+export { fmtData, fmtMes }

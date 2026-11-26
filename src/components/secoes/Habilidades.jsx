@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDados } from '../../hooks/useDados'
 import { useNaTela } from '../../hooks/useNaTela'
 import { perfil, projetoPorSlug } from '../../services/data'
+import Capitulo from '../Capitulo'
 
 const L = 1000
 const A = 640
@@ -59,15 +60,14 @@ export default function Habilidades() {
   const projetosLigados = [...vizinhos].filter((id) => !id.startsWith('tec:')).map(projetoPorSlug).filter(Boolean)
 
   return (
-    <section id="habilidades" className="section secao--lavanda" aria-labelledby="hab-titulo">
+    <section id="habilidades" className="section" aria-labelledby="hab-titulo">
       <div className={`wrap reveal ${visivel ? 'is-visible' : ''}`} ref={ref}>
-        <p className="eyebrow">Habilidades técnicas</p>
-        <h2 id="hab-titulo" className="section-title">
-          Uma teia de <em>tecnologias</em> e projetos.
-        </h2>
-        <p className="lead">
-          Cada fio liga uma tecnologia a um projeto em que ela foi usada de verdade. Escolha uma tecnologia para ver onde ela aparece.
-          O desenho da rede foi calculado em Python (algoritmo de Fruchterman-Reingold com NumPy).
+        <Capitulo numero="III" nota="o que eu sei fazer" id="hab-titulo">
+          Uma teia de ferramentas
+        </Capitulo>
+        <p className="capitulo__intro">
+          Cada fio liga uma ferramenta a um projeto em que eu usei ela de verdade. Escolhe uma e a aranha te leva até lá.
+          <span className="mao capitulo__margem">a posição de cada ponto foi calculada em Python</span>
         </p>
 
         <div className="habilidades">
@@ -91,11 +91,14 @@ export default function Habilidades() {
                 </div>
               </div>
             ))}
-            {!dados && !erro && <p className="muted">Tecendo a rede…</p>}
-            {erro && <p className="notice">Não consegui carregar a rede agora. As tecnologias estão listadas em cada projeto.</p>}
+            {!dados && !erro && <p className="muted">Tecendo a teia…</p>}
+            {erro && <p className="notice">
+          Não coloquei barra de porcentagem em nada. Usar uma ferramenta em mais projetos não quer dizer que eu domino mais ela, só que ela apareceu mais.
+          {' '}Também uso {perfil.habilidades.Ferramentas.filter((f) => !tecnologias.some((t) => t.rotulo === f)).join(', ')} no dia a dia.
+        </p>}
           </div>
 
-          <div className="habilidades__rede glass">
+          <div className="habilidades__rede folha">
             {dados && (
               <svg viewBox={`0 0 ${L} ${A}`} role="img" aria-labelledby="rede-desc" className={visivel ? 'rede rede--tecendo' : 'rede'}>
                 <desc id="rede-desc">
@@ -144,7 +147,7 @@ export default function Habilidades() {
         {noSelecionado && (
           <div className="habilidades__resultado" aria-live="polite">
             <p>
-              <strong>{noSelecionado.rotulo}</strong> aparece em {projetosLigados.length} {projetosLigados.length === 1 ? 'projeto' : 'projetos'}:
+              <strong>{noSelecionado.rotulo}</strong> aparece em {projetosLigados.length} {projetosLigados.length === 1 ? 'projeto meu' : 'projetos meus'}:
             </p>
             <ul>
               {projetosLigados.map((p) => (

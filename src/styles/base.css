@@ -10,29 +10,18 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* papel pontilhado, como caderno de anotações */
 body {
   margin: 0;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--grid) 1px, transparent 1.2px);
+  background-size: 22px 22px;
   color: var(--text);
   font-family: var(--font-ui);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.02rem;
+  line-height: 1.65;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-}
-
-/* grão sutil + duas manchas orgânicas no fundo */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(40vmax 30vmax at 85% 8%, rgba(232, 161, 188, 0.1), transparent 70%),
-    radial-gradient(30vmax 28vmax at 8% 45%, rgba(142, 197, 240, 0.07), transparent 70%),
-    radial-gradient(32vmax 26vmax at 92% 75%, rgba(143, 214, 195, 0.06), transparent 70%),
-    radial-gradient(28vmax 24vmax at 20% 95%, rgba(244, 179, 147, 0.06), transparent 70%);
 }
 
 img,
@@ -45,6 +34,10 @@ canvas {
 a {
   color: var(--accent);
   text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+a:hover {
+  text-decoration-thickness: 2px;
 }
 
 button,
@@ -53,7 +46,6 @@ select {
   font: inherit;
   color: inherit;
 }
-
 button {
   cursor: pointer;
 }
@@ -61,7 +53,6 @@ button {
 :focus-visible {
   outline: 3px solid var(--focus);
   outline-offset: 3px;
-  border-radius: 6px;
 }
 
 h1,
@@ -70,11 +61,10 @@ h3,
 h4 {
   font-family: var(--font-display);
   font-weight: 400;
-  line-height: 1.1;
+  line-height: 1.05;
   margin: 0 0 0.5em;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
-
 p {
   margin: 0 0 1em;
 }
@@ -97,9 +87,8 @@ p {
   left: 8px;
   z-index: 1000;
   padding: 10px 16px;
-  background: var(--accent);
-  color: var(--on-accent);
-  border-radius: var(--radius-sm);
+  background: var(--text);
+  color: var(--bg);
   transform: translateY(-150%);
   transition: transform 0.2s;
 }
@@ -115,81 +104,64 @@ p {
 }
 
 .section {
-  padding: clamp(72px, 12vw, 140px) 0;
+  padding: clamp(80px, 12vw, 160px) 0;
   position: relative;
-  scroll-margin-top: 64px;
+  scroll-margin-top: 60px;
 }
 
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--sec);
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-.eyebrow::before {
-  content: '';
-  width: 28px;
-  height: 1px;
-  background: currentColor;
+/* anotação à mão */
+.mao {
+  font-family: var(--font-mao);
+  font-size: 1.45rem;
+  line-height: 1.1;
+  color: var(--accent);
 }
 
-.section-title {
-  font-size: clamp(2.1rem, 5.5vw, 4rem);
-  max-width: 18ch;
+/* marca-texto: a cor fica só atrás da metade de baixo da palavra */
+.marca {
+  background: linear-gradient(transparent 55%, var(--hl) 55%, var(--hl) 92%, transparent 92%);
+  padding: 0 0.08em;
 }
-.section-title em {
-  font-style: italic;
-  color: var(--sec);
+.marca--lavanda {
+  --hl: var(--hl-2);
 }
-
-/* cor de cada seção: título, detalhes e uma mancha de luz bem suave no fundo */
-.secao--rosa { --sec: var(--c-rosa); }
-.secao--lavanda { --sec: var(--c-lavanda); }
-.secao--menta { --sec: var(--c-menta); }
-.secao--pessego { --sec: var(--c-pessego); }
-.secao--ceu { --sec: var(--c-ceu); }
-.secao--manteiga { --sec: var(--c-manteiga); }
-.section::before {
-  content: '';
-  position: absolute;
-  inset: 10% auto auto 50%;
-  width: min(70vw, 760px);
-  aspect-ratio: 1.6;
-  transform: translateX(-50%);
-  background: radial-gradient(closest-side, color-mix(in srgb, var(--sec) 9%, transparent), transparent);
-  pointer-events: none;
-  z-index: -1;
+.marca--menta {
+  --hl: var(--hl-3);
 }
-.section > .wrap .glass {
-  border-color: color-mix(in srgb, var(--sec) 16%, var(--glass-border));
-}
-
-.lead {
-  color: var(--text-2);
-  font-size: 1.08rem;
-  max-width: 62ch;
+.marca--pessego {
+  --hl: var(--hl-4);
 }
 
 .mono {
   font-family: var(--font-mono);
   font-size: 0.82em;
 }
-
 .muted {
   color: var(--text-3);
 }
 
+/* folha colada no caderno: papel por cima, sombra curta e fita no topo */
+.folha {
+  position: relative;
+  background: var(--surface);
+  box-shadow: 0 1px 0 var(--line), 0 14px 30px -18px rgba(60, 30, 50, 0.35);
+}
+.fita::before {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  width: 96px;
+  height: 24px;
+  background: var(--fita);
+  transform: translateX(-50%) rotate(-3deg);
+  z-index: 2;
+}
+
+/* mantido por compatibilidade com componentes que ainda usam .glass */
 .glass {
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--radius);
-  backdrop-filter: blur(14px) saturate(120%);
-  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  background: var(--surface);
+  border: 1px solid var(--line);
 }
 
 .btn {
@@ -198,26 +170,24 @@ p {
   gap: 8px;
   min-height: 44px;
   padding: 10px 18px;
+  border: 1.5px solid var(--text);
   border-radius: 999px;
-  border: 1px solid var(--line-strong);
   background: transparent;
   color: var(--text);
   text-decoration: none;
   font-weight: 500;
-  transition: background 0.25s var(--ease), border-color 0.25s, transform 0.25s var(--ease);
+  transition: background 0.2s, color 0.2s, transform 0.25s var(--ease), box-shadow 0.25s;
 }
 .btn:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
+  transform: translate(-2px, -2px);
+  box-shadow: 3px 3px 0 var(--text);
 }
 .btn-primary {
-  background: var(--accent);
-  color: var(--on-accent);
-  border-color: var(--accent);
+  background: var(--text);
+  color: var(--bg);
 }
 .btn-primary:hover {
-  background: var(--text);
-  border-color: var(--text);
+  box-shadow: 3px 3px 0 var(--accent-strong);
 }
 .btn-sm {
   min-height: 36px;
@@ -229,15 +199,22 @@ p {
   height: 18px;
   flex: none;
 }
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
 
+/* etiqueta de filtro: parece um adesivo */
 .chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   min-height: 36px;
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid var(--line-strong);
+  padding: 4px 12px;
+  border: 1px dashed var(--line-strong);
+  border-radius: 3px;
   background: transparent;
   font-size: 0.88rem;
   color: var(--text-2);
@@ -245,60 +222,59 @@ p {
 }
 .chip:hover {
   color: var(--text);
-  border-color: var(--accent);
+  border-style: solid;
 }
 .chip[aria-pressed='true'] {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: var(--on-accent);
-}
-.chip[aria-pressed='true']::before {
-  content: '✓';
-  font-size: 0.8em;
+  background: var(--hl);
+  border: 1px solid var(--text);
+  color: var(--text);
+  transform: rotate(-1deg);
 }
 
 .tag {
   display: inline-block;
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  padding: 3px 9px;
-  border-radius: 6px;
-  background: var(--surface-2);
   color: var(--text-2);
   white-space: nowrap;
+}
+.tag::before {
+  content: '#';
+  color: var(--accent);
 }
 
 .badge {
   display: inline-flex;
   gap: 6px;
   align-items: center;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  padding: 4px 10px;
+  padding: 3px 10px;
+  border: 1.5px solid var(--text);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--accent) 18%, transparent);
-  color: var(--accent);
-  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  background: var(--hl-4);
+}
+.badge svg {
+  width: 14px;
 }
 
 .notice {
-  font-size: 0.82rem;
-  color: var(--text-3);
-  border-left: 2px solid var(--accent-2);
-  padding-left: 12px;
+  font-size: 0.9rem;
+  color: var(--text-2);
+  border-left: 2px solid var(--accent);
+  padding-left: 14px;
 }
 
 /* revelação suave ao rolar (desligada com movimento reduzido) */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
 }
 .reveal.is-visible {
   opacity: 1;
   transform: none;
 }
-
 :root[data-motion='reduzido'] .reveal,
 :root[data-motion='desligado'] .reveal {
   opacity: 1;
@@ -320,10 +296,6 @@ p {
 :root[data-motion='reduzido'] *::after {
   animation-duration: 0.01ms !important;
   animation-iteration-count: 1 !important;
-}
-
-:root[data-contrast='alto'] .glass {
-  backdrop-filter: none;
 }
 :root[data-contrast='alto'] a {
   text-decoration: underline;
