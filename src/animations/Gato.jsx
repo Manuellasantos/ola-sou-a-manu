@@ -1,13 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { usePreferencias } from '../hooks/usePreferencias'
 
-/**
- * Gato que passeia pela borda de cima da grade de projetos.
- * - Com mouse: segue o cursor na horizontal enquanto ele estiver sobre a grade.
- * - Com toque: anda até onde a pessoa tocou.
- * - Parado por alguns segundos: senta e depois cochila (zZz).
- * Ele fica numa camada própria, sem capturar cliques, então nunca atrapalha os cards.
- */
+// gato que anda em cima dos projetos
 export default function Gato({ alvoRef }) {
   const { animar } = usePreferencias()
   const [x, setX] = useState(40)

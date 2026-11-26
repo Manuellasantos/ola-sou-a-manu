@@ -1,19 +1,4 @@
-"""Transforma os dados brutos do GitHub em indicadores para o portfólio.
-
-Entrada:  data/raw/github_bruto.json  (gerado por coletar_github.py)
-          src/data/projects.json      (catálogo de projetos do site)
-Saída:    public/data/github.json
-
-Cuidados importantes:
-- Bytes de código e quantidade de commits NÃO medem domínio de uma linguagem.
-  Por isso o site mostra "em quantos repositórios a linguagem aparece" junto
-  com a participação em bytes, e deixa essa limitação escrita.
-- Projetos em equipe hospedados em outras contas entram na análise de
-  linguagens e tecnologias, mas não na contagem de repositórios próprios.
-
-Uso:
-    python scripts/processar_github.py
-"""
+"""Trata os dados coletados do GitHub e salva em public/data/github.json."""
 
 import re
 import sys
@@ -22,19 +7,17 @@ import pandas as pd
 
 from utils import PASTA_BRUTA, PASTA_PUBLICA, PROJETOS_JSON, agora_iso, ler_json, salvar_json
 
-# O repositório Analise-AWS versiona um ambiente virtual (.venv), então o GitHub
-# conta o código de todas as bibliotecas instaladas (mais de 99% dos bytes).
-# Nele, considero só a linguagem que eu escrevi e ignoro os bytes.
+# no Analise-AWS a pasta .venv foi enviada junto, então os bytes de lá são ignorados
 REPOS_COM_VENDOR = {"Analise-AWS": {"Python"}}
 
-# Repositórios que não são projetos (perfil, o próprio portfólio)
+# repositórios que não são projetos
 REPOS_NAO_PROJETO = {"Manuellasantos", "ola-sou-a-manu"}
 
 DIAS_SEMANA = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"]
 
 
 def chave_repo(nome: str) -> str:
-    """'Nossas-Cores' e 'nossasCores' viram a mesma chave, para não contar duas vezes."""
+    """Essa função padroniza o nome do repositório."""
     return re.sub(r"[^a-z0-9]", "", nome.lower())
 
 
@@ -42,7 +25,7 @@ def tabela_repositorios(bruto: dict) -> pd.DataFrame:
     df = pd.DataFrame(bruto["repositorios"])
     df = df[~df["fork"] & ~df["nome"].isin(REPOS_NAO_PROJETO)].copy()
     df["chave"] = df["nome"].map(chave_repo)
-    # Se o mesmo projeto existe na minha conta e na de outra pessoa, fico com o mais antigo
+    # remove repositórios repetidos
     df = df.sort_values("criado_em").drop_duplicates("chave", keep="first")
     df["criado_em"] = pd.to_datetime(df["criado_em"])
     df["atualizado_em"] = pd.to_datetime(df["atualizado_em"])
@@ -50,7 +33,7 @@ def tabela_repositorios(bruto: dict) -> pd.DataFrame:
 
 
 def tabela_linguagens(repos: pd.DataFrame) -> pd.DataFrame:
-    """Uma linha por (repositório, linguagem) com a quantidade de bytes."""
+    """Essa função monta a tabela de linguagens por repositório."""
     linhas = []
     for _, repo in repos.iterrows():
         reais = REPOS_COM_VENDOR.get(repo["nome"])
@@ -58,7 +41,7 @@ def tabela_linguagens(repos: pd.DataFrame) -> pd.DataFrame:
             if reais is None:
                 linhas.append({"repo": repo["nome"], "linguagem": linguagem, "bytes": qtd})
             elif linguagem in reais:
-                # conta a presença da linguagem, mas não os bytes das bibliotecas
+                # conta a linguagem sem os bytes
                 linhas.append({"repo": repo["nome"], "linguagem": linguagem, "bytes": 0})
     return pd.DataFrame(linhas)
 
@@ -80,7 +63,7 @@ def resumo_linguagens(ling: pd.DataFrame, top: int = 7) -> list[dict]:
 
 
 def linha_do_tempo_repos(repos: pd.DataFrame) -> list[dict]:
-    """Repositórios criados por mês, com o acumulado."""
+    """Essa função conta os repositórios criados por mês."""
     por_mes = repos.set_index("criado_em").resample("MS").size()
     acumulado = por_mes.cumsum()
     return [
@@ -97,8 +80,7 @@ def analisar_contribuicoes(contrib: dict | None) -> dict | None:
     df["date"] = pd.to_datetime(df["date"])
     df = df.rename(columns={"date": "data", "contributionCount": "qtd"})
 
-    # Níveis do heatmap (0 a 4) pelos quartis dos dias com atividade,
-    # do mesmo jeito que o GitHub faz: o nível é relativo à própria pessoa
+    # níveis de cor do calendário (0 a 4)
     ativos = df.loc[df["qtd"] > 0, "qtd"]
     limites = ativos.quantile([0.25, 0.5, 0.75]).tolist() if not ativos.empty else [1, 2, 3]
 
@@ -113,7 +95,7 @@ def analisar_contribuicoes(contrib: dict | None) -> dict | None:
     por_dia_semana = df.groupby("dia_semana")["qtd"].agg(["sum", "mean"])
     por_mes = df.set_index("data")["qtd"].resample("MS").sum()
 
-    # Maior sequência de dias seguidos com contribuição
+    # maior sequência de dias com contribuição
     ativo = (df["qtd"] > 0).astype(int)
     grupos = (ativo != ativo.shift()).cumsum()
     maior_sequencia = int(ativo.groupby(grupos).sum().max())
@@ -134,7 +116,7 @@ def analisar_contribuicoes(contrib: dict | None) -> dict | None:
 
 
 def contagem_catalogo(projetos: list[dict], campo: str) -> list[dict]:
-    """Conta categorias ou tecnologias do catálogo de projetos do site."""
+    """Essa função conta as categorias ou tecnologias dos projetos."""
     serie = pd.Series([item for p in projetos for item in p[campo]])
     return [{"nome": nome, "projetos": int(qtd)} for nome, qtd in serie.value_counts().items()]
 

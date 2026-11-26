@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { tocar } from '../services/audio'
 
-/** Easter egg: um balão vermelho meio escondido. Quem acha, lê a frase. */
+// balão vermelho escondido no contato
 export default function Balao() {
   const [aberto, setAberto] = useState(false)
 

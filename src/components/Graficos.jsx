@@ -1,11 +1,11 @@
-// Gráficos da análise do meu GitHub. Todos leem o JSON gerado por scripts/processar_github.py.
+// gráficos da seção Minhas análises
 import { useMemo, useState } from 'react'
 
 const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez']
 const fmtMes = (m) => `${MESES[Number(m.slice(5, 7)) - 1]}/${m.slice(2, 4)}`
 const fmtData = (d) => new Date(`${d}T12:00:00`).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' })
 
-/** Calendário de contribuições (heatmap). Níveis calculados em Python. */
+// calendário de contribuições
 export function Heatmap({ contrib }) {
   const [foco, setFoco] = useState(null)
   const celula = 12
@@ -66,7 +66,7 @@ export function Heatmap({ contrib }) {
   )
 }
 
-/** Barras de linguagens montadas por pontinhos: "dados brutos se organizando em gráfico". */
+// gráfico de linguagens feito com pontos
 export function Linguagens({ linguagens, visivel }) {
   const pontos = useMemo(() => {
     const lista = []

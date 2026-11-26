@@ -11,11 +11,7 @@ function hexParaRgb(hex) {
   return [(n >> 16) & 255, (n >> 8) & 255, n & 255]
 }
 
-/**
- * Rosa de partículas. As coordenadas 3D vêm de scripts/gerar_rosa.py;
- * aqui só giramos, projetamos em perspectiva e deixamos o cursor "soprar" as pétalas.
- * Perto do cursor, partículas vizinhas se ligam como uma pequena rede de dados.
- */
+// rosa feita de partículas
 export default function RosaGenerativa() {
   const canvasRef = useRef(null)
   const [areaRef, visivel] = useNaTela({ umaVez: false, limiar: 0 })
@@ -83,7 +79,7 @@ export default function RosaGenerativa() {
         let sx = cx + xr * escala * persp
         let sy = cy - alt * escala * persp
 
-        // o cursor empurra as partículas; elas voltam devagar (mola)
+        // o cursor empurra as partículas
         const d = desvio[i]
         const dx = sx + d[0] - mouse.x
         const dy = sy + d[1] - mouse.y
@@ -103,7 +99,7 @@ export default function RosaGenerativa() {
 
       projetados.sort((a, b) => b[2] - a[2])
       for (const [sx, sy, prof, tom] of projetados) {
-        // miolo rosa intenso, pétalas do meio rosa e pêssego, bordas lavanda e céu
+        // cor de cada partícula
         const c = tom > 0.7 ? cores[0] : tom > 0.5 ? cores[1] : tom > 0.35 ? cores[2] : tom > 0.18 ? cores[3] : cores[4]
         const alfa = 0.35 + (1 - (prof + 1) / 2) * 0.6
         const raio = (1 - prof) * 0.9 + 0.6
@@ -113,7 +109,7 @@ export default function RosaGenerativa() {
         ctx.fill()
       }
 
-      // rede de conexões perto do cursor
+      // liga as partículas perto do cursor
       if (animar && mouse.x > 0) {
         const perto = projetados.filter(([sx, sy]) => (sx - mouse.x) ** 2 + (sy - mouse.y) ** 2 < 12000).slice(0, 60)
         ctx.strokeStyle = `rgba(${cores[4].join(',')},0.3)`

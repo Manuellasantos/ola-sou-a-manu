@@ -4,7 +4,7 @@ import { perfil } from '../../services/data'
 import { AdesivoBarras, Estrela, Faixa, SetaMao } from '../Colagem'
 import Icone from '../Icone'
 
-// cada letra do nome é um "recorte" diferente, como letras de revista
+// estilo de cada letra do nome
 const ESTILOS = ['rosa', 'preto', 'contorno', 'pastel', 'branco', 'rosa', 'preto', 'contorno']
 
 function NomeRecortado({ nome }) {

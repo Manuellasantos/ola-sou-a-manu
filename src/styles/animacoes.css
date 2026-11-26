@@ -1,4 +1,4 @@
-/* Tipografia cinética do título */
+/* título animado */
 .cinetico__letra {
   display: inline-block;
   animation: subir 0.9s var(--ease) both;
@@ -186,7 +186,7 @@
   }
 }
 
-/* Revelação escalonada em grades */
+/* entrada dos itens */
 .reveal .alem__card,
 .reveal .linha-tempo__item {
   opacity: 0;
@@ -218,7 +218,7 @@
   font-style: italic;
 }
 
-/* ---------- movimentos da colagem ---------- */
+/* animações da colagem */
 @keyframes colar {
   0% {
     opacity: 0;
@@ -261,7 +261,7 @@
   animation-play-state: paused;
 }
 
-/* ---------- brasão da Corvinal ---------- */
+/* brasão */
 .brasao {
   position: fixed;
   inset: 0;

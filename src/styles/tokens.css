@@ -1,18 +1,14 @@
-/*
-  Identidade "scrapbook editorial": off-white, preto e rosa, com colagens e recortes.
-  Cada seção escolhe um tema (claro, rosa ou preto) que redefine estas variáveis.
-  As paletas de acessibilidade também só trocam variáveis.
-*/
+/* cores, fontes e tamanhos do site */
 :root {
   --off: #faf7f2;
   --preto: #171717;
-  --rosa: #d94fa5;          /* rosa vibrante: fundos, adesivos, títulos grandes */
+  --rosa: #d94fa5;          /* rosa vibrante */
   --rosa-medio: #ed83b7;
   --rosa-pastel: #f8dde7;
   --branco: #ffffff;
-  --rosa-texto: #a8287a;    /* rosa escuro para texto pequeno (contraste AA no off-white) */
+  --rosa-texto: #a8287a;    /* rosa escuro para textos pequenos */
 
-  /* variáveis "semânticas" usadas pelos componentes (tema claro por padrão) */
+  /* variáveis usadas pelos componentes */
   --bg: var(--off);
   --bg-2: #f2ece4;
   --surface: var(--branco);
@@ -36,7 +32,7 @@
   --fita: rgba(237, 131, 183, 0.55);
   --sombra: 4px 4px 0 var(--preto);
 
-  /* séries de dados: cada uma também tem forma ou padrão */
+  /* cores dos gráficos */
   --s1: var(--rosa);
   --s2: var(--preto);
   --s3: var(--rosa-medio);
@@ -72,7 +68,7 @@
   --mola: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* ---------- temas de seção ---------- */
+/* temas das seções */
 .tema-rosa {
   --bg: var(--rosa-pastel);
   --bg-2: #f3cfdc;
@@ -115,7 +111,7 @@
   --focus: #ffd1e6;
 }
 
-/* ---------- Protanopia e deuteranopia: eixo azul ↔ laranja ---------- */
+/* paleta para protanopia e deuteranopia */
 :root[data-palette='protanopia'],
 :root[data-palette='deuteranopia'] {
   --rosa: #e08a1e;
@@ -133,7 +129,7 @@
   --fita: rgba(243, 181, 98, 0.55);
   --focus: #1f5aa8;
 }
-/* ---------- Tritanopia: eixo vermelho ↔ ciano ---------- */
+/* paleta para tritanopia */
 :root[data-palette='tritanopia'] {
   --rosa: #d63a50;
   --rosa-medio: #f08391;
@@ -150,7 +146,7 @@
   --fita: rgba(240, 131, 145, 0.5);
   --focus: #0f7a73;
 }
-/* ---------- Alto contraste ---------- */
+/* alto contraste */
 :root[data-contrast='alto'] {
   --off: #ffffff;
   --rosa: #000000;

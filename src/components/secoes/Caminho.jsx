@@ -5,7 +5,7 @@ import Capitulo from '../Capitulo'
 import Icone from '../Icone'
 import { Estrela } from '../Colagem'
 
-// símbolo + rótulo por tipo: a informação não depende só da cor
+// símbolo e nome de cada tipo
 const TIPOS = {
   formacao: { rotulo: 'formação', simbolo: '◆' },
   experiencia: { rotulo: 'experiência', simbolo: '●' },

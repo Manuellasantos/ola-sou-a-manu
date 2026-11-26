@@ -10,7 +10,7 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-/* papel: textura de fibras bem sutil por cima do off-white */
+/* textura de papel */
 body {
   margin: 0;
   background: var(--off);
@@ -34,7 +34,7 @@ body::after {
   display: none;
 }
 
-/* cada seção pinta o próprio fundo de acordo com o tema */
+/* fundo das seções */
 .section,
 .abertura {
   background-color: var(--bg);
@@ -128,7 +128,7 @@ p {
   scroll-margin-top: 60px;
 }
 
-/* anotação à mão, usada com moderação */
+/* texto escrito à mão */
 .mao {
   font-family: var(--font-mao);
   font-size: 1.5rem;
@@ -137,7 +137,7 @@ p {
   color: var(--accent);
 }
 
-/* palavra destacada com fundo colorido, como recorte de revista */
+/* palavra destacada */
 .destaque {
   background: var(--destaque-fundo);
   color: var(--destaque-texto);
@@ -145,7 +145,7 @@ p {
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
-/* marca-texto (metade de baixo) */
+/* marca-texto */
 .marca {
   background: linear-gradient(transparent 55%, var(--hl) 55%, var(--hl) 92%, transparent 92%);
   padding: 0 0.08em;
@@ -168,7 +168,7 @@ p {
   color: var(--text-3);
 }
 
-/* recorte colado: papel branco, borda preta e sombra dura */
+/* papel colado */
 .folha {
   position: relative;
   background: var(--surface);
@@ -195,7 +195,7 @@ p {
   border: 2px solid var(--preto);
 }
 
-/* botões neo-brutalistas: borda grossa e sombra que "afunda" no clique */
+/* botões */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -244,7 +244,7 @@ p {
   box-shadow: none;
 }
 
-/* etiqueta de filtro em formato de adesivo */
+/* filtros */
 .chip {
   display: inline-flex;
   align-items: center;
@@ -273,7 +273,7 @@ p {
   border-color: var(--rosa);
 }
 
-/* etiqueta de tecnologia */
+/* tags */
 .tag {
   display: inline-block;
   font-family: var(--font-mono);
@@ -308,7 +308,7 @@ p {
   padding-left: 14px;
 }
 
-/* entrada "colada": a peça cai girada e assenta no lugar (não é só fade) */
+/* animação de entrada */
 .reveal {
   opacity: 0;
   transform: translateY(40px) rotate(-1.5deg) scale(0.97);

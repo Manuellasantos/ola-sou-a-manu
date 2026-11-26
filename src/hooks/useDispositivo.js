@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-/** Toque, tela pequena ou aparelho modesto: simplifica os efeitos visuais. */
+// diz se o aparelho é de toque, tem tela pequena ou é mais simples
 export function useDispositivo() {
   const calcular = () => {
     const toque = window.matchMedia?.('(hover: none)').matches ?? false

@@ -11,8 +11,7 @@ import Projetos from '../components/secoes/Projetos'
 import QuemSou from '../components/secoes/QuemSou'
 import { irParaSecao } from '../config/site'
 
-// A ordem conta a história: primeiro quem eu sou, depois a trajetória,
-// as tecnologias, os projetos, as análises e o que estou estudando.
+// página inicial com todas as seções
 export default function Inicio() {
   const [params] = useSearchParams()
   const secao = params.get('secao')

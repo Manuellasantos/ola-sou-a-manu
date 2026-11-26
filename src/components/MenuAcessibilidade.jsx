@@ -18,7 +18,7 @@ const MOVIMENTOS = [
 
 const VLIBRAS_SCRIPT = 'https://vlibras.gov.br/app/vlibras-plugin.js'
 
-/** Carrega o widget oficial do VLibras só quando a pessoa ativa. */
+// carrega o VLibras
 function ativarVLibras() {
   if (document.querySelector('[vw]')) {
     document.querySelector('[vw]').style.display = ''
@@ -37,7 +37,7 @@ function ativarVLibras() {
   script.onload = () => {
     const anterior = window.onload
     new window.VLibras.Widget('https://vlibras.gov.br/app')
-    // o widget espera o evento "load" da página, que já aconteceu numa SPA
+    // inicia o widget
     if (typeof window.onload === 'function' && window.onload !== anterior) window.onload()
   }
   document.body.appendChild(script)

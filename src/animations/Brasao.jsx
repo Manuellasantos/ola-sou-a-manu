@@ -1,13 +1,7 @@
 import { useEffect, useState } from 'react'
 import { tocar } from '../services/audio'
 
-/**
- * Easter egg da Corvinal: digitar "corvinal" (ou tocar no adesivo da casa)
- * mostra um brasão que "carimba" a tela, com o corvo batendo as asas,
- * e as escadas mudam de lugar: os projetos trocam de ordem.
- *
- * O brasão é um desenho original, só inspirado nas cores da casa (azul e bronze).
- */
+// mostra o brasão da Corvinal quando a pessoa digita "corvinal"
 export default function Brasao() {
   const [aberto, setAberto] = useState(false)
 
@@ -54,7 +48,7 @@ export default function Brasao() {
             ].map(([x, y]) => (
               <path key={x} className="brasao__brilho" d={`M${x} ${y - 7} L${x + 2} ${y - 2} L${x + 7} ${y} L${x + 2} ${y + 2} L${x} ${y + 7} L${x - 2} ${y + 2} L${x - 7} ${y} L${x - 2} ${y - 2}Z`} fill="#d9a75b" />
             ))}
-            {/* corvo estilizado: corpo, cabeça, bico e duas asas que batem */}
+            {/* corvo */}
             <g className="brasao__corvo">
               <path className="brasao__asa brasao__asa--esq" d="M96 118 C 76 96, 52 92, 36 104 C 54 106, 66 114, 70 124 C 58 122, 50 128, 46 136 C 66 130, 82 132, 96 128 Z" fill="#b9853f" />
               <path className="brasao__asa brasao__asa--dir" d="M104 118 C 124 96, 148 92, 164 104 C 146 106, 134 114, 130 124 C 142 122, 150 128, 154 136 C 134 130, 118 132, 104 128 Z" fill="#b9853f" />

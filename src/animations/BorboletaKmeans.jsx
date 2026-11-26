@@ -5,7 +5,7 @@ import { usePreferencias } from '../hooks/usePreferencias'
 import { tocar } from '../services/audio'
 
 const SERIES = ['var(--s1)', 'var(--s2)', 'var(--s3)']
-const FORMAS = ['circulo', 'quadrado', 'triangulo'] // cluster também é identificado pela forma
+const FORMAS = ['circulo', 'quadrado', 'triangulo'] // forma de cada grupo
 
 function Ponto({ x, y, forma, cor }) {
   if (forma === 'quadrado') return <rect x={x - 3.2} y={y - 3.2} width="6.4" height="6.4" fill={cor} className="km__ponto" />
@@ -13,15 +13,12 @@ function Ponto({ x, y, forma, cor }) {
   return <circle cx={x} cy={y} r="3.4" fill={cor} className="km__ponto" />
 }
 
-/**
- * Uma borboleta (curva de Temple Fay) cujas asas se desfazem em dados simulados,
- * que depois são agrupados passo a passo pelo k-means calculado em Python.
- */
+// borboleta que vira os pontos do k-means
 export default function BorboletaKmeans() {
   const [ref, visivel] = useNaTela({ limiar: 0.3 })
   const { dados } = useDados('clusters', visivel)
   const { animar } = usePreferencias()
-  const [etapa, setEtapa] = useState(-1) // -1 = borboleta, 0..n = iterações
+  const [etapa, setEtapa] = useState(-1) // -1 mostra a borboleta, depois cada iteração
 
   const total = dados?.passos.length ?? 0
 

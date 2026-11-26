@@ -1,11 +1,7 @@
-/**
- * Peças de colagem reutilizadas pelo site: estrelas irregulares, faixas que correm,
- * bordas de papel rasgado e "adesivos" com pequenos gráficos.
- * Os adesivos de dados leem public/data/arte.json (gerado por scripts/gerar_arte.py).
- */
+// elementos de colagem do site
 import { useDados } from '../hooks/useDados'
 
-/** Estrela/explosão com pontas irregulares (nenhuma igual à outra, pela semente). */
+// estrela com pontas irregulares
 export function Estrela({ pontas = 9, semente = 1, cor = 'var(--preto)', className = '', ...props }) {
   let s = semente
   const aleatorio = () => {
@@ -25,7 +21,7 @@ export function Estrela({ pontas = 9, semente = 1, cor = 'var(--preto)', classNa
   )
 }
 
-/** Faixa inclinada com texto correndo (pausa ao passar o mouse e some com movimento reduzido). */
+// faixa com texto correndo
 export function Faixa({ itens, invertida = false, tema = 'preto' }) {
   const linha = [...itens, ...itens]
   return (
@@ -45,7 +41,7 @@ export function Faixa({ itens, invertida = false, tema = 'preto' }) {
   )
 }
 
-/** Borda de papel rasgado entre duas seções. "cor" é o fundo da seção de baixo. */
+// borda de papel rasgado
 export function Rasgo({ cor = 'var(--off)', semente = 3, virado = false }) {
   let s = semente
   const pts = ['0,40']
@@ -63,7 +59,7 @@ export function Rasgo({ cor = 'var(--off)', semente = 3, virado = false }) {
   )
 }
 
-/** Seta desenhada à mão. */
+// seta desenhada à mão
 export function SetaMao({ className = '', d = 'M6 10 C 40 0, 80 30, 92 70 M78 60 L92 72 L98 54' }) {
   return (
     <svg viewBox="0 0 104 80" className={`seta-mao ${className}`} aria-hidden="true">
@@ -72,7 +68,7 @@ export function SetaMao({ className = '', d = 'M6 10 C 40 0, 80 30, 92 70 M78 60
   )
 }
 
-/* ---------------- adesivos de dados ---------------- */
+// adesivos com gráficos
 
 function Adesivo({ titulo, nota, className = '', children }) {
   return (
@@ -150,7 +146,7 @@ export function AdesivoLinha({ className }) {
   )
 }
 
-/** Água-viva desenhada com linhas: o "sino" pulsa e os tentáculos ondulam. */
+// água-viva
 export function AguaViva({ className = '' }) {
   return (
     <svg viewBox="0 0 80 130" className={`agua-viva ${className}`} aria-hidden="true">

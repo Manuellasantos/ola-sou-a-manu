@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { carregarDados } from '../services/data'
 
-/** Carrega public/data/<nome>.json com estados de carregamento e erro. */
+// carrega um arquivo json da pasta public/data
 export function useDados(nome, ativo = true) {
   const [estado, setEstado] = useState({ dados: null, erro: null, carregando: ativo })
 

@@ -1,10 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { usePreferencias } from '../hooks/usePreferencias'
 
-/**
- * Suricato que espia por trás de um card. Sobe quando a seção aparece,
- * acompanha o cursor com os olhos e se esconde quando recebe um clique.
- */
+// suricato que aparece atrás do card de formação
 export default function Suricato({ visivel }) {
   const { animar } = usePreferencias()
   const [escondido, setEscondido] = useState(false)

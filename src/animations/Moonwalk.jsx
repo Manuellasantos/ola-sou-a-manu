@@ -2,27 +2,14 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { usePreferencias } from '../hooks/usePreferencias'
 import { tocar } from '../services/audio'
 
-/**
- * Dançarino original e estilizado (homenagem ao passo, não um retrato de ninguém)
- * fazendo o moonwalk enquanto puxa o painel "Em cartaz".
- *
- * Como o passo funciona (no referencial do corpo, que olha para a direita):
- *   - um pé fica APOIADO NA PONTA, parado em relação ao chão, com o calcanhar erguido;
- *   - o outro fica CHAPADO no chão e desliza para trás;
- *   - na metade do ciclo eles trocam: o calcanhar que estava erguido desce e o outro sobe.
- * Como o corpo anda para trás na mesma velocidade em que o pé apoiado "avança",
- * parece que ele caminha para frente enquanto escorrega para trás.
- *
- * As pernas usam cinemática inversa de dois segmentos (coxa e canela):
- * dado o quadril e o tornozelo, a lei dos cossenos dá o ângulo do joelho.
- */
+// dançarino fazendo moonwalk e puxando o painel de destaques
 
 const COXA = 34
 const CANELA = 34
 const PE = 16
-const QUADRIL_Y = 58 // altura do quadril em relação ao chão (menor que a perna esticada)
-const PASSO = 16 // meia amplitude do pé em relação ao quadril
-const CICLO = 1.05 // segundos por ciclo completo (dois passos)
+const QUADRIL_Y = 58 // altura do quadril
+const PASSO = 16 // tamanho do passo
+const CICLO = 1.05 // duração de dois passos, em segundos
 
 function joelho(qx, qy, tx, ty) {
   const dx = tx - qx
@@ -30,22 +17,22 @@ function joelho(qx, qy, tx, ty) {
   const d = Math.min(Math.hypot(dx, dy), COXA + CANELA - 0.01)
   const base = Math.atan2(dy, dx)
   const a = Math.acos((COXA * COXA + d * d - CANELA * CANELA) / (2 * COXA * d))
-  // joelho dobra para frente (direita): ângulo subtraído em coordenadas de tela
+  // calcula a posição do joelho
   return [qx + COXA * Math.cos(base - a), qy + COXA * Math.sin(base - a)]
 }
 
-/** Posição de um pé ao longo do ciclo. fase ∈ [0, 1). */
+// calcula a posição do pé em cada momento do passo
 function pe(fase) {
   if (fase < 0.5) {
-    // pé chapado deslizando da frente para trás: +PASSO → −PASSO
+    // pé no chão deslizando para trás
     const t = fase / 0.5
     const x = PASSO - 2 * PASSO * t
     return { tornozelo: [x, 0 - 4], calcanhar: [x - 4, 0], ponta: [x + PE - 4, 0] }
   }
-  // pé na ponta, parado no chão (no referencial do corpo avança −PASSO → +PASSO)
+  // pé na ponta
   const t = (fase - 0.5) / 0.5
   const x = -PASSO + 2 * PASSO * t
-  // o calcanhar sobe rápido no começo e desce no fim (troca de apoio)
+  // sobe e desce o calcanhar
   const ergue = Math.sin(Math.PI * Math.min(1, t * 1.15)) * 0.65 + 0.15
   const ang = ergue * 0.9
   const ponta = [x + PE - 4, 0]
@@ -62,7 +49,7 @@ function Perna({ fase, frente }) {
   return (
     <g>
       <polyline points={`${qx},${qy} ${jx},${jy} ${p.tornozelo[0]},${p.tornozelo[1]}`} fill="none" stroke={tom} strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
-      {/* meia: o detalhe rosa que chama atenção para os pés */}
+      {/* meia */}
       <line x1={p.tornozelo[0]} y1={p.tornozelo[1] - 6} x2={p.tornozelo[0]} y2={p.tornozelo[1]} stroke="var(--accent)" strokeWidth="7" strokeLinecap="round" />
       <path d={`M${p.calcanhar[0]} ${p.calcanhar[1]} L${p.tornozelo[0]} ${p.tornozelo[1]} L${p.ponta[0]} ${p.ponta[1]} Z`} fill={tom} stroke={tom} strokeWidth="5" strokeLinejoin="round" />
     </g>
@@ -87,7 +74,7 @@ function Dancarino({ t }) {
         <path d={`M-14 ${-QUADRIL_Y - 66} L18 ${-QUADRIL_Y - 68}`} stroke="var(--text)" strokeWidth="4" strokeLinecap="round" />
         <path d={`M-6 ${-QUADRIL_Y - 67} L-5 ${-QUADRIL_Y - 82} Q3 ${-QUADRIL_Y - 86} 11 ${-QUADRIL_Y - 82} L11 ${-QUADRIL_Y - 68}`} fill="var(--text)" stroke="var(--text)" strokeWidth="1.5" />
         <path d={`M-6 ${-QUADRIL_Y - 71} L11 ${-QUADRIL_Y - 72}`} stroke="var(--accent)" strokeWidth="3" />
-        {/* braço da frente, segurando a corda do painel */}
+        {/* braço da frente */}
         <path d={`M4 ${-QUADRIL_Y - 44} q14 8 26 ${4 + bracoA * 0.1}`} stroke="var(--text)" strokeWidth="7" fill="none" strokeLinecap="round" />
       </g>
       <Perna fase={fase} frente />
@@ -95,11 +82,7 @@ function Dancarino({ t }) {
   )
 }
 
-/**
- * Palco do moonwalk. O dançarino entra pela direita, escorrega para a esquerda
- * e arrasta o painel junto. O conteúdo do painel está no DOM desde o início:
- * a animação nunca bloqueia o acesso (e some com "movimento reduzido").
- */
+// palco do moonwalk
 export default function Moonwalk({ disparar, children }) {
   const { animar } = usePreferencias()
   const palco = useRef(null)
@@ -137,9 +120,9 @@ export default function Moonwalk({ disparar, children }) {
     if (!animar) setProgresso(1)
   }, [animar])
 
-  // movimento suave: acelera e desacelera nas pontas
+  // deixa o movimento mais suave
   const suave = progresso < 1 ? 1 - Math.pow(1 - progresso, 2.2) : 1
-  const fora = 100 - suave * 100 // % do painel ainda fora do palco
+  const fora = 100 - suave * 100 // quanto do painel ainda está fora da tela
 
   return (
     <div className="moonwalk" ref={palco}>

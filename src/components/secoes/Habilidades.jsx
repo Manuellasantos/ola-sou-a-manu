@@ -8,7 +8,7 @@ import Capitulo from '../Capitulo'
 const L = 1000
 const A = 640
 const GRUPOS = ['Linguagens', 'Dados', 'Desenvolvimento', 'Ferramentas', 'Outras']
-// cada grupo tem cor E forma, para não depender só da cor
+// forma e cor de cada grupo
 const FORMA = { Linguagens: 'circulo', Dados: 'losango', Desenvolvimento: 'triangulo', Ferramentas: 'quadrado', Outras: 'circulo' }
 const COR = { Linguagens: 'var(--s1)', Dados: 'var(--s2)', Desenvolvimento: 'var(--s3)', Ferramentas: 'var(--s4)', Outras: 'var(--s5)' }
 
@@ -19,7 +19,7 @@ function Marcador({ forma, x, y, r, ...props }) {
   return <circle cx={x} cy={y} r={r} {...props} />
 }
 
-/** Aranha que desce por um fio até a tecnologia escolhida: a teia vira a rede. */
+// aranha que desce até a tecnologia escolhida
 function Aranha({ x, y }) {
   return (
     <g className="aranha" style={{ transform: `translate(${x}px, ${y}px)` }} aria-hidden="true">

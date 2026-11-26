@@ -1,7 +1,4 @@
-/**
- * Título de seção no estilo editorial: número em adesivo, anotação à mão opcional
- * e título grande (use <span className="destaque"> para destacar uma palavra).
- */
+// título das seções
 export default function Capitulo({ numero, nota, id, children }) {
   return (
     <header className="titulo-secao">

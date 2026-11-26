@@ -1,24 +1,10 @@
-"""Gera as partículas da rosa do início do site a partir de uma superfície matemática.
-
-A forma vem de uma parametrização conhecida de "rosa 3D". Para cada par (x, t):
-    φ(t) = (π/2) · e^(−t / 8π)                        → abertura (pétalas de fora mais abertas)
-    u(t) = 1 − (1 − (3,6t mod 2π)/π)⁴ / 2              → contorno de cada pétala
-    y    = 2 · (x² − x)² · sen φ                       → curvatura da pétala
-    r    = u · (x · sen φ + y · cos φ)
-    ponto = (r · cos t, r · sin t, u · (x · cos φ − y · sen φ))
-
-Em vez de preencher a superfície, usamos poucos valores de x e muitos de t:
-cada x vira uma "linha de contorno" das pétalas, o que deixa a flor legível
-mesmo com poucos pontos. O frontend só gira e projeta; a matemática fica aqui.
-
-Saída: public/data/rosa.json
-"""
+"""Gera os pontos da rosa da página inicial e salva em public/data/rosa.json."""
 
 import numpy as np
 
 from utils import PASTA_PUBLICA, salvar_json
 
-CONTORNOS = 5      # quantos valores de x (anéis de pétalas)
+CONTORNOS = 5  # quantidade de camadas de pétalas
 PONTOS_POR_CONTORNO = 600
 VOLTAS = 15 * np.pi
 
@@ -40,7 +26,7 @@ def main() -> None:
     pontos -= pontos.mean(axis=0)
     pontos /= np.abs(pontos).max()
 
-    # tom: miolo (perto do eixo) = rosa intenso; pétalas de fora = lavanda
+    # cor de cada ponto: mais forte no meio da flor
     raio = np.linalg.norm(pontos[:, :2], axis=1)
     tom = 1 - raio / raio.max()
 

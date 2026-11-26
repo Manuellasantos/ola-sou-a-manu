@@ -1,15 +1,6 @@
-"""Coleta dados públicos do meu GitHub e salva o resultado bruto em data/raw/.
+"""Coleta os dados públicos do meu GitHub e salva em data/raw/github_bruto.json.
 
-Fontes:
-- API REST do GitHub: perfil, repositórios e linguagens de cada repositório.
-- API GraphQL do GitHub: calendário de contribuições (precisa de token).
-
-O token é lido da variável de ambiente GITHUB_TOKEN e nunca vai para o frontend.
-Sem token, a coleta continua só com a API REST (limite de 60 requisições/hora)
-e o calendário de contribuições fica de fora.
-
-Uso:
-    python scripts/coletar_github.py
+Para coletar o calendário de contribuições, defina a variável GITHUB_TOKEN.
 """
 
 import os
@@ -22,7 +13,7 @@ from utils import PASTA_BRUTA, agora_iso, salvar_json
 USUARIO = os.environ.get("GITHUB_USER", "Manuellasantos")
 API = "https://api.github.com"
 
-# Repositórios de projetos em equipe que estão em contas de outras pessoas
+# projetos em equipe que estão em outras contas
 REPOS_EXTERNOS = [
     "Cosmic-Bubble/projetolavanderia",
     "nanda-marques/nossasCores",
@@ -63,7 +54,7 @@ def buscar(sessao: requests.Session, caminho: str, **params):
 
 
 def buscar_repositorios(sessao):
-    """Lista todos os repositórios públicos do usuário (com paginação)."""
+    """Essa função lista todos os repositórios públicos do usuário."""
     repos, pagina = [], 1
     while True:
         lote = buscar(sessao, f"/users/{USUARIO}/repos", per_page=100, page=pagina, type="owner")
@@ -74,7 +65,7 @@ def buscar_repositorios(sessao):
 
 
 def resumir_repo(sessao, repo: dict, externo: bool) -> dict:
-    """Guarda só os campos que a análise usa, mais as linguagens em bytes."""
+    """Essa função separa os campos usados na análise."""
     linguagens = buscar(sessao, f"/repos/{repo['full_name']}/languages")
     return {
         "nome": repo["name"],

@@ -1,4 +1,4 @@
-// localStorage pode falhar (aba anônima, bloqueio de cookies). Nunca quebrar o site por isso.
+// salva e lê as preferências no navegador
 const PREFIXO = 'manu-portfolio:'
 
 export function ler(chave, padrao) {
@@ -14,6 +14,6 @@ export function salvar(chave, valor) {
   try {
     localStorage.setItem(PREFIXO + chave, JSON.stringify(valor))
   } catch {
-    /* sem armazenamento: as preferências valem só nesta visita */
+    /* sem armazenamento disponível */
   }
 }

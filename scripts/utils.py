@@ -1,8 +1,4 @@
-"""Funções compartilhadas pelos scripts de dados do portfólio.
-
-Todos os scripts salvam os resultados em public/data/, que é a pasta
-lida pelo frontend. Assim o site continua 100% estático (GitHub Pages).
-"""
+"""Funções usadas por vários scripts."""
 
 import json
 from datetime import datetime, timezone
@@ -13,7 +9,7 @@ PASTA_PUBLICA = RAIZ / "public" / "data"
 PASTA_BRUTA = RAIZ / "data" / "raw"
 PROJETOS_JSON = RAIZ / "src" / "data" / "projects.json"
 
-# Paleta do site, para os gráficos gerados em Python ficarem iguais aos do navegador
+# cores do site
 PALETA = {
     "grafite": "#131217",
     "violeta": "#24212B",
@@ -25,12 +21,12 @@ PALETA = {
 
 
 def agora_iso() -> str:
-    """Data e hora atual em UTC, no formato ISO 8601."""
+    """Essa função retorna a data e hora atual."""
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
 
 
 def salvar_json(dados, caminho: Path) -> None:
-    """Salva um objeto Python como JSON compacto (UTF-8, sem escapar acentos)."""
+    """Essa função salva os dados em um arquivo json."""
     caminho.parent.mkdir(parents=True, exist_ok=True)
     with open(caminho, "w", encoding="utf-8") as arquivo:
         json.dump(dados, arquivo, ensure_ascii=False, separators=(",", ":"))

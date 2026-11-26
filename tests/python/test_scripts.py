@@ -1,4 +1,4 @@
-"""Testes dos scripts de dados. Rodar com: pytest tests/python"""
+"""Testes dos scripts de dados."""
 
 import sys
 from pathlib import Path

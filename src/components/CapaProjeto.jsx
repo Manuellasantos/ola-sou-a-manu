@@ -6,11 +6,7 @@ function hash(texto) {
   return Math.abs(h)
 }
 
-/**
- * Capa do card. Usa a primeira captura real do projeto; se não houver nenhuma,
- * desenha uma capa conceitual (rosácea matemática r = cos(kθ)) com aviso visível,
- * para nunca parecer uma tela de dashboard que não existe.
- */
+// mostra o print do projeto ou uma capa desenhada
 export default function CapaProjeto({ projeto, grande = false }) {
   const imagem = projeto.imagens[0]
   if (imagem) {

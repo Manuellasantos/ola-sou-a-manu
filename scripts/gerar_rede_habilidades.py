@@ -1,16 +1,4 @@
-"""Monta a rede de habilidades: tecnologias ligadas aos projetos em que foram usadas.
-
-As ligações vêm direto do catálogo (src/data/projects.json), então a rede
-nunca mostra uma tecnologia que não foi usada em algum projeto real.
-
-O posicionamento usa o algoritmo de Fruchterman-Reingold implementado em NumPy:
-    - todos os nós se repelem (força ∝ 1/d)
-    - nós ligados se atraem (força ∝ d²)
-    - a "temperatura" diminui a cada passo, então o desenho estabiliza
-Calcular isso aqui deixa o navegador leve: o JavaScript só desenha.
-
-Saída: public/data/rede.json
-"""
+"""Monta a rede que liga as tecnologias aos projetos e salva em public/data/rede.json."""
 
 import numpy as np
 
@@ -20,7 +8,7 @@ SEMENTE = 3
 ITERACOES = 400
 
 
-# Tecnologias que aparecem nos projetos mas não estão na lista resumida do perfil
+# grupo das tecnologias que não estão no perfil
 GRUPOS_EXTRAS = {
     "Dados": ["Unity Catalog", "AI/BI Dashboard", "scikit-learn", "Chart.js", "PostgreSQL", "Leaflet", "OpenStreetMap", "OSRM"],
     "Desenvolvimento": ["Ionic", "EJS", "Tailwind CSS", "Google Gemini API", "Pytest"],
@@ -37,7 +25,7 @@ def grupo_da_tecnologia(tecnologia: str, habilidades: dict) -> str:
 
 def fruchterman_reingold(n: int, arestas: np.ndarray, rng: np.random.Generator) -> np.ndarray:
     pos = rng.uniform(-1, 1, size=(n, 2))
-    k = np.sqrt(4 / n)  # distância "ideal" entre nós
+    k = np.sqrt(4 / n)  # distância entre os pontos
     temperatura = 0.2
     for _ in range(ITERACOES):
         delta = pos[:, None, :] - pos[None, :, :]
@@ -52,13 +40,12 @@ def fruchterman_reingold(n: int, arestas: np.ndarray, rng: np.random.Generator) 
         np.add.at(desloc, origem, -atracao)
         np.add.at(desloc, destino, atracao)
 
-        # gravidade: puxa tudo para o centro. Sem ela, projetos sem tecnologias em comum
-        # com os outros (como o dashboard em Excel) iriam parar longe e achatariam o desenho
+        # puxa os pontos para o centro
         desloc -= pos * 0.6
         tamanho = np.linalg.norm(desloc, axis=1)[:, None] + 1e-6
         pos += desloc / tamanho * np.minimum(tamanho, temperatura)
         temperatura *= 0.99
-    # normaliza para [0.05, 0.95]
+    # deixa as posições entre 0.05 e 0.95
     pos -= pos.min(axis=0)
     pos /= pos.max(axis=0) + 1e-9
     return 0.05 + pos * 0.9

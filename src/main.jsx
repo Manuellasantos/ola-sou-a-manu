@@ -12,7 +12,7 @@ import './styles/animacoes.css'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <PreferenciasProvider>
-      {/* HashRouter: rotas como /#/projeto/voebem funcionam no GitHub Pages sem servidor */}
+      {/* HashRouter para as rotas funcionarem no GitHub Pages */}
       <HashRouter>
         <App />
       </HashRouter>

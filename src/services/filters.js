@@ -1,6 +1,4 @@
-/**
- * Lógica dos filtros do catálogo, separada dos componentes para poder ser testada.
- */
+// funções dos filtros de projetos
 
 export const ORDEM_CATEGORIAS = [
   'Análise de Dados',
@@ -35,7 +33,7 @@ export const FILTROS_VAZIOS = {
   status: '',
 }
 
-/** Só as categorias que têm pelo menos um projeto, na ordem definida acima. */
+// retorna só as categorias que têm projetos
 export function categoriasDisponiveis(projetos) {
   const usadas = new Set(projetos.flatMap((p) => p.categorias))
   return ORDEM_CATEGORIAS.filter((c) => usadas.has(c))

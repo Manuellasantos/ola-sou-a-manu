@@ -1,11 +1,4 @@
-/**
- * Motor de áudio do portfólio.
- *
- * Regras: desligado por padrão, só liga depois de um clique da pessoa (respeita o
- * bloqueio de autoplay), volume baixo, trechos curtos com fade-in/fade-out e nada
- * tocando em loop. Os efeitos são sintetizados aqui mesmo com a Web Audio API,
- * então não dependem de nenhum arquivo com direitos autorais.
- */
+// funções de áudio do site
 import { TRILHAS } from '../config/audio'
 import { asset } from '../config/site'
 
@@ -35,7 +28,7 @@ export function configurarAudio({ ativo, volume: novoVolume }) {
   if (mestre) mestre.gain.setTargetAtTime(ativo ? volume : 0, contexto.currentTime, 0.05)
 }
 
-/** Envelope com fade-in e fade-out para nada começar ou terminar seco. */
+// controla o volume com fade-in e fade-out
 function envelope(ctx, inicio, duracao, pico = 1, ataque = 0.02) {
   const g = ctx.createGain()
   g.gain.setValueAtTime(0, inicio)
@@ -70,9 +63,9 @@ function ruido(ctx, inicio, duracao, filtro = 4000, pico = 0.3) {
   fonte.start(inicio)
 }
 
-// Efeitos originais. Nenhum deles reproduz melodia de música existente.
+// efeitos sonoros
 const EFEITOS = {
-  // batida curta e genérica (bumbo + estalo), sem melodia, para o moonwalk
+  // batida do moonwalk
   groove(ctx, t) {
     for (let i = 0; i < 8; i++) {
       const b = t + i * 0.25
@@ -139,10 +132,7 @@ async function tocarArquivo(ctx, trilha) {
   fonte.start(t, trilha.inicio, trilha.duracao)
 }
 
-/**
- * Toca um efeito ("pop") ou uma trilha ("moonwalk"). Se a trilha não tiver arquivo
- * licenciado configurado, toca o efeito original equivalente.
- */
+// toca um efeito ou uma trilha
 export function tocar(nome) {
   if (!ligado) return
   const ctx = garantirContexto()

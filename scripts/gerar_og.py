@@ -1,8 +1,4 @@
-"""Gera a imagem de compartilhamento (public/og.png, 1200x630) com a rosa de partículas.
-
-Uso:
-    python scripts/gerar_og.py
-"""
+"""Gera a imagem de compartilhamento do site (public/og.png)."""
 
 import matplotlib
 

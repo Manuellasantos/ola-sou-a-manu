@@ -9,7 +9,7 @@ export const rotuloTipo = (p) =>
     .filter(Boolean)
     .join(' · ')
 
-// tamanho e tema de cada peça do bento: os projetos de dados ganham as maiores
+// tamanho e cor dos cards em destaque
 const LAYOUT = {
   1: { tamanho: 'bento--xl', tema: 'tema-preto' },
   2: { tamanho: 'bento--largo', tema: 'tema-rosa' },
@@ -18,7 +18,7 @@ const LAYOUT = {
 }
 const TEMAS_ROTATIVOS = ['', 'tema-rosa', '', 'tema-preto', 'tema-rosa', '']
 
-/** Print do projeto dentro de uma moldura: navegador para web, celular para app. */
+// mostra o print do projeto numa moldura de navegador ou celular
 function Mockup({ projeto }) {
   const img = projeto.imagens[0]
   if (!img) return <CapaProjeto projeto={projeto} />

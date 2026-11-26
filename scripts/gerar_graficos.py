@@ -1,16 +1,8 @@
-"""Gera gráficos estáticos (Matplotlib) e um relatório interativo (Plotly)
-a partir de public/data/github.json.
-
-- docs/img/github-linguagens.png e docs/img/github-semana.png entram no README.
-- docs/relatorio-github.html é um relatório Plotly que abre direto no navegador.
-
-Uso:
-    python scripts/gerar_graficos.py
-"""
+"""Gera os gráficos do README (docs/img) e o relatório em Plotly (docs/relatorio-github.html)."""
 
 import matplotlib
 
-matplotlib.use("Agg")  # sem janela: funciona no terminal e no GitHub Actions
+matplotlib.use("Agg")  # gera as imagens sem abrir janela
 import matplotlib.pyplot as plt
 import pandas as pd
 import plotly.graph_objects as go

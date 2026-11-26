@@ -1,21 +1,4 @@
-"""K-means do zero com NumPy, salvando cada iteração para animar no site.
-
-ATENÇÃO: os pontos são DADOS SIMULADOS (três nuvens gaussianas). O objetivo é
-mostrar como o algoritmo funciona, não analisar um conjunto de dados real.
-
-Passos do k-means:
-    1. escolhe k centróides iniciais (aqui: pontos aleatórios, de propósito,
-       para a animação mostrar mais passos; o k-means++ convergiria rápido demais)
-    2. associa cada ponto ao centróide mais próximo
-    3. move cada centróide para a média dos seus pontos
-    4. repete 2 e 3 até os centróides pararem de se mexer
-
-Antes do k-means, os mesmos pontos aparecem desenhando uma borboleta
-(curva de Temple Fay): r = e^sen(θ) − 2·cos(4θ) + sen⁵((2θ − π)/24).
-No site, as asas se desfazem e viram os dados.
-
-Saída: public/data/clusters.json
-"""
+"""Roda o k-means em dados simulados e salva cada iteração em public/data/clusters.json."""
 
 import numpy as np
 
@@ -33,7 +16,7 @@ def gerar_dados(rng: np.random.Generator) -> np.ndarray:
 
 
 def iniciar_aleatorio(dados: np.ndarray, k: int, rng: np.random.Generator) -> np.ndarray:
-    """Sorteia k pontos distintos como centróides iniciais."""
+    """Essa função sorteia os centróides iniciais."""
     return dados[rng.choice(len(dados), size=k, replace=False)].copy()
 
 
@@ -58,7 +41,7 @@ def kmeans(dados: np.ndarray, k: int, rng: np.random.Generator) -> list[dict]:
 
 
 def pontos_borboleta(n: int) -> np.ndarray:
-    """n pontos sobre a curva da borboleta, normalizados para [0.1, 0.9]."""
+    """Essa função calcula os pontos da curva da borboleta."""
     theta = np.linspace(0, 12 * np.pi, n)
     r = np.exp(np.sin(theta)) - 2 * np.cos(4 * theta) + np.sin((2 * theta - np.pi) / 24) ** 5
     x, y = r * np.sin(theta), -r * np.cos(theta)

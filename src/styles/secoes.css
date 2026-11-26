@@ -1,4 +1,4 @@
-/* ================= títulos de seção ================= */
+/* títulos de seção */
 .titulo-secao {
   position: relative;
   margin-bottom: clamp(24px, 4vw, 48px);
@@ -31,7 +31,7 @@
   margin-bottom: 36px;
 }
 
-/* ================= peças de colagem ================= */
+/* peças de colagem */
 .estrela {
   position: absolute;
   pointer-events: none;
@@ -54,7 +54,7 @@
   color: var(--text);
 }
 
-/* faixas inclinadas com texto correndo */
+/* faixas */
 .faixas {
   position: relative;
   z-index: 4;
@@ -107,7 +107,7 @@
   font-weight: 400;
 }
 
-/* adesivos de dados */
+/* adesivos */
 .adesivo {
   position: absolute;
   margin: 0;
@@ -176,7 +176,7 @@
   animation-delay: calc(var(--i) * -0.4s);
 }
 
-/* ================= abertura ================= */
+/* abertura */
 .abertura {
   position: relative;
   overflow: hidden;
@@ -374,7 +374,7 @@
 
 }
 
-/* ================= sobre mim ================= */
+/* sobre mim */
 .sobre {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -429,7 +429,7 @@
   }
 }
 
-/* ================= além da tecnologia ================= */
+/* além da tecnologia */
 .alem-secao {
   overflow: hidden;
 }
@@ -515,7 +515,7 @@
   top: 70px;
 }
 
-/* ================= trajetória ================= */
+/* trajetória */
 .trajetoria {
   display: grid;
   grid-template-columns: 1.4fr 1fr;
@@ -658,7 +658,7 @@
   }
 }
 
-/* ================= tecnologias ================= */
+/* tecnologias */
 .habilidades {
   display: grid;
   gap: 24px;
@@ -751,7 +751,7 @@
   font-size: 1.2rem;
 }
 
-/* ================= projetos ================= */
+/* projetos */
 .moonwalk {
   position: relative;
   overflow: hidden;
@@ -1040,7 +1040,7 @@
   margin: auto 0 0;
   padding-top: 8px;
 }
-/* molduras de mockup */
+/* molduras dos prints */
 .mockup {
   position: relative;
   border: 2px solid var(--preto);
@@ -1148,7 +1148,7 @@
   }
 }
 
-/* ================= análises ================= */
+/* análises */
 .lab {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1336,7 +1336,7 @@
   }
 }
 
-/* ================= estudos ================= */
+/* estudos */
 .estudos__pesquisa {
   position: relative;
   max-width: 560px;
@@ -1505,7 +1505,7 @@
   }
 }
 
-/* ================= contato ================= */
+/* contato */
 .epilogo {
   overflow: hidden;
   padding-bottom: 200px;
@@ -1595,7 +1595,7 @@
   opacity: 1;
 }
 
-/* ================= página do projeto ================= */
+/* página do projeto */
 .detalhe {
   padding-top: 110px;
 }

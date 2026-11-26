@@ -5,7 +5,7 @@ import Rodape from './components/Rodape'
 import Brasao from './animations/Brasao'
 import Inicio from './pages/Inicio'
 
-// A página de detalhes só é baixada quando alguém abre um projeto
+// carrega a página do projeto só quando ela é aberta
 const PaginaProjeto = lazy(() => import('./pages/PaginaProjeto'))
 const NaoEncontrada = lazy(() => import('./pages/NaoEncontrada'))
 

@@ -1,16 +1,4 @@
-"""Gera os pequenos "adesivos de dados" que decoram as colagens do site.
-
-Nada aqui é inventado: cada adesivo é calculado a partir de dados que o
-próprio projeto já tem.
-- mini tabela: as três linguagens que mais aparecem nos meus repositórios;
-- barras e linha: contribuições por dia da semana e repositórios acumulados.
-
-Entrada:  public/data/github.json
-Saída:    public/data/arte.json
-
-Uso:
-    python scripts/gerar_arte.py
-"""
+"""Gera os dados dos adesivos de gráficos e salva em public/data/arte.json."""
 
 from utils import PASTA_PUBLICA, ler_json, salvar_json
 

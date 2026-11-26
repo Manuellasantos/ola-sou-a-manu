@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 
-/**
- * Diz se o elemento está visível. Usado para disparar animações só quando a pessoa
- * chega na seção e para pausar canvas fora da tela (economiza bateria).
- */
+// diz se o elemento está aparecendo na tela
 export function useNaTela({ umaVez = true, margem = '0px 0px -12% 0px', limiar = 0 } = {}) {
   const ref = useRef(null)
   const [visivel, setVisivel] = useState(false)

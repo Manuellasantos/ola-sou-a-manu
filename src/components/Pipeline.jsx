@@ -1,10 +1,7 @@
 import { useState } from 'react'
 import { usePreferencias } from '../hooks/usePreferencias'
 
-/**
- * Representação interativa de um pipeline. Partículas "sujas" entram na primeira
- * camada e saem organizadas na última. Cada camada abre uma explicação.
- */
+// etapas de um pipeline de dados
 const PIPELINES = {
   medalhao: [
     { id: 'bronze', nome: 'Bronze', simbolo: '▤', resumo: 'Ingestão bruta', texto: 'O VRA e os cadastros da ANAC entram como vieram: nada é corrigido aqui, para sempre ser possível reprocessar.' },
@@ -22,7 +19,7 @@ export default function Pipeline({ tipo = 'medalhao', titulo }) {
   const camadas = PIPELINES[tipo]
   const [ativa, setAtiva] = useState(camadas[0].id)
   const { animar } = usePreferencias()
-  // se o tipo mudar (outro projeto), volta para a primeira camada em vez de quebrar
+  // volta para a primeira etapa se o projeto mudar
   const atual = camadas.find((c) => c.id === ativa) ?? camadas[0]
 
   return (

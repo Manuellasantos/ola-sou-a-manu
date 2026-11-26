@@ -6,14 +6,14 @@ export { projetos, perfil }
 
 export const projetoPorSlug = (slug) => projetos.find((p) => p.slug === slug)
 
-// Projetos em destaque primeiro (pela ordem de "destaque"), depois os demais
+// projetos em destaque primeiro
 export const projetosOrdenados = [...projetos].sort(
   (a, b) => (a.destaque ?? 99) - (b.destaque ?? 99),
 )
 
 const cache = new Map()
 
-/** Busca um JSON gerado pelos scripts Python em public/data/. */
+// busca um arquivo json da pasta public/data
 export function carregarDados(nome) {
   if (!cache.has(nome)) {
     const promessa = fetch(asset(`data/${nome}.json`)).then((r) => {

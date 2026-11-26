@@ -1,7 +1,7 @@
-"""Roda todos os scripts de dados na ordem certa.
+"""Roda todos os scripts de dados.
 
-    python scripts/gerar_tudo.py            # tudo, inclusive a coleta no GitHub
-    python scripts/gerar_tudo.py --offline  # pula a coleta e usa data/raw/ existente
+    python scripts/gerar_tudo.py
+    python scripts/gerar_tudo.py --offline  (sem coletar do GitHub)
 """
 
 import sys
@@ -29,7 +29,7 @@ def main() -> int:
 
     for nome, funcao in etapas:
         print(f"→ {nome}")
-        if funcao():  # as funções retornam 0/None em caso de sucesso
+        if funcao():  # retorna 1 quando dá erro
             print(f"Falhou em: {nome}")
             return 1
     return 0

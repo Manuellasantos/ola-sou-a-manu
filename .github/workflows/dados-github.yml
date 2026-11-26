@@ -1,6 +1,4 @@
-# Atualiza os dados do GitHub toda segunda-feira (ou manualmente).
-# Os scripts Python coletam a API, processam com Pandas e salvam public/data/github.json.
-# O token usado é o GITHUB_TOKEN automático do Actions: ele nunca vai para o site.
+# atualiza os dados do GitHub toda segunda-feira
 name: Atualizar dados do GitHub
 
 on:

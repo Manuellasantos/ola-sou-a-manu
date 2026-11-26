@@ -24,7 +24,7 @@ const TECNOLOGIAS = tecnologiasDisponiveis(projetosOrdenados)
 const STATUS = statusDisponiveis(projetosOrdenados)
 const DESTAQUES = projetosOrdenados.filter((p) => p.destaque)
 
-/** Embaralha de forma determinística, para a "passagem secreta" sempre mudar algo. */
+// embaralha a lista de projetos
 function embaralhar(lista, semente) {
   const copia = [...lista]
   let s = semente
@@ -36,7 +36,7 @@ function embaralhar(lista, semente) {
   return copia
 }
 
-/** Técnica FLIP: anima os cards da posição antiga para a nova quando a grade muda. */
+// anima os cards quando eles trocam de lugar
 function useFlip(gradeRef, dependencia, animar) {
   const posicoes = useRef(new Map())
   useLayoutEffect(() => {
@@ -79,8 +79,7 @@ export default function Projetos() {
 
   useFlip(gradeRef, resultado.map((p) => p.slug).join(), animar)
 
-  // Passagem secreta: o brasão (src/animations/Brasao.jsx) avisa e os projetos trocam de ordem,
-  // como as escadas que mudam de lugar
+  // troca a ordem dos projetos quando o brasão aparece
   useEffect(() => {
     const abrir = () => {
       setPassagem((n) => n + 1)

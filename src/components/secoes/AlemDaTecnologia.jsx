@@ -4,7 +4,7 @@ import Capitulo from '../Capitulo'
 import Icone from '../Icone'
 import { Estrela, Rasgo } from '../Colagem'
 
-// ícone de cada adesivo da ficha (desenhados no projeto, sem emoji)
+// ícone de cada item
 const ICONES = ['pena', 'gato', 'chapeu', 'livro', 'rosa', 'pegada', 'peca', 'sorvete', 'onda', 'pena', 'livro', 'gato', 'onda']
 
 export default function AlemDaTecnologia() {
