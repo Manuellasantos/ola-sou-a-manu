@@ -45,7 +45,7 @@ export default function Abertura() {
               ) : (
                 <RosaGenerativa />
               )}
-              <figcaption className="mao">{perfil.foto ? 'eu!' : 'rosa, minha flor favorita'}</figcaption>
+              <figcaption className="mao">{perfil.foto ? 'eu!' : 'tulipa, minha flor favorita'}</figcaption>
             </figure>
             <AdesivoBarras className="abertura__adesivo abertura__adesivo--barras" />
           </div>

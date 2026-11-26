@@ -101,9 +101,6 @@ export default function Projetos() {
         <Capitulo numero="05" id="proj-titulo">
           Meus <span className="destaque">projetos</span>
         </Capitulo>
-        <p className="secao-intro">
-          Alguns eu fiz sozinha, a maioria em equipe. Nos projetos em grupo, só conto qual foi a minha parte quando isso está no repositório.
-        </p>
 
         <div ref={palcoRef}>
           <Moonwalk disparar={palcoVisivel}>
