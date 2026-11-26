@@ -1,0 +1,22 @@
+# dependências
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# build
+dist/
+
+# dados brutos da API (são regenerados pelo script de coleta)
+data/raw/
+
+# segredos
+.env
+.env.local
+
+# sistema e editores
+.DS_Store
+.vscode/
+.idea/
+*.log
