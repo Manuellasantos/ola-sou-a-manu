@@ -1,68 +1,81 @@
-import { useEffect, useState } from 'react'
 import RosaGenerativa from '../../animations/RosaGenerativa'
-import { irParaSecao, linkSecao } from '../../config/site'
-import { usePreferencias } from '../../hooks/usePreferencias'
-import { Seta } from '../Rabisco'
+import { asset, irParaSecao, linkSecao } from '../../config/site'
+import { perfil } from '../../services/data'
+import { AdesivoBarras, AdesivoDispersao, Coordenadas, Estrela, Faixa, SetaMao } from '../Colagem'
+import Icone from '../Icone'
 
-const VERBOS = ['investigar', 'organizar', 'conectar', 'desenhar', 'questionar']
+// cada letra do nome é um "recorte" diferente, como letras de revista
+const ESTILOS = ['rosa', 'preto', 'contorno', 'pastel', 'branco', 'rosa', 'preto', 'contorno']
 
-function TextoCinetico({ texto }) {
-  // cada letra sobe com um pequeno atraso; leitores de tela leem a frase inteira
-  let indice = 0
+function NomeRecortado({ nome }) {
   return (
-    <span className="cinetico" aria-label={texto} role="text">
-      {texto.split(' ').map((palavra, p) => (
-        <span key={p} className="cinetico__palavra" aria-hidden="true">
-          {[...palavra].map((letra) => (
-            <span key={indice} style={{ '--i': indice++ }} className="cinetico__letra">
-              {letra}
-            </span>
-          ))}
+    <span className="recorte" aria-label={nome} role="text">
+      {[...nome].map((letra, i) => (
+        <span key={i} aria-hidden="true" className={`recorte__letra recorte__letra--${ESTILOS[i % ESTILOS.length]}`} style={{ '--i': i, '--giro': `${((i * 37) % 11) - 5}deg` }}>
+          {letra}
         </span>
       ))}
     </span>
   )
 }
 
+const FAIXA_1 = ['Ciência de Dados', 'Engenharia de Dados', 'Análise de Dados', 'Inteligência Artificial', 'Fatec Sebrae', 'São Paulo']
+const FAIXA_2 = ['Python', 'SQL', 'Pandas', 'NumPy', 'Databricks', 'Spark', 'Plotly', 'Streamlit', 'React', 'Git']
+
 export default function Abertura() {
-  const { animar } = usePreferencias()
-  const [verbo, setVerbo] = useState(0)
-
-  useEffect(() => {
-    if (!animar) return
-    const id = setInterval(() => setVerbo((v) => (v + 1) % VERBOS.length), 2200)
-    return () => clearInterval(id)
-  }, [animar])
-
   return (
-    <section id="inicio" className="abertura" aria-labelledby="abertura-titulo">
-      <div className="wrap abertura__grade">
-        <div className="abertura__texto">
-          <p className="mao abertura__rotulo">caderno de campo da Manu · São Paulo</p>
-          <h1 id="abertura-titulo" className="abertura__titulo">
-            <TextoCinetico texto="Olá, sou a Manu." />
-          </h1>
-          <p className="abertura__sub">
-            Estudo Ciência de Dados e gosto de <span className="marca abertura__verbo" key={verbo}>{VERBOS[verbo]}</span> as coisas até entender
-            por que elas são do jeito que são.
-          </p>
-          <p className="abertura__guia">
-            Esse site é meio caderno, meio portfólio. Começa por mim, passa pelo meu caminho e termina nos projetos e nos dados.
-          </p>
-          <a className="btn btn-primary" href={linkSecao('quem-sou')} onClick={(e) => irParaSecao('quem-sou', e)}>
-            Começar pelo começo
-          </a>
-        </div>
+    <>
+      <section id="inicio" className="abertura" aria-labelledby="abertura-titulo">
+        <div className="wrap abertura__palco">
+          <Estrela className="abertura__estrela abertura__estrela--1" semente={4} cor="var(--rosa)" />
+          <Estrela className="abertura__estrela abertura__estrela--2" semente={9} pontas={11} />
 
-        <div className="abertura__rosa">
-          <RosaGenerativa />
-          <p className="mao abertura__nota">
-            <Seta curva="cima" className="abertura__seta" />
-            isso é uma rosa feita de 3.000 pontos.
-            <br />a conta foi feita em Python.
-          </p>
+          <h1 id="abertura-titulo" className="abertura__titulo">
+            <span className="abertura__prazer">Prazer, sou a</span>
+            <NomeRecortado nome="Manuella" />
+            <span className="abertura__exclamacao" aria-hidden="true">
+              !
+            </span>
+          </h1>
+
+          <div className="abertura__colagem">
+            <figure className="polaroide folha fita">
+              {perfil.foto ? (
+                <img src={asset(perfil.foto)} alt="Foto da Manuella" className="polaroide__foto" />
+              ) : (
+                <RosaGenerativa />
+              )}
+              <figcaption className="mao">{perfil.foto ? 'eu!' : 'minha flor preferida'}</figcaption>
+            </figure>
+            <AdesivoDispersao className="abertura__adesivo abertura__adesivo--dispersao" />
+            <AdesivoBarras className="abertura__adesivo abertura__adesivo--barras" />
+            <Coordenadas className="abertura__coordenadas" />
+          </div>
+
+          <div className="abertura__texto">
+            <p className="abertura__sub">
+              Estudante de <span className="destaque">Ciência de Dados</span> para Negócios na Fatec Sebrae e técnica em Informática para Internet.
+            </p>
+            <p className="abertura__apoio">Gosto de pegar um dado bagunçado e entender o que ele está tentando dizer.</p>
+            <div className="abertura__acoes">
+              <a className="btn btn-primary" href={linkSecao('projetos')} onClick={(e) => irParaSecao('projetos', e)}>
+                Ver meus projetos <Icone nome="seta" />
+              </a>
+              <a className="btn" href={linkSecao('sobre')} onClick={(e) => irParaSecao('sobre', e)}>
+                Sobre mim
+              </a>
+            </div>
+            <p className="mao abertura__dica">
+              <SetaMao className="abertura__seta" />
+              (tem um gato andando pelos projetos)
+            </p>
+          </div>
         </div>
+      </section>
+      <div className="faixas">
+        <Faixa itens={FAIXA_1} />
+        <Faixa itens={FAIXA_2} invertida tema="rosa" />
       </div>
-    </section>
+    </>
   )
 }

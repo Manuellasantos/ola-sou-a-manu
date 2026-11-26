@@ -3,6 +3,7 @@ import Balao from '../../animations/Balao'
 import { asset } from '../../config/site'
 import { useNaTela } from '../../hooks/useNaTela'
 import { perfil } from '../../services/data'
+import { Estrela } from '../Colagem'
 
 export default function Epilogo() {
   const [ref, visivel] = useNaTela()
@@ -20,13 +21,13 @@ export default function Epilogo() {
   }
 
   return (
-    <section id="contato" className="section epilogo" aria-labelledby="contato-titulo">
+    <section id="contato" className="section tema-preto epilogo" aria-labelledby="contato-titulo">
       <div className={`wrap reveal ${visivel ? 'is-visible' : ''}`} ref={ref}>
-        <p className="mao epilogo__nota">fim do caderno (por enquanto)</p>
+        <p className="mao epilogo__nota">fico feliz que chegou até aqui</p>
         <h2 id="contato-titulo" className="epilogo__titulo">
-          Se você chegou até aqui, a gente já tem assunto.
+          Vamos <span className="destaque">conversar?</span>
         </h2>
-        <p className="epilogo__texto">Pode ser sobre dados, um projeto, uma vaga ou um livro de suspense. Respondo por e-mail ou pelo LinkedIn.</p>
+        <p className="epilogo__texto">Pode ser sobre dados, um projeto, uma oportunidade ou um livro de suspense. Respondo por e-mail e pelo LinkedIn.</p>
 
         <ul className="epilogo__links">
           <li>
@@ -56,6 +57,7 @@ export default function Epilogo() {
         <span className="sr-only" aria-live="polite">
           {copiado ? 'E-mail copiado' : ''}
         </span>
+        <Estrela className="epilogo__estrela" semente={40} pontas={13} cor="var(--rosa)" />
         <Balao />
       </div>
     </section>

@@ -2,52 +2,48 @@ import Suricato from '../../animations/Suricato'
 import { useNaTela } from '../../hooks/useNaTela'
 import { perfil } from '../../services/data'
 import Capitulo from '../Capitulo'
+import { AdesivoCorrelacao, Estrela, Rasgo } from '../Colagem'
 
 export default function QuemSou() {
   const [ref, visivel] = useNaTela()
 
   return (
-    <section id="quem-sou" className="section" aria-labelledby="quem-titulo">
+    <section id="sobre" className="section tema-rosa sobre-secao" aria-labelledby="sobre-titulo">
       <div className={`wrap reveal ${visivel ? 'is-visible' : ''}`} ref={ref}>
-        <Capitulo numero="I" nota="antes de qualquer projeto" id="quem-titulo">
-          Prazer, sou a <span className="marca">Manuella</span>.
+        <Capitulo numero="01" id="sobre-titulo">
+          Sobre <span className="destaque">mim</span>
         </Capitulo>
 
-        <div className="quem">
-          <div className="quem__bio">
-            {perfil.bio.map((p, i) => (
-              <p key={p} className={i === 0 ? 'quem__primeiro' : ''}>
-                {p}
-              </p>
+        <div className="sobre">
+          <div className="sobre__texto">
+            {perfil.bio.map((p) => (
+              <p key={p}>{p}</p>
             ))}
-            <p className="mao quem__nota">
-              curiosidade é o meu traço mais forte.
-              <br />o resto do site é consequência disso.
-            </p>
           </div>
 
-          <figure className="ficha folha fita">
-            <Suricato visivel={visivel} />
-            <figcaption className="ficha__titulo">
-              <span className="mono">ficha de campo nº 001</span>
-              <strong>Espécime: Manu</strong>
-            </figcaption>
-            <dl className="ficha__lista">
-              {perfil.ficha.map(([campo, valor]) => (
-                <div key={campo}>
-                  <dt>{campo}</dt>
-                  <dd>{valor}</dd>
-                </div>
-              ))}
-            </dl>
-            <p className="ficha__carimbo" aria-hidden="true">
-              observada
-              <br />
-              em 2026
-            </p>
-          </figure>
+          <aside className="sobre__colagem" aria-label="Formação">
+            <div className="formacao folha">
+              <Suricato visivel={visivel} />
+              <h3>Formação</h3>
+              <ol>
+                <li>
+                  <span className="mono">2026 – 2028 (previsão)</span>
+                  <strong>Ciência de Dados para Negócios</strong>
+                  <span>Fatec Sebrae</span>
+                </li>
+                <li>
+                  <span className="mono">2023 – 2025</span>
+                  <strong>Técnico em Informática para Internet</strong>
+                  <span>Etec Albert Einstein</span>
+                </li>
+              </ol>
+            </div>
+            <Estrela className="sobre__estrela" semente={21} pontas={8} cor="var(--rosa)" />
+            <AdesivoCorrelacao className="sobre__adesivo" />
+          </aside>
         </div>
       </div>
+      <Rasgo cor="var(--rosa)" semente={7} />
     </section>
   )
 }

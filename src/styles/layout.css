@@ -7,10 +7,10 @@
   border-bottom: 1px solid transparent;
 }
 .topo--rolou {
-  background: color-mix(in srgb, var(--bg) 90%, transparent);
+  background: color-mix(in srgb, var(--off) 94%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-color: var(--line);
+  border-color: var(--preto);
 }
 .topo__barra {
   display: flex;
@@ -32,8 +32,11 @@
   color: var(--accent);
 }
 .topo__marca {
-  font-family: var(--font-mao);
-  font-size: 1.7rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--preto);
 }
 .topo__nav ul {
   display: flex;
@@ -46,13 +49,14 @@
   display: block;
   padding: 8px 10px;
   border-radius: 999px;
-  color: var(--text-2);
+  color: var(--preto);
   text-decoration: none;
+  font-weight: 500;
   font-size: 0.88rem;
 }
 .topo__nav a:hover {
-  color: var(--text);
-  background: var(--hl);
+  color: var(--preto);
+  background: var(--rosa-pastel);
 }
 .topo__acoes {
   display: flex;
@@ -64,9 +68,10 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  border: 1.5px solid var(--text);
-  background: var(--surface);
-  color: var(--text);
+  border: 2px solid var(--preto);
+  background: var(--branco);
+  color: var(--preto);
+  box-shadow: 2px 2px 0 var(--preto);
 }
 .icone-btn svg {
   width: 20px;
@@ -177,7 +182,9 @@
 
 /* ---------- rodapé ---------- */
 .rodape {
-  border-top: 1.5px solid var(--text);
+  background: var(--preto);
+  color: var(--off);
+  border-top: 2px solid var(--rosa);
   padding: 28px 0;
   font-size: 0.88rem;
   color: var(--text-2);

@@ -1,31 +1,25 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import BorboletaKmeans from '../../animations/BorboletaKmeans'
 import { useDados } from '../../hooks/useDados'
 import { useNaTela } from '../../hooks/useNaTela'
-import { perfil } from '../../services/data'
 import Capitulo from '../Capitulo'
 import { Acumulado, Heatmap, Linguagens, Semana, fmtData, fmtMes } from '../Graficos'
-import Pipeline from '../Pipeline'
+import { Rasgo } from '../Colagem'
 
-export default function Laboratorio() {
+export default function Analises() {
   const [ref, visivel] = useNaTela()
   const { dados, erro, carregando } = useDados('github', visivel)
   const [tabela, setTabela] = useState(false)
   const c = dados?.contribuicoes
 
   return (
-    <section id="laboratorio" className="section laboratorio" aria-labelledby="lab-titulo">
+    <section id="analises" className="section tema-rosa analises-secao" aria-labelledby="lab-titulo">
       <div className={`wrap reveal ${visivel ? 'is-visible' : ''}`} ref={ref}>
-        <Capitulo numero="V" nota="o laboratório" id="lab-titulo">
-          Testei em mim <span className="marca marca--menta">mesma</span>
+        <Capitulo numero="06" nota="atualiza sozinho toda segunda" id="lab-titulo">
+          Minhas <span className="destaque">análises</span>
         </Capitulo>
-        <p className="capitulo__intro">
-          Fiquei curiosa pra saber como eu uso o GitHub. Então fiz o que faço com qualquer dado: puxei, limpei com Pandas e desenhei. Um robô do
-          GitHub Actions refaz tudo toda segunda-feira.
-        </p>
+        <p className="secao-intro">Analisei a minha própria atividade no GitHub: em que dias eu programo, quais linguagens aparecem e como os repositórios foram surgindo.</p>
 
-        {carregando && <p className="mao">puxando os dados…</p>}
+        {carregando && <p className="mao">carregando os dados…</p>}
         {erro && <p className="notice">Os dados não carregaram agora. Tenta recarregar a página.</p>}
 
         {dados && (
@@ -56,7 +50,7 @@ export default function Laboratorio() {
             {c && (
               <figure className="lab__grafico lab__grafico--largo folha">
                 <figcaption>
-                  <span className="mao">cada quadradinho é um dia</span>
+                  <span className="lab__legenda-titulo">Contribuições no último ano</span> <span className="mao">cada quadradinho é um dia</span>
                 </figcaption>
                 <Heatmap contrib={c} />
                 <p className="mao lab__anotacao">
@@ -67,21 +61,21 @@ export default function Laboratorio() {
 
             <figure className="lab__grafico folha">
               <figcaption>
-                <span className="mao">linguagens no código público</span>
+                <span className="lab__legenda-titulo">Linguagens nos repositórios</span>
               </figcaption>
               <Linguagens linguagens={dados.linguagens} visivel={visivel} />
-              <p className="lab__legenda">Os pontos começam bagunçados e se organizam em barras. Cada ponto vale 2% do código.</p>
+              <p className="lab__legenda">Cada ponto vale 2% do código.</p>
             </figure>
 
             <figure className="lab__grafico folha">
               <figcaption>
-                <span className="mao">repositórios ao longo do tempo</span>
+                <span className="lab__legenda-titulo">Repositórios ao longo do tempo</span>
               </figcaption>
               <Acumulado meses={dados.repos_por_mes} />
               {c && (
                 <>
                   <figcaption className="lab__sub">
-                    <span className="mao">contribuições por dia da semana</span>
+                    <span className="lab__legenda-titulo">Contribuições por dia da semana</span>
                   </figcaption>
                   <Semana dias={c.por_dia_semana} />
                 </>
@@ -137,53 +131,21 @@ export default function Laboratorio() {
 
               <div className="lab__fonte">
                 <p>
-                  <strong>De onde veio:</strong> API pública do GitHub, da minha conta (@{dados.usuario}). Última atualização em{' '}
+                  <strong>Fonte:</strong> API pública do GitHub, conta @{dados.usuario}. Atualizado em{' '}
                   {fmtData(dados.coletado_em.slice(0, 10))}.
                 </p>
                 <p>
-                  <strong>Antes de tirar conclusões:</strong> quantidade de código não mede o quanto eu sei de uma linguagem. Só entra o que é público,
-                  então o dashboard em Excel quase não aparece. E no repositório da Análise AWS eu subi a pasta do ambiente virtual sem querer, então
-                  ignorei os bytes de lá pra não inflar o Python.
+                  <strong>Limitações:</strong> quantidade de código não mede o quanto eu sei de uma linguagem. Só entra o que é público, então o dashboard
+                  em Excel quase não aparece. No repositório da Análise AWS a pasta do ambiente virtual foi enviada junto com o código, então ignorei os
+                  bytes de lá para não inflar o Python.
                 </p>
               </div>
             </div>
           </div>
         )}
 
-        <div className="experimentos">
-          <div className="experimento">
-            <h3>
-              Experimento: <span className="marca marca--lavanda">borboleta vira dado</span>
-            </h3>
-            <p>
-              Os pontos desenham uma borboleta usando a curva de Temple Fay. Quando você clica, as asas se desfazem e os pontos viram três grupos que o
-              k-means vai descobrindo passo a passo. Escrevi o k-means do zero em NumPy pra entender o que acontece por dentro.
-            </p>
-            <p className="mao">os pontos são inventados por mim, só pra mostrar o algoritmo.</p>
-            <BorboletaKmeans />
-          </div>
-
-          <div className="experimento">
-            <h3>
-              Como organizei <span className="marca marca--pessego">1 milhão de voos</span>
-            </h3>
-            <p>
-              No Voebem, os dados da ANAC passam por três camadas antes de virar dashboard. Clica em cada uma pra ver o que acontece lá.
-            </p>
-            <Pipeline tipo="medalhao" />
-            <Link className="btn btn-sm" to="/projeto/voebem">
-              ver o projeto inteiro
-            </Link>
-
-            <h3 className="experimento__estudar">Ainda quero estudar</h3>
-            <ul className="estudar">
-              {perfil.estudar.map((e) => (
-                <li key={e}>{e}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
       </div>
+      <Rasgo cor="var(--off)" semente={27} />
     </section>
   )
 }

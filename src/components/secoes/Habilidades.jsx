@@ -60,15 +60,12 @@ export default function Habilidades() {
   const projetosLigados = [...vizinhos].filter((id) => !id.startsWith('tec:')).map(projetoPorSlug).filter(Boolean)
 
   return (
-    <section id="habilidades" className="section" aria-labelledby="hab-titulo">
+    <section id="tecnologias" className="section tema-preto" aria-labelledby="hab-titulo">
       <div className={`wrap reveal ${visivel ? 'is-visible' : ''}`} ref={ref}>
-        <Capitulo numero="III" nota="o que eu sei fazer" id="hab-titulo">
-          Uma teia de ferramentas
+        <Capitulo numero="04" nota="escolhe uma e a aranha vai até lá" id="hab-titulo">
+          Tecnologias que <span className="destaque">utilizo</span>
         </Capitulo>
-        <p className="capitulo__intro">
-          Cada fio liga uma ferramenta a um projeto em que eu usei ela de verdade. Escolhe uma e a aranha te leva até lá.
-          <span className="mao capitulo__margem">a posição de cada ponto foi calculada em Python</span>
-        </p>
+        <p className="secao-intro">Cada fio liga uma tecnologia a um projeto em que eu usei ela.</p>
 
         <div className="habilidades">
           <div className="habilidades__lista" role="group" aria-label="Escolha uma tecnologia">
@@ -92,10 +89,7 @@ export default function Habilidades() {
               </div>
             ))}
             {!dados && !erro && <p className="muted">Tecendo a teia…</p>}
-            {erro && <p className="notice">
-          Não coloquei barra de porcentagem em nada. Usar uma ferramenta em mais projetos não quer dizer que eu domino mais ela, só que ela apareceu mais.
-          {' '}Também uso {perfil.habilidades.Ferramentas.filter((f) => !tecnologias.some((t) => t.rotulo === f)).join(', ')} no dia a dia.
-        </p>}
+            {erro && <p className="notice">A rede não carregou agora. As tecnologias também aparecem em cada projeto.</p>}
           </div>
 
           <div className="habilidades__rede folha">
@@ -159,7 +153,7 @@ export default function Habilidades() {
           </div>
         )}
         <p className="notice">
-          Sem barras de “proficiência”: quantidade de projetos mostra onde já usei uma tecnologia, não o quanto eu domino. Também tenho familiaridade com{' '}
+          O número ao lado de cada tecnologia é a quantidade de projetos em que ela aparece, não o quanto eu domino. Também uso{' '}
           {perfil.habilidades.Ferramentas.filter((f) => !tecnologias.some((t) => t.rotulo === f)).join(', ')}.
         </p>
       </div>

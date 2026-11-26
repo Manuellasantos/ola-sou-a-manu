@@ -10,18 +10,37 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
-/* papel pontilhado, como caderno de anotações */
+/* papel: textura de fibras bem sutil por cima do off-white */
 body {
   margin: 0;
-  background-color: var(--bg);
-  background-image: radial-gradient(var(--grid) 1px, transparent 1.2px);
-  background-size: 22px 22px;
-  color: var(--text);
+  background: var(--off);
+  color: var(--preto);
   font-family: var(--font-ui);
   font-size: 1.02rem;
-  line-height: 1.65;
+  line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+:root[data-contrast='alto'] body::after {
+  display: none;
+}
+
+/* cada seção pinta o próprio fundo de acordo com o tema */
+.section,
+.abertura {
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--grid) 1px, transparent 1.3px);
+  background-size: 24px 24px;
+  color: var(--text);
 }
 
 img,
@@ -34,10 +53,10 @@ canvas {
 a {
   color: var(--accent);
   text-underline-offset: 3px;
-  text-decoration-thickness: 1px;
+  text-decoration-thickness: 1.5px;
 }
 a:hover {
-  text-decoration-thickness: 2px;
+  text-decoration-thickness: 3px;
 }
 
 button,
@@ -60,10 +79,10 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 400;
-  line-height: 1.05;
+  font-weight: 700;
+  line-height: 1;
   margin: 0 0 0.5em;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.02em;
 }
 p {
   margin: 0 0 1em;
@@ -87,8 +106,8 @@ p {
   left: 8px;
   z-index: 1000;
   padding: 10px 16px;
-  background: var(--text);
-  color: var(--bg);
+  background: var(--preto);
+  color: var(--off);
   transform: translateY(-150%);
   transition: transform 0.2s;
 }
@@ -104,20 +123,29 @@ p {
 }
 
 .section {
-  padding: clamp(80px, 12vw, 160px) 0;
+  padding: clamp(80px, 11vw, 150px) 0;
   position: relative;
   scroll-margin-top: 60px;
 }
 
-/* anotação à mão */
+/* anotação à mão, usada com moderação */
 .mao {
   font-family: var(--font-mao);
-  font-size: 1.45rem;
-  line-height: 1.1;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.05;
   color: var(--accent);
 }
 
-/* marca-texto: a cor fica só atrás da metade de baixo da palavra */
+/* palavra destacada com fundo colorido, como recorte de revista */
+.destaque {
+  background: var(--destaque-fundo);
+  color: var(--destaque-texto);
+  padding: 0 0.14em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+/* marca-texto (metade de baixo) */
 .marca {
   background: linear-gradient(transparent 55%, var(--hl) 55%, var(--hl) 92%, transparent 92%);
   padding: 0 0.08em;
@@ -140,57 +168,67 @@ p {
   color: var(--text-3);
 }
 
-/* folha colada no caderno: papel por cima, sombra curta e fita no topo */
+/* recorte colado: papel branco, borda preta e sombra dura */
 .folha {
   position: relative;
   background: var(--surface);
-  box-shadow: 0 1px 0 var(--line), 0 14px 30px -18px rgba(60, 30, 50, 0.35);
+  color: var(--text);
+  border: 2px solid var(--preto);
+  box-shadow: var(--sombra);
+}
+.tema-preto .folha {
+  border-color: var(--off);
 }
 .fita::before {
   content: '';
   position: absolute;
-  top: -12px;
+  top: -13px;
   left: 50%;
-  width: 96px;
-  height: 24px;
+  width: 92px;
+  height: 26px;
   background: var(--fita);
-  transform: translateX(-50%) rotate(-3deg);
+  transform: translateX(-50%) rotate(-4deg);
   z-index: 2;
 }
-
-/* mantido por compatibilidade com componentes que ainda usam .glass */
 .glass {
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: 2px solid var(--preto);
 }
 
+/* botões neo-brutalistas: borda grossa e sombra que "afunda" no clique */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-height: 44px;
-  padding: 10px 18px;
-  border: 1.5px solid var(--text);
+  min-height: 46px;
+  padding: 10px 20px;
+  border: 2px solid var(--preto);
   border-radius: 999px;
-  background: transparent;
-  color: var(--text);
+  background: var(--branco);
+  color: var(--preto);
   text-decoration: none;
-  font-weight: 500;
-  transition: background 0.2s, color 0.2s, transform 0.25s var(--ease), box-shadow 0.25s;
+  font-weight: 600;
+  box-shadow: 3px 3px 0 var(--preto);
+  transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
 }
 .btn:hover {
   transform: translate(-2px, -2px);
-  box-shadow: 3px 3px 0 var(--text);
+  box-shadow: 5px 5px 0 var(--preto);
+}
+.btn:active {
+  transform: translate(3px, 3px);
+  box-shadow: 0 0 0 var(--preto);
 }
 .btn-primary {
-  background: var(--text);
-  color: var(--bg);
+  background: var(--rosa);
+  color: var(--branco);
 }
-.btn-primary:hover {
-  box-shadow: 3px 3px 0 var(--accent-strong);
+.tema-preto .btn {
+  border-color: var(--off);
+  box-shadow: 3px 3px 0 var(--rosa);
 }
 .btn-sm {
-  min-height: 36px;
+  min-height: 38px;
   padding: 6px 14px;
   font-size: 0.88rem;
 }
@@ -200,59 +238,64 @@ p {
   flex: none;
 }
 .btn:disabled {
-  opacity: 0.4;
+  opacity: 0.45;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
 
-/* etiqueta de filtro: parece um adesivo */
+/* etiqueta de filtro em formato de adesivo */
 .chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  min-height: 36px;
-  padding: 4px 12px;
-  border: 1px dashed var(--line-strong);
-  border-radius: 3px;
+  min-height: 38px;
+  padding: 4px 14px;
+  border: 2px solid var(--text);
+  border-radius: 999px;
   background: transparent;
   font-size: 0.88rem;
-  color: var(--text-2);
-  transition: all 0.2s;
+  font-weight: 500;
+  color: var(--text);
+  transition: background 0.2s, transform 0.2s var(--mola);
 }
 .chip:hover {
-  color: var(--text);
-  border-style: solid;
+  background: var(--hl);
 }
 .chip[aria-pressed='true'] {
-  background: var(--hl);
-  border: 1px solid var(--text);
-  color: var(--text);
-  transform: rotate(-1deg);
+  background: var(--preto);
+  border-color: var(--preto);
+  color: var(--off);
+  transform: rotate(-2deg);
+}
+.tema-preto .chip[aria-pressed='true'] {
+  background: var(--rosa);
+  border-color: var(--rosa);
 }
 
+/* etiqueta de tecnologia */
 .tag {
   display: inline-block;
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  color: var(--text-2);
+  font-weight: 500;
+  padding: 2px 9px;
+  border: 1.5px solid currentColor;
+  border-radius: 999px;
   white-space: nowrap;
-}
-.tag::before {
-  content: '#';
-  color: var(--accent);
 }
 
 .badge {
   display: inline-flex;
   gap: 6px;
   align-items: center;
-  font-size: 0.78rem;
-  font-weight: 600;
-  padding: 3px 10px;
-  border: 1.5px solid var(--text);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border: 2px solid var(--preto);
   border-radius: 999px;
-  background: var(--hl-4);
+  background: var(--rosa-medio);
+  color: var(--preto);
 }
 .badge svg {
   width: 14px;
@@ -261,15 +304,15 @@ p {
 .notice {
   font-size: 0.9rem;
   color: var(--text-2);
-  border-left: 2px solid var(--accent);
+  border-left: 3px solid var(--rosa);
   padding-left: 14px;
 }
 
-/* revelação suave ao rolar (desligada com movimento reduzido) */
+/* entrada "colada": a peça cai girada e assenta no lugar (não é só fade) */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  transform: translateY(40px) rotate(-1.5deg) scale(0.97);
+  transition: opacity 0.6s var(--ease), transform 0.8s var(--mola);
 }
 .reveal.is-visible {
   opacity: 1;

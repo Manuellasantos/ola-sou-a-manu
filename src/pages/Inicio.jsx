@@ -4,13 +4,15 @@ import Abertura from '../components/secoes/Abertura'
 import Caminho from '../components/secoes/Caminho'
 import Epilogo from '../components/secoes/Epilogo'
 import Habilidades from '../components/secoes/Habilidades'
-import Laboratorio from '../components/secoes/Laboratorio'
+import AlemDaTecnologia from '../components/secoes/AlemDaTecnologia'
+import Analises from '../components/secoes/Analises'
+import Estudos from '../components/secoes/Estudos'
 import Projetos from '../components/secoes/Projetos'
 import QuemSou from '../components/secoes/QuemSou'
 import { irParaSecao } from '../config/site'
 
-// A ordem conta a história: primeiro quem eu sou, depois de onde vim,
-// o que sei fazer, o que construí e, por fim, os meus próprios dados.
+// A ordem conta a história: primeiro quem eu sou, depois a trajetória,
+// as tecnologias, os projetos, as análises e o que estou estudando.
 export default function Inicio() {
   const [params] = useSearchParams()
   const secao = params.get('secao')
@@ -29,10 +31,12 @@ export default function Inicio() {
     <>
       <Abertura />
       <QuemSou />
+      <AlemDaTecnologia />
       <Caminho />
       <Habilidades />
       <Projetos />
-      <Laboratorio />
+      <Analises />
+      <Estudos />
       <Epilogo />
     </>
   )

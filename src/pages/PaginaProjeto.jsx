@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import CapaProjeto from '../components/CapaProjeto'
-import { rotuloTipo } from '../components/LinhaProjeto'
+import { rotuloTipo } from '../components/CardProjeto'
 import Icone from '../components/Icone'
 import Pipeline from '../components/Pipeline'
 import { asset } from '../config/site'

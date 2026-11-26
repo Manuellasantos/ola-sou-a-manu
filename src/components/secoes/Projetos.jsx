@@ -16,7 +16,8 @@ import {
   tecnologiasDisponiveis,
 } from '../../services/filters'
 import Capitulo from '../Capitulo'
-import LinhaProjeto from '../LinhaProjeto'
+import CardProjeto from '../CardProjeto'
+import { Rasgo } from '../Colagem'
 import Icone from '../Icone'
 
 const CATEGORIAS = categoriasDisponiveis(projetosOrdenados)
@@ -109,17 +110,17 @@ export default function Projetos() {
   return (
     <section id="projetos" className="section projetos" aria-labelledby="proj-titulo">
       <div className={`wrap reveal ${visivel ? 'is-visible' : ''}`} ref={ref}>
-        <Capitulo numero="IV" nota="o que eu construí" id="proj-titulo">
-          Onze projetos e um fio em comum: <span className="marca">dados</span>
+        <Capitulo numero="05" id="proj-titulo">
+          Meus <span className="destaque">projetos</span>
         </Capitulo>
-        <p className="capitulo__intro">
-          Alguns fiz sozinha, a maioria em equipe. Quando o projeto é de grupo, conto o que foi meu só se isso estiver escrito no repositório.
+        <p className="secao-intro">
+          Alguns eu fiz sozinha, a maioria em equipe. Nos projetos em grupo, só conto qual foi a minha parte quando isso está no repositório.
         </p>
 
         <div ref={palcoRef}>
           <Moonwalk disparar={palcoVisivel}>
             <div className="cartaz folha">
-              <p className="mao cartaz__titulo">em cartaz: os que eu mais gosto de mostrar</p>
+              <p className="mao cartaz__titulo">em cartaz</p>
               <ol className="cartaz__lista">
                 {DESTAQUES.map((p) => (
                   <li key={p.slug}>
@@ -135,7 +136,7 @@ export default function Projetos() {
           <label className="filtros__busca">
             <Icone nome="busca" />
             <span className="sr-only">Buscar por nome, descrição, categoria ou tecnologia</span>
-            <input type="search" placeholder="procurar: python, ETL, mapa…" value={filtros.busca} onChange={(e) => mudar({ busca: e.target.value })} />
+            <input type="search" placeholder="buscar: python, ETL, mapa…" value={filtros.busca} onChange={(e) => mudar({ busca: e.target.value })} />
           </label>
 
           <div className="filtros__chips" role="group" aria-label="Área">
@@ -194,11 +195,11 @@ export default function Projetos() {
           {aviso}
         </p>
 
-        <div className="indice-area">
+        <div className="bento-area">
           <Gato alvoRef={gradeRef} />
-          <ol className="indice" ref={gradeRef}>
+          <ol className="bento" ref={gradeRef}>
             {resultado.map((p, i) => (
-              <LinhaProjeto key={p.slug} projeto={p} numero={i + 1} />
+              <CardProjeto key={p.slug} projeto={p} numero={i + 1} />
             ))}
           </ol>
           {resultado.length === 0 && (
@@ -210,8 +211,9 @@ export default function Projetos() {
             </div>
           )}
         </div>
-        <p className="mao projetos__dica">psiu: digita “corvinal” em qualquer lugar da página.</p>
+        <p className="mao projetos__dica">psiu: digita “corvinal” em qualquer lugar da página</p>
       </div>
+      <Rasgo cor="var(--rosa-pastel)" semente={19} />
     </section>
   )
 }

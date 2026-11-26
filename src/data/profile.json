@@ -10,9 +10,9 @@
     "curriculo": "curriculo/ManuellaSantos.pdf"
   },
   "bio": [
-    "Tenho 19 anos, estudo Ciência de Dados para Negócios na Fatec Sebrae e me formei técnica em Informática para Internet na Etec Albert Einstein em 2025.",
-    "Sou do tipo que precisa entender como as coisas funcionam por dentro. Com o tempo, isso virou interesse por Ciência de Dados, Inteligência Artificial, Engenharia de Dados e desenvolvimento de aplicações.",
-    "Também gosto de estar no meio das coisas: hackathons, competições, pesquisa. Hoje sou monitora de hackathons na Fatec Sebrae e ajudo outros estudantes a entrar nesse mundo."
+    "Tenho 19 anos, estudo Ciência de Dados para Negócios na Fatec Sebrae e sou técnica em Informática para Internet pela Etec Albert Einstein, onde me formei em 2025.",
+    "Gosto de entender como as coisas funcionam e de testar coisas novas. Hoje meus principais interesses são Ciência de Dados, Inteligência Artificial, Engenharia de Dados e desenvolvimento de aplicações.",
+    "Já participei de projetos, hackathons, competições acadêmicas e iniciativas de pesquisa, e sou monitora de hackathons na Fatec Sebrae, conectando estudantes a essas oportunidades. Foi assim que mais evoluí: aprendendo na prática e trabalhando em equipe."
   ],
   "habilidades": {
     "Linguagens": [
@@ -210,5 +210,10 @@
     "Machine Learning além da regressão linear: clustering, classificação e avaliação de modelos",
     "IA usada com responsabilidade (é o tema da minha iniciação científica)",
     "Biologia e padrões da natureza, porque não consigo largar"
-  ]
+  ],
+  "foto": null,
+  "alem": {
+    "abertura": "Mas nem só de código e dados vive uma pessoa!",
+    "texto": "Sou apaixonada por animais, principalmente gatos, e tenho uma curiosidade enorme por biologia e natureza, mesmo seguindo outro caminho profissional. No tempo livre eu leio (suspense, mistério e terror), pratico atividade física e aprendo coisas que não têm nada a ver com a minha área."
+  }
 }
