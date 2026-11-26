@@ -105,7 +105,7 @@ export default function PaginaProjeto() {
           </Bloco>
           <Bloco titulo="Metodologia e arquitetura" quando={d.metodologia}>
             <p>{d.metodologia}</p>
-            {(d.arquitetura === 'medalhao' || d.arquitetura === 'etl') && <Pipeline tipo={d.arquitetura} />}
+            {(d.arquitetura === 'medalhao' || d.arquitetura === 'etl') && <Pipeline key={p.slug} tipo={d.arquitetura} />}
           </Bloco>
           <Bloco titulo="Tratamento dos dados" quando={d.tratamento?.length}>
             <Lista itens={d.tratamento} />

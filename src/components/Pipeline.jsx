@@ -22,7 +22,8 @@ export default function Pipeline({ tipo = 'medalhao', titulo }) {
   const camadas = PIPELINES[tipo]
   const [ativa, setAtiva] = useState(camadas[0].id)
   const { animar } = usePreferencias()
-  const atual = camadas.find((c) => c.id === ativa)
+  // se o tipo mudar (outro projeto), volta para a primeira camada em vez de quebrar
+  const atual = camadas.find((c) => c.id === ativa) ?? camadas[0]
 
   return (
     <div className={`pipeline pipeline--${tipo}`}>
@@ -34,7 +35,7 @@ export default function Pipeline({ tipo = 'medalhao', titulo }) {
             type="button"
             role="tab"
             id={`tab-${c.id}`}
-            aria-selected={ativa === c.id}
+            aria-selected={atual.id === c.id}
             aria-controls={`painel-${tipo}`}
             className={`pipeline__camada pipeline__camada--${c.id}`}
             onClick={() => setAtiva(c.id)}
@@ -51,7 +52,7 @@ export default function Pipeline({ tipo = 'medalhao', titulo }) {
           </button>
         ))}
       </div>
-      <div id={`painel-${tipo}`} role="tabpanel" aria-labelledby={`tab-${ativa}`} className="pipeline__painel folha">
+      <div id={`painel-${tipo}`} role="tabpanel" aria-labelledby={`tab-${atual.id}`} className="pipeline__painel folha">
         <p>{atual.texto}</p>
       </div>
     </div>
