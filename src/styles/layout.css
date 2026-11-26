@@ -1,0 +1,188 @@
+/* ---------- cabeçalho ---------- */
+.topo {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  transition: background 0.3s, border-color 0.3s;
+  border-bottom: 1px solid transparent;
+}
+.topo--rolou {
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: var(--line);
+}
+.topo__barra {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 64px;
+}
+.topo__marca {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: auto;
+}
+.topo__rosa {
+  color: var(--accent);
+}
+.topo__nav ul {
+  display: flex;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.topo__nav a {
+  display: block;
+  padding: 8px 10px;
+  border-radius: 999px;
+  color: var(--text-2);
+  text-decoration: none;
+  font-size: 0.88rem;
+}
+.topo__nav a:hover {
+  color: var(--text);
+  background: var(--surface);
+}
+.topo__acoes {
+  display: flex;
+  gap: 6px;
+}
+.icone-btn {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line-strong);
+  background: var(--glass);
+  color: var(--text);
+}
+.icone-btn svg {
+  width: 20px;
+  height: 20px;
+}
+.icone-btn:hover,
+.icone-btn[aria-pressed='true'] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.topo__hamburguer {
+  display: none;
+}
+
+@media (max-width: 1080px) {
+  .topo__hamburguer {
+    display: grid;
+  }
+  .topo__nav {
+    position: fixed;
+    inset: 64px 0 auto;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    padding: 12px var(--gutter) 20px;
+    display: none;
+  }
+  .topo__nav.aberto {
+    display: block;
+  }
+  .topo__nav ul {
+    flex-direction: column;
+  }
+  .topo__nav a {
+    padding: 12px;
+    font-size: 1rem;
+  }
+}
+
+/* ---------- menu de acessibilidade ---------- */
+.a11y {
+  width: min(420px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  color: var(--text);
+  padding: 22px;
+  margin: 16px 16px 16px auto;
+  background: var(--bg-2);
+}
+.a11y::backdrop {
+  background: rgba(0, 0, 0, 0.55);
+}
+.a11y__topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.a11y h2 {
+  font-size: 1.6rem;
+  margin: 0;
+}
+.a11y__nota {
+  font-size: 0.85rem;
+}
+.a11y fieldset {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin: 0 0 12px;
+}
+.a11y legend {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding: 0 6px;
+}
+.a11y__opcao,
+.a11y__alternar,
+.a11y__volume {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 36px;
+  cursor: pointer;
+}
+.a11y input[type='radio'],
+.a11y input[type='checkbox'] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+}
+.a11y__volume input {
+  flex: 1;
+  accent-color: var(--accent);
+}
+.a11y__fonte {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.a11y__fonte output {
+  min-width: 64px;
+  text-align: center;
+  font-family: var(--font-mono);
+}
+
+/* ---------- rodapé ---------- */
+.rodape {
+  border-top: 1px solid var(--line);
+  padding: 28px 0;
+  font-size: 0.88rem;
+  color: var(--text-2);
+}
+.rodape__linha {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+.rodape p {
+  margin: 0;
+}

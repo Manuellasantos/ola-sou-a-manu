@@ -1,0 +1,123 @@
+/* Tokens de design. As paletas de acessibilidade só trocam estas variáveis. */
+:root {
+  --bg: #131217;
+  --bg-2: #1b1920;
+  --surface: #24212b;
+  --surface-2: #2e2a37;
+  --line: rgba(243, 239, 242, 0.1);
+  --line-strong: rgba(243, 239, 242, 0.22);
+  --text: #f3eff2;
+  --text-2: #c9c1cc;
+  --text-3: #9a91a0;
+
+  --accent: #e8a1bc;      /* rosa suave: assinatura */
+  --accent-strong: #cc5c91; /* rosa intenso */
+  --accent-2: #ac96db;    /* lavanda */
+  --on-accent: #131217;
+
+  /* séries de dados (gráficos, rede, filtros). Cada série também tem forma/padrão. */
+  --s1: #e8a1bc;
+  --s2: #ac96db;
+  --s3: #f3eff2;
+  --s4: #cc5c91;
+  --s5: #7c6f8f;
+
+  /* rampa do heatmap: só a luminosidade muda, então funciona sem cor */
+  --heat-0: #24212b;
+  --heat-1: #4a3343;
+  --heat-2: #7d4865;
+  --heat-3: #b45d8a;
+  --heat-4: #e8a1bc;
+
+  /* paleta colorida: cada seção tem a sua cor, sempre sobre a base escura */
+  --c-rosa: #e8a1bc;
+  --c-lavanda: #ac96db;
+  --c-menta: #8fd6c3;
+  --c-pessego: #f4b393;
+  --c-ceu: #8ec5f0;
+  --c-manteiga: #f0d68a;
+  --sec: var(--c-rosa);
+
+  --glass: rgba(36, 33, 43, 0.55);
+  --glass-border: rgba(243, 239, 242, 0.12);
+  --focus: #f6c1d6;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-ui: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --radius: 22px;
+  --radius-sm: 12px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: 1240px;
+  --font-scale: 1;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Protanopia e deuteranopia: eixo azul ↔ laranja, que continua distinguível */
+:root[data-palette='protanopia'],
+:root[data-palette='deuteranopia'] {
+  --c-rosa: #f0b25a;
+  --c-lavanda: #6aa9f0;
+  --c-menta: #a9d0ff;
+  --c-pessego: #ffd38a;
+  --c-ceu: #4f8fd6;
+  --c-manteiga: #f3eff2;
+  --accent: #f0b25a;
+  --accent-strong: #d98a1f;
+  --accent-2: #6aa9f0;
+  --s1: #f0b25a;
+  --s2: #6aa9f0;
+  --s3: #f3eff2;
+  --s4: #2f6fc4;
+  --s5: #8d8d8d;
+  --heat-1: #22385a;
+  --heat-2: #2f5f99;
+  --heat-3: #4f8fd6;
+  --heat-4: #a9d0ff;
+  --focus: #ffd38a;
+}
+
+/* Tritanopia: eixo vermelho ↔ ciano */
+:root[data-palette='tritanopia'] {
+  --c-rosa: #f07a8a;
+  --c-lavanda: #3cc8c0;
+  --c-menta: #9ff0ea;
+  --c-pessego: #ff9eaa;
+  --c-ceu: #2aa39b;
+  --c-manteiga: #f3eff2;
+  --accent: #f07a8a;
+  --accent-strong: #d64560;
+  --accent-2: #3cc8c0;
+  --s1: #f07a8a;
+  --s2: #3cc8c0;
+  --s3: #f3eff2;
+  --s4: #a8323f;
+  --s5: #8d8d8d;
+  --heat-1: #4a2228;
+  --heat-2: #803540;
+  --heat-3: #c24b5d;
+  --heat-4: #ff9eaa;
+  --focus: #9ff0ea;
+}
+
+:root[data-contrast='alto'] {
+  --c-rosa: #ffb3d1;
+  --c-lavanda: #d9c9ff;
+  --c-menta: #b3ffe9;
+  --c-pessego: #ffd1b8;
+  --c-ceu: #b8e0ff;
+  --c-manteiga: #fff0b3;
+  --bg: #000;
+  --bg-2: #000;
+  --surface: #0d0d0d;
+  --surface-2: #1a1a1a;
+  --line: rgba(255, 255, 255, 0.5);
+  --line-strong: #fff;
+  --text: #fff;
+  --text-2: #fff;
+  --text-3: #e6e6e6;
+  --glass: #0d0d0d;
+  --glass-border: #fff;
+  --focus: #ffff00;
+}
