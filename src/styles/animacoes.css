@@ -324,10 +324,6 @@
   padding: 8px 16px;
   animation: carimbar 0.7s var(--mola) 0.4s both;
 }
-.mural__botao {
-  align-self: flex-start;
-  margin-top: 8px;
-}
 @keyframes carimbar {
   0% {
     opacity: 0;
